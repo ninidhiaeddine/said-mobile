@@ -17,7 +17,7 @@ class SaidApp extends StatelessWidget {
       title: 'Said Ngo',
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      theme: SaidTheme(),
+      theme: saidTheme(),
       home: const HomePage(),
     );
   }
