@@ -15,16 +15,17 @@ class HomePage extends StatelessWidget {
               child: Image(image: AssetImage('assets/images/logo.png'))),
           Padding(
               padding: const EdgeInsets.all(32.0),
-              child: Align(
-                  alignment: Alignment.center,
-                  child: Text(AppLocalizations.of(context).welcomeMsg))),
+              child: Text(AppLocalizations.of(context).welcomeMsg,
+                  textAlign: TextAlign.center)),
           Padding(
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(
                   width: 200,
                   child: ElevatedButton(
                       onPressed: () {},
-                      child: Text(AppLocalizations.of(context).getStarted))))
+                      child: Text((AppLocalizations.of(context).getStarted),
+                          style:
+                              const TextStyle(fontWeight: FontWeight.bold)))))
         ]));
   }
 }
