@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:said/screens/sign_in.dart';
+import 'package:said/widgets/said_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,11 +23,10 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(
                   width: 200,
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text((AppLocalizations.of(context).getStarted),
-                          style:
-                              const TextStyle(fontWeight: FontWeight.bold)))))
+                  child: SaidButton(
+                      text: AppLocalizations.of(context).getStarted,
+                      context: context,
+                      linkTo: const SignInPage())))
         ]));
   }
 }
