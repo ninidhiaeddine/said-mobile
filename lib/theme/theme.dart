@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:said/config/color_constants.dart';
 import 'package:said/utils/material_color_builder.dart';
 
 saidTheme () => ThemeData(
-    scaffoldBackgroundColor: const Color(0xffecf1ff),
-    primarySwatch: buildMaterialColor(const Color(0xfff59e0b)),
+    scaffoldBackgroundColor: ColorConstants.backgroundColor,
+    primarySwatch: buildMaterialColor(ColorConstants.primaryColor),
     accentColor: buildMaterialColor(const Color(0xff000000))
 );

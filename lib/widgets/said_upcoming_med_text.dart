@@ -10,10 +10,13 @@ class SaidUpcomingMedicationText extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(AppLocalizations.of(context).youHave),
-        Text(medsCount),
-        Text(AppLocalizations.of(context).youHave)
+        const Padding(padding: EdgeInsets.all(2.0)),
+        Text(medsCount.toString()),
+        const Padding(padding: EdgeInsets.all(2.0)),
+        Text(AppLocalizations.of(context).medsToTake)
       ],
     );
   }
