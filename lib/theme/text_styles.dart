@@ -6,9 +6,10 @@ blackHeader() => const TextStyle(
       fontSize: 28,
     );
 
-subHeader() => const TextStyle(
+subHeader() => TextStyle(
   fontWeight: FontWeight.bold,
-  fontSize: 20
+  color: ColorConstants.secondaryColor,
+  fontSize: 16
 );
 
 primaryText() =>

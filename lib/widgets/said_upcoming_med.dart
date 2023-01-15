@@ -31,7 +31,7 @@ class SaidUpcomingMed extends StatelessWidget {
                           child: const Padding(
                               padding: EdgeInsets.all(4.0),
                               child: Icon(Icons.medical_services_rounded,
-                                  size: 40)))
+                                  size: 30)))
                     ],
                   ),
                   const SizedBox(width: 10),
@@ -41,11 +41,11 @@ class SaidUpcomingMed extends StatelessWidget {
                       Text(
                         medName,
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(method,
                           style:
-                              const TextStyle(fontSize: 16, color: Colors.grey))
+                              const TextStyle(fontSize: 14, color: Colors.grey))
                     ],
                   ),
                 ],

@@ -42,7 +42,7 @@ class _UserHomePageState extends State<UserHomePage> {
                   icon: const Icon(Icons.arrow_right_alt)),
             ])),
         Padding(
-            padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 16.0),
+            padding: const EdgeInsets.fromLTRB(32.0, 8.0, 32.0, 16.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(AppLocalizations.of(context).upcomingMedReminders,
