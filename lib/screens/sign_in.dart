@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/screens/sign_up.dart';
 import 'package:said/screens/user_home.dart';
+import 'package:said/screens/user_navigator_parent.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/said_button.dart';
 import 'package:said/widgets/said_text_field.dart';
@@ -45,7 +46,7 @@ class _SignInPageState extends State<SignInPage> {
                   child: SaidButton(
                       text: AppLocalizations.of(context).cntn,
                       context: context,
-                      linkTo: const UserHomePage()))),
+                      linkTo: const UserNavigatorParent()))),
           Padding(
               padding: const EdgeInsets.fromLTRB(64.0, 48.0, 64.0, 0.0),
               child: Row(

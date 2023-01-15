@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/config/color_constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SaidStepsCounter extends StatefulWidget {
   const SaidStepsCounter(
