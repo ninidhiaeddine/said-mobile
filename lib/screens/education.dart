@@ -9,20 +9,20 @@ class EducationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child:
-          Column(
-            children: [
-              Text(AppLocalizations.of(context).educationContent,
-              style: subHeader()),
-              SaidTextField(
-                placeholder: AppLocalizations.of(context).search,
-              ),
-              
-            ],
-          )
-      )
-    )
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: SafeArea(
+            child: Column(
+          children: [
+            Text(AppLocalizations.of(context).educationContent,
+                style: subHeader()),
+            SaidTextField(
+              placeholder: AppLocalizations.of(context).search,
+              icon: const Icon(Icons.search),
+            ),
+          ],
+        )));
   }
 }

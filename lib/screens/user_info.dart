@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:said/screens/about.dart';
+import 'package:said/screens/contact.dart';
+import 'package:said/screens/education.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/said_button.dart';
 import 'package:said/widgets/said_outlined_button.dart';
@@ -24,24 +27,27 @@ class _UserInfoPageState extends State<UserInfoPage> {
           style: subHeader(),
         ),
         Padding(
-            padding: EdgeInsets.all(64.0),
+            padding: const EdgeInsets.all(64.0),
             child: Column(
               children: [
                 SaidButton(
                   text: AppLocalizations.of(context).learnAboutCRC,
                   context: context,
                   icon: const Icon(Icons.bar_chart),
+                  linkTo: const EducationPage(),
                 ),
                 const Padding(padding: EdgeInsets.all(8.0)),
                 SaidOutlinedButton(
                   text: AppLocalizations.of(context).about,
                   context: context,
                   icon: const Icon(Icons.info_rounded),
+                  linkTo: const AboutPage(),
                 ),
                 SaidOutlinedButton(
                   text: AppLocalizations.of(context).contactUs,
                   context: context,
                   icon: const Icon(Icons.email_rounded),
+                  linkTo: const ContactPage(),
                 )
               ],
             )),
