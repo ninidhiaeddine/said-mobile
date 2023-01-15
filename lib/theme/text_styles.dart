@@ -16,3 +16,5 @@ primaryText() =>
     const TextStyle(color: Color(0xfff59e0b), fontWeight: FontWeight.bold);
 
 userName() => const TextStyle(fontWeight: FontWeight.bold, fontSize: 28);
+
+announcementDate() => const TextStyle(color: Colors.grey);
