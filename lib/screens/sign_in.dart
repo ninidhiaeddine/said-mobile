@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/screens/sign_up.dart';
-import 'package:said/screens/user_home.dart';
 import 'package:said/screens/user_navigator_parent.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/said_button.dart';
