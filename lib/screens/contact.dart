@@ -19,46 +19,76 @@ class ContactPage extends StatelessWidget {
       ),
       backgroundColor: ColorConstants.secondaryColor,
       body: SafeArea(
-        child: Column(
-          children: [
-            Text(AppLocalizations.of(context).contactUs, style: subHeader()),
-            SaidTextField(
-              placeholder: AppLocalizations.of(context).message,
-            ),
-            SaidButton(
-              text: AppLocalizations.of(context).send,
-              context: context,
-              icon: const Icon(Icons.send),
-            ),
-            const Padding(padding: EdgeInsets.all(32.0)),
-            Row(
+        child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
               children: [
-                const Icon(Icons.location_pin),
-                Text(AppLocalizations.of(context).saidLocation)
+                Text(AppLocalizations.of(context).contactUs,
+                    style: subHeaderWhite()),
+                const Padding(padding: EdgeInsets.all(16.0)),
+                SaidTextField(
+                  placeholder: AppLocalizations.of(context).message,
+                  linesCount: 6,
+                  blackVariant: true,
+                ),
+                const Padding(padding: EdgeInsets.all(4)),
+                SaidButton(
+                  text: AppLocalizations.of(context).send,
+                  context: context,
+                  icon: const Icon(Icons.send),
+                ),
+                const Padding(padding: EdgeInsets.all(16)),
+                Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(Icons.location_pin, color: Colors.white),
+                            const Padding(padding: EdgeInsets.all(6)),
+                            Text(AppLocalizations.of(context).saidLocation,
+                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white))
+                          ],
+                        ),
+                        const Padding(padding: EdgeInsets.all(4)),
+                        Row(
+                          children: [
+                            const Icon(Icons.phone, color: Colors.white),
+                            const Padding(padding: EdgeInsets.all(6)),
+                            Text(AppLocalizations.of(context).saidPhoneNumber,
+                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white))
+                          ],
+                        ),
+                        const Padding(padding: EdgeInsets.all(4)),
+                        Row(
+                          children: [
+                            const Icon(Icons.email_rounded,
+                                color: Colors.white),
+                            const Padding(padding: EdgeInsets.all(6)),
+                            Text(AppLocalizations.of(context).saidEmail,
+                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white))
+                          ],
+                        ),
+                      ],
+                    )),
+                const Padding(padding: EdgeInsets.all(16.0)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(AppLocalizations.of(context).followUs,
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white)),
+                    const Padding(padding: EdgeInsets.all(2)),
+                    Text(AppLocalizations.of(context).socialMedia,
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: ColorConstants.primaryColor)),
+                  ],
+                ),
+                SaidSocialMediaBar(),
               ],
-            ),
-            Row(
-              children: [
-                const Icon(Icons.phone),
-                Text(AppLocalizations.of(context).saidPhoneNumber)
-              ],
-            ),
-            Row(
-              children: [
-                const Icon(Icons.email_rounded),
-                Text(AppLocalizations.of(context).saidEmail)
-              ],
-            ),
-            const Padding(padding: EdgeInsets.all(16.0)),
-            Row(
-              children: [
-                Text(AppLocalizations.of(context).followUs),
-                Text(AppLocalizations.of(context).socialMedia),
-              ],
-            ),
-            SaidSocialMediaBar(),
-          ],
-        ),
+            )),
       ),
     );
   }

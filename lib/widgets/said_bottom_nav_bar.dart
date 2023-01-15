@@ -20,7 +20,6 @@ class SaidBottomNavigationBar extends StatelessWidget {
     return BottomNavigationBar(
         selectedItemColor: ColorConstants.secondaryColor,
         unselectedItemColor: Colors.blueGrey,
-        showUnselectedLabels: true,
         type: BottomNavigationBarType.shifting,
         items: List<BottomNavigationBarItem>.generate(
             icons.length,

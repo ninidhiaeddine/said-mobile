@@ -3,7 +3,7 @@ import 'package:said/screens/user_account.dart';
 import 'package:said/screens/user_club.dart';
 import 'package:said/screens/user_home.dart';
 import 'package:said/screens/user_info.dart';
-import 'package:said/screens/user_notifs.dart';
+import 'package:said/screens/user_announcements.dart';
 import 'package:said/widgets/said_bottom_nav_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -47,7 +47,7 @@ class _UserNavigatorParentState extends State<UserNavigatorParent> {
           .home,
       AppLocalizations
           .of(context)
-          .notifs,
+          .announcements,
       AppLocalizations
           .of(context)
           .account,
@@ -58,7 +58,7 @@ class _UserNavigatorParentState extends State<UserNavigatorParent> {
       UserClubPage(),
       UserInfoPage(),
       UserHomePage(),
-      UserNotifsPage(),
+      UserAnnouncementsPage(),
       UserAccountPage()
     ];
 

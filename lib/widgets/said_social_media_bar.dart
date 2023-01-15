@@ -27,19 +27,28 @@ class SaidSocialMediaBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
             onPressed: () => openLink('Facebook'),
-            icon: const Icon(Icons.facebook)),
+            icon: const Icon(Icons.facebook),
+            iconSize: 30,
+            color: Colors.white,),
         IconButton(
             onPressed: () => openLink('Instagram'),
-            icon: const FaIcon(FontAwesomeIcons.instagram)),
+            icon: const FaIcon(FontAwesomeIcons.instagram),
+            iconSize: 30,
+            color: Colors.white),
         IconButton(
             onPressed: () => openLink('Twitter'),
-            icon: const FaIcon(FontAwesomeIcons.twitter)),
+            icon: const FaIcon(FontAwesomeIcons.twitter),
+            iconSize: 30,
+            color: Colors.white),
         IconButton(
             onPressed: () => openLink('LinkedIn'),
-            icon: const FaIcon(FontAwesomeIcons.linkedin)),
+            icon: const FaIcon(FontAwesomeIcons.linkedin),
+            iconSize: 30,
+            color: Colors.white),
       ],
     );
   }

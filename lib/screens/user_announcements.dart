@@ -3,14 +3,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/said_announcement.dart';
 
-class UserNotifsPage extends StatefulWidget {
-  const UserNotifsPage({Key? key}) : super(key: key);
+class UserAnnouncementsPage extends StatefulWidget {
+  const UserAnnouncementsPage({Key? key}) : super(key: key);
 
   @override
-  State<UserNotifsPage> createState() => _UserNotifsPageState();
+  State<UserAnnouncementsPage> createState() => _UserAnnouncementsPageState();
 }
 
-class _UserNotifsPageState extends State<UserNotifsPage> {
+class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
