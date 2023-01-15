@@ -63,5 +63,7 @@
   "thursday": "Thu",
   "friday": "Fri",
   "saturday": "Sat",
-  "sunday": "Sun"
+  "sunday": "Sun",
+  "steps": "Steps",
+  "goal": "Goal: "
 }

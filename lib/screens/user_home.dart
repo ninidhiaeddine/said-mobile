@@ -25,7 +25,7 @@ class _UserHomePageState extends State<UserHomePage> {
         const SaidUserBar(),
         const SaidUpcomingMedicationText(),
         const Padding(padding: EdgeInsets.all(8.0)),
-        const SaidStepsCounter(),
+        const SaidStepsCounter(stepsDone: 3000, stepsGoal: 8000,),
         Padding(
             padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 16.0),
             child:
