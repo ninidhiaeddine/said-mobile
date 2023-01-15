@@ -12,20 +12,38 @@ class SaidButton extends StatelessWidget {
 
   final String text;
   final BuildContext context;
-  final Icon? icon;
+  final Widget? icon;
   final Widget? linkTo;
   final Function? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    if (icon != null) {
+      return ElevatedButton(
         onPressed: () => {
               linkTo == null
                   ? onPressed
                   : Navigator.push(
                       context, MaterialPageRoute(builder: (context) => linkTo!))
             },
-        child: Text(text,
-            style: const TextStyle(fontWeight: FontWeight.bold)));
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(
+            width: 5,
+          ),
+          icon!,
+        ]));
+    } else {
+      return ElevatedButton(
+          onPressed: () => {
+            linkTo == null
+                ? onPressed
+                : Navigator.push(
+                context, MaterialPageRoute(builder: (context) => linkTo!))
+          },
+          child:
+            Text(text, style: const TextStyle(fontWeight: FontWeight.bold))
+          );
+    }
   }
 }
