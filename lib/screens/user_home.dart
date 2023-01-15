@@ -26,21 +26,33 @@ class _UserHomePageState extends State<UserHomePage> {
         const SaidUpcomingMedicationText(),
         const Padding(padding: EdgeInsets.all(8.0)),
         const SaidStepsCounter(),
-        const Padding(padding: EdgeInsets.all(12.0)),
-        Text(AppLocalizations.of(context).actions, style: subHeader()),
-        SaidButton(
-            text: AppLocalizations.of(context).setUpMeds,
-            context: context,
-            icon: const Icon(Icons.arrow_right_alt)),
-        SaidButton(
-            text: AppLocalizations.of(context).selfScreening,
-            context: context,
-            icon: const Icon(Icons.arrow_right_alt)),
-        const Padding(padding: EdgeInsets.all(12.0)),
-        Text(AppLocalizations.of(context).upcomingMedReminders,
-            style: subHeader()),
-        const SaidUpcomingMed(medName: "Vitamin A", method: "Before Eating"),
-        const SaidUpcomingMed(medName: "Vitamin A", method: "Before Eating"),
+        Padding(
+            padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 16.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(AppLocalizations.of(context).actions, style: subHeader()),
+              const Padding(padding: EdgeInsets.all(4.0)),
+              SaidButton(
+                  text: AppLocalizations.of(context).setUpMeds,
+                  context: context,
+                  icon: const Icon(Icons.arrow_right_alt)),
+              SaidButton(
+                  text: AppLocalizations.of(context).selfScreening,
+                  context: context,
+                  icon: const Icon(Icons.arrow_right_alt)),
+            ])),
+        Padding(
+            padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 16.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(AppLocalizations.of(context).upcomingMedReminders,
+                  style: subHeader()),
+              const Padding(padding: EdgeInsets.all(4.0)),
+              const SaidUpcomingMed(
+                  medName: "Vitamin A", method: "Before Eating"),
+              const SaidUpcomingMed(
+                  medName: "Vitamin A", method: "Before Eating"),
+            ])),
       ],
     ))));
   }

@@ -17,7 +17,10 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
     return Container(
       width: double.infinity,
       height: 300,
-      color: ColorConstants.secondaryColor,
+      decoration: BoxDecoration(
+        color: ColorConstants.secondaryColor,
+        borderRadius: const BorderRadius.all(Radius.circular(16))
+      ),
     );
   }
 }
