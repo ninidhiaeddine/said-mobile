@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:said/config/color_constants.dart';
+import 'package:flutter/material.dart';
 
 class SaidProfilePic extends StatelessWidget {
   const SaidProfilePic({super.key, this.networkImgSrc, this.nameInitials});
@@ -15,6 +15,14 @@ class SaidProfilePic extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorConstants.secondaryColor,
         shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(
+          "JD",
+          style: TextStyle(
+            fontSize: 24,
+              color: Colors.white),
+        ),
       ),
     );
   }
