@@ -17,10 +17,11 @@ class _SaidUserBarState extends State<SaidUserBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(32.0),
+      padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 16.0),
       child: Column(
         children: [
           const SaidProfilePic(),
+          const Padding(padding: EdgeInsets.all(12.0)),
           Row(
             children: [
               Column(crossAxisAlignment: CrossAxisAlignment.start,

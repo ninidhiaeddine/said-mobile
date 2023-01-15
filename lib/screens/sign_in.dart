@@ -17,9 +17,10 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+        body: SafeArea(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
           const Padding(
               padding: EdgeInsets.fromLTRB(90.0, 0.0, 90.0, 0.0),
               child: Image(image: AssetImage('assets/images/logo.png'))),
@@ -42,10 +43,9 @@ class _SignInPageState extends State<SignInPage> {
               child: SizedBox(
                   width: double.infinity,
                   child: SaidButton(
-                    text: AppLocalizations.of(context).cntn,
-                    context: context,
-                    linkTo: const UserHomePage()
-                  ))),
+                      text: AppLocalizations.of(context).cntn,
+                      context: context,
+                      linkTo: const UserHomePage()))),
           Padding(
               padding: const EdgeInsets.fromLTRB(64.0, 48.0, 64.0, 0.0),
               child: Row(
@@ -63,6 +63,6 @@ class _SignInPageState extends State<SignInPage> {
                   )
                 ],
               ))
-        ]));
+        ])));
   }
 }

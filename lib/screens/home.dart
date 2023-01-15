@@ -9,9 +9,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+        body: SafeArea(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
           const Padding(
               padding: EdgeInsets.all(32.0),
               child: Image(image: AssetImage('assets/images/logo.png'))),
@@ -27,6 +28,6 @@ class HomePage extends StatelessWidget {
                       text: AppLocalizations.of(context).getStarted,
                       context: context,
                       linkTo: const SignInPage())))
-        ]));
+        ])));
   }
 }
