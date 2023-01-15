@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SaidButton extends StatelessWidget {
   const SaidButton(
@@ -20,30 +19,29 @@ class SaidButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (icon != null) {
       return ElevatedButton(
-        onPressed: () => {
-              linkTo == null
-                  ? onPressed
-                  : Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => linkTo!))
-            },
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(
-            width: 5,
-          ),
-          icon!,
-        ]));
+          onPressed: () => {
+                linkTo == null
+                    ? onPressed
+                    : Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => linkTo!))
+              },
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(
+              width: 5,
+            ),
+            icon!,
+          ]));
     } else {
       return ElevatedButton(
           onPressed: () => {
-            linkTo == null
-                ? onPressed
-                : Navigator.push(
-                context, MaterialPageRoute(builder: (context) => linkTo!))
-          },
+                linkTo == null
+                    ? onPressed
+                    : Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => linkTo!))
+              },
           child:
-            Text(text, style: const TextStyle(fontWeight: FontWeight.bold))
-          );
+              Text(text, style: const TextStyle(fontWeight: FontWeight.bold)));
     }
   }
 }
