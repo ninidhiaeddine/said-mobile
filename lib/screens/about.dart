@@ -11,7 +11,6 @@ class AboutPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          foregroundColor: Colors.white,
         ),
         body: SafeArea(
           child: Column(
