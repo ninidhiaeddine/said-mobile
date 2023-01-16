@@ -30,7 +30,7 @@ class Screening1Page extends StatelessWidget {
                 SaidButton(
                   text: AppLocalizations.of(context).proceed,
                   context: context,
-                  linkTo: Screening2Page(),
+                  linkTo: const Screening2Page(),
                 )
               ],
             ),

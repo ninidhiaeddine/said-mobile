@@ -19,7 +19,8 @@ class _UserAccountPageState extends State<UserAccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+        body: SingleChildScrollView(
+            child: Column(
       children: [
         const SaidUserBar(),
         Text(
@@ -59,6 +60,6 @@ class _UserAccountPageState extends State<UserAccountPage> {
               ],
             )),
       ],
-    ));
+    )));
   }
 }

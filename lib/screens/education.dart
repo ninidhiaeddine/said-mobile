@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/widgets/said_bottom_nav_bar.dart';
 import 'package:said/widgets/said_text_field.dart';
 
 class EducationPage extends StatefulWidget {
@@ -56,7 +57,44 @@ class _EducationPageState extends State<EducationPage> {
                                 padding: EdgeInsets.all(16),
                                 child: Text("Header"));
                           },
+                          body: const Text("Inside Expandable")),
+                      ExpansionPanel(
+                          canTapOnHeader: true,
+                          isExpanded: _isOpen[1],
+                          headerBuilder: (context, isOpen) {
+                            return const Padding(
+                                padding: EdgeInsets.all(16),
+                                child: Text("Header"));
+                          },
+                          body: const Text("Inside Expandable")),
+                      ExpansionPanel(
+                          canTapOnHeader: true,
+                          isExpanded: _isOpen[1],
+                          headerBuilder: (context, isOpen) {
+                            return const Padding(
+                                padding: EdgeInsets.all(16),
+                                child: Text("Header"));
+                          },
+                          body: const Text("Inside Expandable")),
+                      ExpansionPanel(
+                          canTapOnHeader: true,
+                          isExpanded: _isOpen[1],
+                          headerBuilder: (context, isOpen) {
+                            return const Padding(
+                                padding: EdgeInsets.all(16),
+                                child: Text("Header"));
+                          },
+                          body: const Text("Inside Expandable")),
+                      ExpansionPanel(
+                          canTapOnHeader: true,
+                          isExpanded: _isOpen[1],
+                          headerBuilder: (context, isOpen) {
+                            return const Padding(
+                                padding: EdgeInsets.all(16),
+                                child: Text("Header"));
+                          },
                           body: const Text("Inside Expandable"))
+
                     ],
                     expansionCallback: (i, isOpen) {
                       setState(() {
