@@ -6,10 +6,10 @@ class SaidSocialMediaBar extends StatelessWidget {
   SaidSocialMediaBar({Key? key}) : super(key: key);
 
   final socialMediaUrls = {
-    'Facebook': 'https://www.facebook.com/saidcrc.org/',
-    'Instagram': 'https://www.instagram.com/saidngo/',
+    'Facebook': 'https://www.facebook.com/saidcrc.org',
+    'Instagram': 'https://www.instagram.com/saidngo',
     'Twitter': 'https://twitter.com/SAIDNG0',
-    'LinkedIn': 'https://www.linkedin.com/in/said-ngo-358780120/',
+    'LinkedIn': 'https://www.linkedin.com/in/said-ngo-358780120',
   };
 
   Future<void> openLink(socialMediaKey) async {
@@ -19,9 +19,9 @@ class SaidSocialMediaBar extends StatelessWidget {
     }
 
     Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
+    //if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    //}
   }
 
   @override

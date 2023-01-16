@@ -37,9 +37,9 @@ class ContactPage extends StatelessWidget {
                   context: context,
                   icon: const Icon(Icons.send),
                 ),
-                const Padding(padding: EdgeInsets.all(16)),
+                const Padding(padding: EdgeInsets.all(8)),
                 Padding(
-                    padding: const EdgeInsets.all(25),
+                    padding: const EdgeInsets.all(60),
                     child: Column(
                       children: [
                         Row(
@@ -71,7 +71,7 @@ class ContactPage extends StatelessWidget {
                         ),
                       ],
                     )),
-                const Padding(padding: EdgeInsets.all(16.0)),
+                const Padding(padding: EdgeInsets.all(2.0)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
