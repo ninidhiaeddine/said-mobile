@@ -18,51 +18,46 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-          const Padding(
-              padding: EdgeInsets.fromLTRB(90.0, 0.0, 90.0, 0.0),
-              child: Image(image: AssetImage('assets/images/logo.png'))),
-          Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Text(AppLocalizations.of(context).signIn,
-                  style: blackHeader())),
-          Padding(
-              padding: const EdgeInsets.fromLTRB(64.0, 8.0, 64.0, 0.0),
-              child: SaidTextField(
-                placeholder: AppLocalizations.of(context).email,
-              )),
-          Padding(
-              padding: const EdgeInsets.fromLTRB(64.0, 16.0, 64.0, 0.0),
-              child: SaidTextField(
-                placeholder: AppLocalizations.of(context).password,
-              )),
-          Padding(
-              padding: const EdgeInsets.fromLTRB(64.0, 16.0, 64.0, 0.0),
-              child: SizedBox(
-                  width: double.infinity,
-                  child: SaidButton(
-                      text: AppLocalizations.of(context).cntn,
-                      context: context,
-                      linkTo: const UserNavigatorParent()))),
-          Padding(
-              padding: const EdgeInsets.fromLTRB(64.0, 48.0, 64.0, 0.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(AppLocalizations.of(context).newHere),
-                  const Padding(padding: EdgeInsets.all(2.0)),
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignUpPage())),
-                    child: Text(AppLocalizations.of(context).createAccount,
-                        style: primaryText()),
-                  )
-                ],
-              ))
-        ])));
+            child: Padding(
+      padding: EdgeInsets.all(48.0),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Padding(
+                padding: EdgeInsets.fromLTRB(45.0, 0.0, 45.0, 0.0),
+                child: Image(image: AssetImage('assets/images/logo.png'))),
+            const Padding(padding: EdgeInsets.all(24)),
+            Text(AppLocalizations.of(context).signIn, style: blackHeader()),
+            const Padding(padding: EdgeInsets.all(32)),
+            SaidTextField(
+              placeholder: AppLocalizations.of(context).email,
+            ),
+            const Padding(padding: EdgeInsets.all(8)),
+            SaidTextField(
+              placeholder: AppLocalizations.of(context).password,
+            ),
+            const Padding(padding: EdgeInsets.all(12)),
+            SaidButton(
+                text: AppLocalizations.of(context).cntn,
+                context: context,
+                linkTo: const UserNavigatorParent()),
+            const Padding(padding: EdgeInsets.all(24)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(AppLocalizations.of(context).newHere),
+                const Padding(padding: EdgeInsets.all(2.0)),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpPage())),
+                  child: Text(AppLocalizations.of(context).createAccount,
+                      style: primaryText()),
+                )
+              ],
+            )
+          ]),
+    )));
   }
 }
