@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:said/screens/screening1.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/said_button.dart';
 import 'package:said/widgets/said_steps_counter.dart';
@@ -44,7 +45,8 @@ class _UserHomePageState extends State<UserHomePage> {
               SaidButton(
                   text: AppLocalizations.of(context).selfScreening,
                   context: context,
-                  icon: const Icon(Icons.arrow_right_alt)),
+                  icon: const Icon(Icons.arrow_right_alt),
+                  linkTo: const Screening1Page()),
             ])),
         Padding(
             padding: const EdgeInsets.fromLTRB(32.0, 8.0, 32.0, 16.0),
