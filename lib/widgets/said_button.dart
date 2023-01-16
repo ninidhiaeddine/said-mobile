@@ -40,8 +40,12 @@ class SaidButton extends StatelessWidget {
                     : Navigator.push(context,
                         MaterialPageRoute(builder: (context) => linkTo!))
               },
-          child:
-              Text(text, style: const TextStyle(fontWeight: FontWeight.bold)));
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(text, style: const TextStyle(fontWeight: FontWeight.bold))
+            ],
+          ));
     }
   }
 }

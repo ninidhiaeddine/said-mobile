@@ -16,7 +16,7 @@ class _UserClubPageState extends State<UserClubPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               Text(AppLocalizations.of(context).clubPosts, style: subHeader()),

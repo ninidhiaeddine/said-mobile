@@ -14,10 +14,10 @@ class UserAccountPage extends StatefulWidget {
 }
 
 class _UserAccountPageState extends State<UserAccountPage> {
+  List<String> sexOptions = ["Male", "Female"];
+
   @override
   Widget build(BuildContext context) {
-    List<String> sexOptions = ["Male", "Female"];
-
     return Scaffold(
         body: Column(
       children: [

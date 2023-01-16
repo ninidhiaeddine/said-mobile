@@ -27,7 +27,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
           style: subHeader(),
         ),
         Padding(
-            padding: const EdgeInsets.all(64.0),
+            padding: const EdgeInsets.all(48.0),
             child: Column(
               children: [
                 SaidButton(
