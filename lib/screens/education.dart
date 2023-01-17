@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/utils/expansion_panel_generator.dart';
 import 'package:said/widgets/said_text_field.dart';
 
 class EducationPage extends StatefulWidget {
@@ -11,27 +12,8 @@ class EducationPage extends StatefulWidget {
 }
 
 class _EducationPageState extends State<EducationPage> {
-  final List<bool> _isOpen = List.generate(20, (index) => false);
-
-  List<ExpansionPanel> generateExpansionPanels(
-      List<String> titles, List<Widget> bodies) {
-    if (titles.length != bodies.length) {
-      throw Exception(
-          "The List of Titles and Bodies must be of the same length.");
-    }
-
-    return List<ExpansionPanel>.generate(
-        titles.length,
-        (i) => ExpansionPanel(
-            canTapOnHeader: true,
-            isExpanded: _isOpen[0],
-            headerBuilder: (context, isOpen) {
-              return Padding(
-                  padding: const EdgeInsets.all(16), child: Text(titles[i]));
-            },
-            body:
-                Padding(padding: const EdgeInsets.all(16), child: bodies[i])));
-  }
+  final List<bool> _isOpen = List.generate(10, (index) => false);
+  final List<bool> _nestedIsOpen = List.generate(2, (index) => false);
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +73,17 @@ class _EducationPageState extends State<EducationPage> {
       ),
       Column(
         children: [
+          Text(AppLocalizations.of(context).stagesOfCrcTitle),
+          Text(AppLocalizations.of(context).stagesOfCrcBody1),
+          Text(AppLocalizations.of(context).stagesOfCrcBody2),
+          Text(AppLocalizations.of(context).stage0),
+          Text(AppLocalizations.of(context).stage2),
+          Text(AppLocalizations.of(context).stage3),
+          Text(AppLocalizations.of(context).stage4),
+        ],
+      ),
+      Column(
+        children: [
           Text(AppLocalizations.of(context).screeningImportance),
           Text(AppLocalizations.of(context).screeningMsg1),
           Text(AppLocalizations.of(context).screeningMsg2),
@@ -122,11 +115,16 @@ class _EducationPageState extends State<EducationPage> {
           Text(AppLocalizations.of(context).screeningGLowRisk),
           Text(AppLocalizations.of(context).screeningGLowRisk1),
           ExpansionPanelList(
-            animationDuration: const Duration(seconds: 1),
+            animationDuration: const Duration(milliseconds: 500),
+            expansionCallback: (i, isOpen) {
+              setState(() {
+                _nestedIsOpen[i] = !isOpen;
+              });
+            },
             children: [
               ExpansionPanel(
                   canTapOnHeader: true,
-                  isExpanded: _isOpen[0],
+                  isExpanded: _nestedIsOpen[0],
                   headerBuilder: (context, isOpen) {
                     return Padding(
                         padding: const EdgeInsets.all(16),
@@ -139,7 +137,7 @@ class _EducationPageState extends State<EducationPage> {
                           AppLocalizations.of(context).primaryPreventionBody))),
               ExpansionPanel(
                   canTapOnHeader: true,
-                  isExpanded: _isOpen[0],
+                  isExpanded: _nestedIsOpen[1],
                   headerBuilder: (context, isOpen) {
                     return Padding(
                         padding: const EdgeInsets.all(16),
@@ -179,7 +177,7 @@ class _EducationPageState extends State<EducationPage> {
       ),
     ];
 
-    List<ExpansionPanel> panels = generateExpansionPanels(titles, bodies);
+    List<ExpansionPanel> panels = generateExpansionPanels(titles, bodies, _isOpen);
 
     return Scaffold(
         appBar: AppBar(
@@ -201,7 +199,7 @@ class _EducationPageState extends State<EducationPage> {
                   ),
                   const Padding(padding: EdgeInsets.all(8)),
                   ExpansionPanelList(
-                    animationDuration: const Duration(seconds: 1),
+                    animationDuration: const Duration(milliseconds: 500),
                     children: panels,
                     expansionCallback: (i, isOpen) {
                       setState(() {
