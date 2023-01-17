@@ -41,7 +41,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                   text: AppLocalizations.of(context).about,
                   context: context,
                   icon: const Icon(Icons.info_rounded),
-                  linkTo: const AboutPage(),
+                  linkTo: AboutPage(),
                 ),
                 SaidOutlinedButton(
                   text: AppLocalizations.of(context).contactUs,
