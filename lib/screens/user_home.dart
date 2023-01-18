@@ -3,6 +3,8 @@ import 'package:said/screens/med_setup.dart';
 import 'package:said/screens/screening1.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/said_button.dart';
+import 'package:said/widgets/said_conditional_widget.dart';
+import 'package:said/widgets/said_screening_warning.dart';
 import 'package:said/widgets/said_steps_counter.dart';
 import 'package:said/widgets/said_upcoming_med.dart';
 import 'package:said/widgets/said_upcoming_med_text.dart';
@@ -27,8 +29,13 @@ class _UserHomePageState extends State<UserHomePage> {
         const SaidUserBar(),
         const SaidUpcomingMedicationText(),
         const Padding(padding: EdgeInsets.all(8.0)),
+        const SaidConditionalWidget(
+            widget: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: SaidScreeningWarning()),
+            condition: true),
         const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: SaidStepsCounter(
               stepsDone: 3000,
               stepsGoal: 8000,
