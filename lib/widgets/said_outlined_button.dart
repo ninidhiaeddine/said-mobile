@@ -26,7 +26,7 @@ class SaidOutlinedButton extends StatelessWidget {
                   color: ColorConstants.accentColor, width: 1.0)),
           onPressed: () => {
                 linkTo == null
-                    ? onPressed
+                    ? onPressed!.call()
                     : Navigator.push(context,
                         MaterialPageRoute(builder: (context) => linkTo!))
               },
@@ -45,7 +45,7 @@ class SaidOutlinedButton extends StatelessWidget {
                   color: ColorConstants.accentColor, width: 1.0)),
           onPressed: () => {
                 linkTo == null
-                    ? onPressed
+                    ? onPressed!.call()
                     : Navigator.push(context,
                         MaterialPageRoute(builder: (context) => linkTo!))
               },

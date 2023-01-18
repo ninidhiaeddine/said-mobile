@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:said/utils/navigator.dart';
 
 class SaidButton extends StatelessWidget {
   const SaidButton(
@@ -23,10 +24,7 @@ class SaidButton extends StatelessWidget {
       if (enabled) {
         return ElevatedButton(
             onPressed: () => {
-                  linkTo == null
-                      ? onPressed
-                      : Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => linkTo!))
+                  linkTo == null ? onPressed!.call() : navigateToRoute(context, linkTo!)
                 },
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -48,11 +46,8 @@ class SaidButton extends StatelessWidget {
     } else {
       if (enabled) {
         return ElevatedButton(
-            onPressed: () => {
-                  linkTo == null
-                      ? onPressed
-                      : Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => linkTo!))
+            onPressed: () {
+                  linkTo == null ? onPressed!.call() : navigateToRoute(context, linkTo!);
                 },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
