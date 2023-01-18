@@ -21,4 +21,11 @@ class Message {
       dateSent: json['dateSent'],
     );
   }
+
+  Map toJson() => {
+    'id': id,
+    'user': user,
+    'message': message,
+    'dateSent': dateSent,
+  };
 }

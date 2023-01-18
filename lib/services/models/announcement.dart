@@ -15,4 +15,10 @@ class Announcement {
       dateSent: json['dateSent'],
     );
   }
+
+  Map toJson() => {
+    'id': id,
+    'content': content,
+    'dateSent': dateSent
+  };
 }

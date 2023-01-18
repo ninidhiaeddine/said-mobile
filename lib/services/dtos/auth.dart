@@ -10,4 +10,9 @@ class Auth {
       password: json['password'],
     );
   }
+
+  Map toJson() => {
+    'email': email,
+    'password': password,
+  };
 }

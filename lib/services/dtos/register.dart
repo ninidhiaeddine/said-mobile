@@ -13,4 +13,10 @@ class Register {
       password: json['password'],
     );
   }
+
+  Map toJson() => {
+    'username': username,
+    'email': email,
+    'password': password
+  };
 }

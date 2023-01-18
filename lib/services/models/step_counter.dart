@@ -21,4 +21,11 @@ class StepCounter {
       date: json['date'],
     );
   }
+
+  Map toJson() => {
+    'id': id,
+    'user': user,
+    'steps': steps,
+    'date': date
+  };
 }

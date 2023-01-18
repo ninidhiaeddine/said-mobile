@@ -19,4 +19,10 @@ class PostLike {
       post: json['post'],
     );
   }
+
+  Map toJson() => {
+    'id': id,
+    'user': user,
+    'post': post,
+  };
 }

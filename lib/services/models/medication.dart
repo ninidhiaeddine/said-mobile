@@ -31,4 +31,15 @@ class Medication {
         startDate: json['startDate'],
         endDate: json['endDate']);
   }
+
+  Map toJson() => {
+    'id': id,
+    'user': user,
+    'name': name,
+    'amount': amount,
+    'type': type,
+    'method': method,
+    'startDate': startDate,
+    'endDate': endDate,
+  };
 }

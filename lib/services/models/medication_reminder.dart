@@ -25,4 +25,12 @@ class MedicationReminder {
       dateTime: json['dateTime'],
     );
   }
+
+  Map toJson() => {
+    'id': id,
+    'medication': medication,
+    'user': user,
+    'alreadyTaken': alreadyTaken,
+    'dateTime': dateTime,
+  };
 }

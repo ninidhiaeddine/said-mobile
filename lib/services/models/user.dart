@@ -3,6 +3,9 @@ class User {
   final String username;
   final String email;
   final String password;
+  final String? phoneNumber;
+  final int? age;
+  final int? sex;
 
   User(
       {required this.id,
@@ -13,19 +16,25 @@ class User {
       this.age,
       this.sex});
 
-  final String? phoneNumber;
-  final int? age;
-  final int? sex;
-
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        id: json['id'],
-        username: json['username'],
-        email: json['email'],
-        password: json['password'],
-        phoneNumber: json['phoneNumber'],
-        age: json['age'],
-        sex: json['sex'],
+      id: json['id'],
+      username: json['username'],
+      email: json['email'],
+      password: json['password'],
+      phoneNumber: json['phoneNumber'],
+      age: json['age'],
+      sex: json['sex'],
     );
   }
+
+  Map toJson() => {
+    'id': id,
+    'username': username,
+    'email': email,
+    'password': password,
+    'phoneNumber': phoneNumber,
+    'age': age,
+    'sex': sex,
+  };
 }
