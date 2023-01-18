@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/theme.dart';
 
 void main() {
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   runApp(const SaidApp());
 }
 
