@@ -3,13 +3,14 @@ import 'package:said/config/color_constants.dart';
 
 class SaidTextField extends StatefulWidget {
   const SaidTextField(
-      {super.key, this.icon, this.placeholder = "", this.linesCount = 1, this.textInputType = TextInputType.text, this.blackVariant = false});
+      {super.key, this.prefixIcon, this.suffixIcon, this.placeholder = "", this.linesCount = 1, this.textInputType = TextInputType.text, this.blackVariant = false});
 
   final String placeholder;
   final bool blackVariant;
   final int linesCount;
   final TextInputType textInputType;
-  final Icon? icon;
+  final Icon? prefixIcon;
+  final Icon? suffixIcon;
 
   @override
   State<StatefulWidget> createState() => _SaidTextFieldState();
@@ -31,7 +32,8 @@ class _SaidTextFieldState extends State<SaidTextField> {
       style: widget.blackVariant ? const TextStyle(color: Colors.white) : null,
       maxLines: widget.linesCount,
       decoration: InputDecoration(
-        prefixIcon: widget.icon,
+        prefixIcon: widget.prefixIcon,
+        suffixIcon: widget.suffixIcon,
         fillColor:
             widget.blackVariant ? Colors.black : ColorConstants.textFieldColor,
         filled: true,
