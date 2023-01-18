@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
 
 class SaidPasswordField extends StatefulWidget {
-  const SaidPasswordField({super.key, this.placeholder = "Password"});
+  const SaidPasswordField({super.key, this.callback, this.placeholder = "Password"});
 
+  final Function(String)? callback;
   final String placeholder;
 
   @override
@@ -11,16 +12,9 @@ class SaidPasswordField extends StatefulWidget {
 }
 
 class _SaidPasswordFieldState extends State<SaidPasswordField> {
-  String _value = "";
   bool _passwordVisible = false;
 
   final TextEditingController _controller = TextEditingController();
-
-  void _updateValue(String newValue) {
-    setState(() {
-      _value = newValue;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +37,7 @@ class _SaidPasswordFieldState extends State<SaidPasswordField> {
         hintText: widget.placeholder,
       ),
       onChanged: (newValue) {
-        _updateValue(newValue);
+        widget.callback!(newValue);
       },
     );
   }

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
 
 class SaidTimePicker extends StatefulWidget {
-  const SaidTimePicker({Key? key, required this.placeholder}) : super(key: key);
+  const SaidTimePicker({Key? key, this.callback, required this.placeholder}) : super(key: key);
 
+  final Function(TimeOfDay)? callback;
   final String placeholder;
 
   @override
@@ -27,7 +28,11 @@ class _SaidTimePickerState extends State<SaidTimePicker> {
       return;
     }
 
+    // update text on field:
     _controller.text = formatTime(newTime, context);
+
+    // callback with new time value:
+    widget.callback!(newTime);
   }
 
   @override

@@ -3,9 +3,10 @@ import 'package:said/config/color_constants.dart';
 
 class SaidDropdown extends StatefulWidget {
   const SaidDropdown(
-      {Key? key, required this.placeholder, required this.options})
+      {Key? key, this.callback, required this.placeholder, required this.options})
       : super(key: key);
 
+  final Function(String?)? callback;
   final String placeholder;
   final List<String> options;
 
@@ -25,6 +26,8 @@ class _SaidDropdownState extends State<SaidDropdown> {
         items: widget.options
             .map((e) => DropdownMenuItem(value: e, child: Text(e)))
             .toList(),
-        onChanged: (val) {});
+        onChanged: (newValue) {
+          widget.callback!(newValue);
+        });
   }
 }

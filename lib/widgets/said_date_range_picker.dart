@@ -3,9 +3,10 @@ import 'package:intl/intl.dart';
 import 'package:said/config/color_constants.dart';
 
 class SaidDateRangePicker extends StatefulWidget {
-  const SaidDateRangePicker({Key? key, required this.placeholder})
+  const SaidDateRangePicker({Key? key, this.callback, required this.placeholder})
       : super(key: key);
 
+  final Function(DateTimeRange)? callback;
   final String placeholder;
 
   @override
@@ -39,7 +40,11 @@ class _SaidDateRangePickerState extends State<SaidDateRangePicker> {
       return;
     }
 
+    // update text in text field:
     _controller.text = formatDateRange(newDateRange);
+
+    // callback function to return selected date:
+    widget.callback!(newDateRange);
   }
 
   @override
