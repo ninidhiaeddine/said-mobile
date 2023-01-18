@@ -68,6 +68,9 @@
   "steps": "Steps",
   "goal": "Goal: ",
   "shareMilestone": "Share Milestone",
+  "screeningWarningTitle": "You must see a doctor ASAP",
+  "screeningWarningBody": "Your records indicate that you are experiencing at least one symptom of colorectal cancer. Thus, you must seek medical attention as soon as possible.",
+  "updateRecords": "Update Records",
 
   "storyTitle": "Story of SAID NGO (Decree 324/2016)",
   "storyBody": "In 2016 SAID NGO was founded in memory of Said Nimer with an objective to Spread Awareness and Improve Detection (S.A.I.D.) about colon cancer.",
