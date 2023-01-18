@@ -1,18 +1,13 @@
-class Announcement {
-  final int announcementId;
-  final String content;
-  final DateTime dateSent;
+class Auth {
+  final String email;
+  final String password;
 
-  Announcement(
-      {required this.announcementId,
-        required this.content,
-        required this.dateSent});
+  const Auth({required this.email, required this.password});
 
-  factory Announcement.fromJson(Map<String, dynamic> json) {
-    return Announcement(
-      announcementId: json['announcementId'],
-      content: json['content'],
-      dateSent: json['dateSent'],
+  factory Auth.fromJson(Map<String, dynamic> json) {
+    return Auth(
+      email: json['email'],
+      password: json['password'],
     );
   }
 }
