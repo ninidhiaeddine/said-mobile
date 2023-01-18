@@ -17,8 +17,8 @@ class _SingleMedSetupPageState extends State<SingleMedSetupPage> {
   bool notifsAreOn = false;
   final List<bool> _selections = List.generate(7, (index) => false);
 
-  List<String> typeOptions = ["Pill", "Injection"];
-  List<String> methodOptions = ["Before Eating", "After Eating"];
+  List<String> typeOptions = ["Pill", "Injection", "Drop", "Solution", "Other"];
+  List<String> methodOptions = ["Before Eating", "After Eating", "Halfway through a meal"];
 
   @override
   Widget build(BuildContext context) {
