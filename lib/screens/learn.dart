@@ -195,7 +195,7 @@ class _LearnPageState extends State<LearnPage> {
                   const Padding(padding: EdgeInsets.all(8)),
                   SaidTextField(
                     placeholder: AppLocalizations.of(context).search,
-                    icon: const Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                   ),
                   const Padding(padding: EdgeInsets.all(8)),
                   ExpansionPanelList(
