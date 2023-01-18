@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:said/theme/text_styles.dart';
 
@@ -9,6 +10,12 @@ class SaidAnnouncement extends StatelessWidget {
 
   final String content;
   final DateTime dateTime;
+
+  String formatDateTime(DateTime dateTime) {
+    var date = DateFormat.yMd().format(dateTime);
+    var time = DateFormat.jm().format(dateTime);
+    return "$date at $time";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class SaidAnnouncement extends StatelessWidget {
             Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  dateTime.toString(),
+                  formatDateTime(dateTime),
                   style: announcementDate(),
                 ))
           ],
