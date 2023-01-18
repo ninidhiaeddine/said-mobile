@@ -14,45 +14,78 @@ class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.fromLTRB(78, 32, 78, 16),
-          child: Image(image: AssetImage('assets/images/logo.png')),
-        ),
-        Text(
-          AppLocalizations.of(context).announcements,
-          style: subHeader(),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(16),
-        ),
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 48.0),
-            child: Column(
-              children: [
-                SaidAnnouncement(
-                    content: "We are hosting out Walkathon soon!",
-                    dateTime: DateTime(2023, 7, 7)),
-                const Padding(
-                  padding: EdgeInsets.all(8),
+        body: SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(78, 32, 78, 16),
+              child: Image(image: AssetImage('assets/images/logo.png')),
+            ),
+            Text(
+              AppLocalizations.of(context).announcements,
+              style: subHeader(),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(16),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SaidAnnouncement(
+                        content: "We are hosting out Walkathon soon!",
+                        dateTime: DateTime(2023, 7, 7)),
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                    ),
+                    SaidAnnouncement(
+                        content: "We are hosting out Walkathon soon!",
+                        dateTime: DateTime(2023, 7, 7)),
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                    ),
+                    SaidAnnouncement(
+                        content: "We are hosting out Walkathon soon!",
+                        dateTime: DateTime(2023, 7, 7)),
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                    ),
+                    SaidAnnouncement(
+                        content: "We are hosting out Walkathon soon!",
+                        dateTime: DateTime(2023, 7, 7)),
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                    ),
+                    SaidAnnouncement(
+                        content: "We are hosting out Walkathon soon!",
+                        dateTime: DateTime(2023, 7, 7)),
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                    ),
+                    SaidAnnouncement(
+                        content: "We are hosting out Walkathon soon!",
+                        dateTime: DateTime(2023, 7, 7)),
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                    ),
+                    SaidAnnouncement(
+                        content: "We are hosting out Walkathon soon!",
+                        dateTime: DateTime(2023, 7, 7)),
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                    ),
+                    SaidAnnouncement(
+                        content: "We are hosting out Walkathon soon!",
+                        dateTime: DateTime(2023, 7, 7)),
+                  ],
                 ),
-                SaidAnnouncement(
-                    content: "We are hosting out Walkathon soon!",
-                    dateTime: DateTime(2023, 7, 7)),
-                const Padding(
-                  padding: EdgeInsets.all(8),
-                ),
-                SaidAnnouncement(
-                    content: "We are hosting out Walkathon soon!",
-                    dateTime: DateTime(2023, 7, 7)),
-                const Padding(
-                  padding: EdgeInsets.all(8),
-                ),
-              ],
-            ))
-      ],
-    )));
+              ),
+            )
+          ],
+        ),
+      ),
+    ));
   }
 }
