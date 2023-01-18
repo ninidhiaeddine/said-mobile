@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:said/widgets/said_button.dart';
+import 'package:said/widgets/said_date_range_picker.dart';
 import 'package:said/widgets/said_dropdown.dart';
 import 'package:said/widgets/said_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:said/widgets/said_time_picker.dart';
 
 class SingleMedSetupPage extends StatefulWidget {
   const SingleMedSetupPage({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class _SingleMedSetupPageState extends State<SingleMedSetupPage> {
   final List<bool> _selections = List.generate(7, (index) => false);
 
   List<String> typeOptions = ["Pill", "Injection"];
-  List<String> methodOptions = ["Pill", "Injection"];
+  List<String> methodOptions = ["Before Eating", "After Eating"];
 
   @override
   Widget build(BuildContext context) {
@@ -51,29 +53,19 @@ class _SingleMedSetupPageState extends State<SingleMedSetupPage> {
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidDropdown(
+                        placeholder: AppLocalizations.of(context).type,
+                        options: typeOptions),
+                    const Padding(padding: EdgeInsets.all(8)),
+                    SaidDropdown(
                         placeholder: AppLocalizations.of(context).method,
                         options: methodOptions),
                     const Padding(padding: EdgeInsets.all(16)),
-                    SaidTextField(
+                    SaidTimePicker(
                       placeholder: AppLocalizations.of(context).time,
-                      textInputType: TextInputType.datetime,
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
-                    Row(
-                      children: [
-                        Flexible(
-                            child: SaidTextField(
-                          placeholder: AppLocalizations.of(context).startDate,
-                          textInputType: TextInputType.datetime,
-                        )),
-                        const Padding(padding: EdgeInsets.all(4)),
-                        Flexible(
-                            child: SaidTextField(
-                          placeholder: AppLocalizations.of(context).endDate,
-                          textInputType: TextInputType.datetime,
-                        )),
-                      ],
-                    ),
+                    SaidDateRangePicker(
+                        placeholder: AppLocalizations.of(context).dateRange),
                     const Padding(padding: EdgeInsets.all(8)),
                     Row(
                       children: [
