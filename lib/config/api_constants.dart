@@ -1,5 +1,5 @@
 class ApiConstants {
-  static String baseUrl = 'http://localhost:1337/api';
+  static String baseUrl = 'http://10.0.2.2:1337/api';
 
   // endpoints:
   static String usersEndpoint = '/users';
