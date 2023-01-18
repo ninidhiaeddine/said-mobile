@@ -15,8 +15,6 @@ class SaidStepsCounter extends StatefulWidget {
 }
 
 class _SaidStepsCounterState extends State<SaidStepsCounter> {
-  final bool goalReached = false;
-
   double _computeProgressValue() {
     return widget.stepsDone / widget.stepsGoal;
   }
@@ -75,7 +73,7 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
                 text: AppLocalizations.of(context).shareMilestone,
                 context: context,
                 icon: const Icon(Icons.star_purple500),
-                enabled: goalReached))
+                enabled: widget.stepsGoal <= widget.stepsDone))
       ]),
     );
   }
