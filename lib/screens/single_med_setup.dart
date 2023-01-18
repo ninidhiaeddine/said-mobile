@@ -47,6 +47,7 @@ class _SingleMedSetupPageState extends State<SingleMedSetupPage> {
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidTextField(
                       placeholder: AppLocalizations.of(context).amount,
+                      textInputType: TextInputType.number,
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidDropdown(
@@ -54,18 +55,22 @@ class _SingleMedSetupPageState extends State<SingleMedSetupPage> {
                         options: methodOptions),
                     const Padding(padding: EdgeInsets.all(16)),
                     SaidTextField(
-                        placeholder: AppLocalizations.of(context).time),
+                      placeholder: AppLocalizations.of(context).time,
+                      textInputType: TextInputType.datetime,
+                    ),
                     const Padding(padding: EdgeInsets.all(8)),
                     Row(
                       children: [
                         Flexible(
                             child: SaidTextField(
                           placeholder: AppLocalizations.of(context).startDate,
+                          textInputType: TextInputType.datetime,
                         )),
                         const Padding(padding: EdgeInsets.all(4)),
                         Flexible(
                             child: SaidTextField(
                           placeholder: AppLocalizations.of(context).endDate,
+                          textInputType: TextInputType.datetime,
                         )),
                       ],
                     ),

@@ -33,18 +33,22 @@ class _UserAccountPageState extends State<UserAccountPage> {
               children: [
                 SaidTextField(
                   placeholder: AppLocalizations.of(context).firstName,
+                  textInputType: TextInputType.name,
                 ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                 ),
                 SaidTextField(
                   placeholder: AppLocalizations.of(context).lastName,
+                  textInputType: TextInputType.name,
                 ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                 ),
                 SaidTextField(
                   placeholder: AppLocalizations.of(context).age,
+                  textInputType: const TextInputType.numberWithOptions(
+                      signed: false, decimal: false),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
