@@ -4,14 +4,14 @@ import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/expansion_panel_generator.dart';
 import 'package:said/widgets/said_text_field.dart';
 
-class EducationPage extends StatefulWidget {
-  const EducationPage({Key? key}) : super(key: key);
+class LearnPage extends StatefulWidget {
+  const LearnPage({Key? key}) : super(key: key);
 
   @override
-  State<EducationPage> createState() => _EducationPageState();
+  State<LearnPage> createState() => _LearnPageState();
 }
 
-class _EducationPageState extends State<EducationPage> {
+class _LearnPageState extends State<LearnPage> {
   final List<bool> _isOpen = List.generate(10, (index) => false);
   final List<bool> _nestedIsOpen = List.generate(2, (index) => false);
 
