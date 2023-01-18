@@ -72,6 +72,17 @@
   "screeningWarningBody": "Your records indicate that you are experiencing at least one symptom of colorectal cancer. Thus, you must seek medical attention as soon as possible.",
   "updateRecords": "Update Records",
 
+  "response": "Response",
+  "screeningBadBody": "Based on your answers, you should reach out to your doctor!",
+  "screeningBadTitle": "Seek Medical Help!",
+  "screeningGoodBody": "Based on your answers, you most likely are safe! Keep up the good work",
+  "screeningGoodTitle": "You are Safe!",
+  "yourResponses": "Your Responses",
+  "youAreExperiencing": "You are experiencing the following symptoms:",
+  "youHaveA": "You have a",
+  "crcChances": "chance of being potentially affected by colorectal cancer.",
+  "goBackHome": "Go Back Home",
+
   "storyTitle": "Story of SAID NGO (Decree 324/2016)",
   "storyBody": "In 2016 SAID NGO was founded in memory of Said Nimer with an objective to Spread Awareness and Improve Detection (S.A.I.D.) about colon cancer.",
   "missionTitle": "Mission of SAID NGO",
