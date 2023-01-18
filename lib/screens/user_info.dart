@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:said/screens/about.dart';
 import 'package:said/screens/contact.dart';
-import 'package:said/screens/education.dart';
+import 'package:said/screens/learn.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/said_button.dart';
 import 'package:said/widgets/said_outlined_button.dart';
@@ -34,7 +34,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                   text: AppLocalizations.of(context).learnAboutCRC,
                   context: context,
                   icon: const Icon(Icons.bar_chart),
-                  linkTo: const EducationPage(),
+                  linkTo: const LearnPage(),
                 ),
                 const Padding(padding: EdgeInsets.all(8.0)),
                 SaidOutlinedButton(

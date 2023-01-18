@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:said/screens/med_setup.dart';
 import 'package:said/screens/screening1.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/said_button.dart';
@@ -39,9 +40,11 @@ class _UserHomePageState extends State<UserHomePage> {
               Text(AppLocalizations.of(context).actions, style: subHeader()),
               const Padding(padding: EdgeInsets.all(4.0)),
               SaidButton(
-                  text: AppLocalizations.of(context).setUpMeds,
-                  context: context,
-                  icon: const Icon(Icons.arrow_right_alt)),
+                text: AppLocalizations.of(context).setUpMeds,
+                context: context,
+                icon: const Icon(Icons.arrow_right_alt),
+                linkTo: const MedSetupPage(),
+              ),
               SaidButton(
                   text: AppLocalizations.of(context).selfScreening,
                   context: context,
