@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
-import 'package:said/widgets/said_profile_pic.dart';
+import 'package:said/widgets/said_avatar.dart';
 
 class UserPost extends StatefulWidget {
   const UserPost(
@@ -40,7 +40,7 @@ class _UserPostState extends State<UserPost> {
               padding: const EdgeInsets.all(8),
               child: Row(
                 children: [
-                  SaidProfilePic(
+                  SaidAvatar(
                     nameInitials: widget.nameInitials,
                     networkImg: widget.profilePic,
                     dimensions: 30,
