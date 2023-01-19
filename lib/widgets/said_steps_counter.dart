@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pedometer/pedometer.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/widgets/said_button.dart';
 
 class SaidStepsCounter extends StatefulWidget {
   const SaidStepsCounter(
-      {super.key, this.stepsDone = 0, required this.stepsGoal});
+      {super.key, required this.stepsGoal});
 
-  final int stepsDone;
   final int stepsGoal;
 
   @override
@@ -15,8 +15,43 @@ class SaidStepsCounter extends StatefulWidget {
 }
 
 class _SaidStepsCounterState extends State<SaidStepsCounter> {
+  late Stream<StepCount> _stepCountStream;
+  late int _stepsDone;
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+
+    setState(() {
+      _stepsDone = 0;
+    });
+  }
+
+  void onStepCount(StepCount event) {
+    /// Handle step count changed
+    int steps = event.steps;
+    DateTime timeStamp = event.timeStamp;
+
+    setState(() {
+      _stepsDone = steps;
+    });
+  }
+
+  void onStepCountError(error) {
+    /// Handle the error
+  }
+
+  Future<void> initPlatformState() async {
+    /// Init stream
+    _stepCountStream = await Pedometer.stepCountStream;
+
+    /// Listen to stream and handle errors
+    _stepCountStream.listen(onStepCount).onError(onStepCountError);
+  }
+
   double _computeProgressValue() {
-    return widget.stepsDone / widget.stepsGoal;
+    return _stepsDone / widget.stepsGoal;
   }
 
   @override
@@ -46,7 +81,7 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
                 style: const TextStyle(color: Colors.white, fontSize: 18))),
         Positioned(
             top: 130,
-            child: Text(widget.stepsDone.toString(),
+            child: Text(_stepsDone.toString(),
                 style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -73,7 +108,7 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
                 text: AppLocalizations.of(context).shareMilestone,
                 context: context,
                 icon: const Icon(Icons.star_purple500),
-                enabled: widget.stepsGoal <= widget.stepsDone))
+                enabled: widget.stepsGoal <= _stepsDone))
       ]),
     );
   }
