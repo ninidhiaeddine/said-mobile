@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:said/screens/med_setup.dart';
 import 'package:said/screens/screening1.dart';
+import 'package:said/services/models/user.dart';
+import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/said_button.dart';
 import 'package:said/widgets/said_conditional_widget.dart';
 import 'package:said/widgets/said_screening_warning.dart';
@@ -19,6 +22,21 @@ class UserHomePage extends StatefulWidget {
 }
 
 class _UserHomePageState extends State<UserHomePage> {
+  late User _user;
+
+  Future<void> _loadUser() async {
+    // get user id:
+    int userId = await SaidSessionManager.getSessionValue('id');
+
+    // get user from API service:
+    _user = await UserService.getUser(userId);
+  }
+
+  @override
+  initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +44,17 @@ class _UserHomePageState extends State<UserHomePage> {
             child: SingleChildScrollView(
                 child: Column(
       children: [
-        const SaidUserBar(),
+        FutureBuilder(future: _loadUser(), builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return SaidUserBar(
+              userFullName: _user.username,
+            );
+          } else {
+            return const SaidUserBar(
+              userFullName: "Unknown User",
+            );
+          }
+        }),
         const SaidUpcomingMedicationText(),
         const Padding(padding: EdgeInsets.all(8.0)),
         const SaidConditionalWidget(
@@ -37,7 +65,7 @@ class _UserHomePageState extends State<UserHomePage> {
         const Padding(
             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: SaidStepsCounter(
-              stepsDone: 5000,
+              stepsDone: 0,
               stepsGoal: 8000,
             )),
         Padding(
