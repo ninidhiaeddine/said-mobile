@@ -1,13 +1,19 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:said/config/api_constants.dart';
 import 'package:said/services/models/medication_reminder.dart';
 
 class MedicationReminderService {
-  static Future<List<MedicationReminder>> getAllMedicationReminders(int medicationId) async {
+  static Future<List<MedicationReminder>> getAllMedicationReminders(
+      int medicationId) async {
     final response = await http.get(
-        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.medicationRemindersEndpoint}?medication=$medicationId'));
+        Uri.parse(
+            '${ApiConstants.baseUrl}${ApiConstants.medicationRemindersEndpoint}?medication=$medicationId'),
+        headers: <String, String>{
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
+        });
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -20,26 +26,33 @@ class MedicationReminderService {
     }
   }
 
-  static Future<http.Response> addMedicationReminder(MedicationReminder medicationReminder) {
+  static Future<http.Response> addMedicationReminder(
+      MedicationReminder medicationReminder) {
     return http.post(
-        Uri.parse(ApiConstants.baseUrl + ApiConstants.medicationRemindersEndpoint),
+        Uri.parse(
+            ApiConstants.baseUrl + ApiConstants.medicationRemindersEndpoint),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
         body: jsonEncode(MedicationReminder));
   }
 
-  static Future<http.Response> deleteMedicationReminder(MedicationReminder medicationReminder) {
+  static Future<http.Response> deleteMedicationReminder(
+      MedicationReminder medicationReminder) {
     return http.delete(
-        Uri.parse(ApiConstants.baseUrl + ApiConstants.medicationRemindersEndpoint),
+        Uri.parse(
+            ApiConstants.baseUrl + ApiConstants.medicationRemindersEndpoint),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
         body: jsonEncode(MedicationReminder));
   }
 
   // helper method:
-  static List<MedicationReminder> parseMedicationReminders(String responseBody) {
+  static List<MedicationReminder> parseMedicationReminders(
+      String responseBody) {
     final parsed = jsonDecode(responseBody);
     return parsed.map((json) => MedicationReminder.fromJson(json)).toList();
   }

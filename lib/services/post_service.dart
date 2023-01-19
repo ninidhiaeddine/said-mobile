@@ -1,13 +1,17 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:said/config/api_constants.dart';
 import 'package:said/services/models/post.dart';
 
 class PostService {
   static Future<List<Post>> getAllPosts() async {
-    final response = await http.get(Uri.parse(
-        '${ApiConstants.baseUrl}${ApiConstants.postsEndpoint}'));
+    final response = await http.get(
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.postsEndpoint}'),
+        headers: <String, String>{
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
+        });
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -25,6 +29,7 @@ class PostService {
         Uri.parse(ApiConstants.baseUrl + ApiConstants.postsEndpoint),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
         body: jsonEncode(post));
   }
@@ -34,6 +39,7 @@ class PostService {
         Uri.parse(ApiConstants.baseUrl + ApiConstants.postsEndpoint),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
         body: jsonEncode(post));
   }
@@ -43,6 +49,7 @@ class PostService {
         Uri.parse(ApiConstants.baseUrl + ApiConstants.postsEndpoint),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
         body: jsonEncode(post));
   }
