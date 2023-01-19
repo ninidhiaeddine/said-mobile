@@ -40,7 +40,7 @@ class PostService {
 
   static Future<http.Response> deletePost(Post post) {
     return http.delete(
-        Uri.parse(ApiConstants.baseUrl + ApiConstants.medicationsEndpoint),
+        Uri.parse(ApiConstants.baseUrl + ApiConstants.postsEndpoint),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
