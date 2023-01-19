@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:said/screens/home.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:said/screens/home.dart';
 import 'package:said/theme/theme.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const SaidApp());
 }
 
