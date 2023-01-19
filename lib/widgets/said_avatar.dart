@@ -1,8 +1,8 @@
 import 'package:said/config/color_constants.dart';
 import 'package:flutter/material.dart';
 
-class SaidProfilePic extends StatelessWidget {
-  const SaidProfilePic({super.key, this.networkImg, this.nameInitials, this.dimensions = 60});
+class SaidAvatar extends StatelessWidget {
+  const SaidAvatar({super.key, this.networkImg, this.nameInitials, this.dimensions = 60});
 
   // TODO: show network image if available:
 
@@ -21,7 +21,7 @@ class SaidProfilePic extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "JD",
+          nameInitials!,
           style: TextStyle(
             fontSize: dimensions / 2,
               color: Colors.white),
