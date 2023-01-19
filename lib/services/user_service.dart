@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:said/config/api_constants.dart';
 import 'package:said/services/models/user.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class UserService {
   static Future<User> getUser(int id) async {
     final response = await http.get(
-      Uri.parse('${ApiConstants.baseUrl}${ApiConstants.usersEndpoint}/$id'),
-    );
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.usersEndpoint}/$id'),
+        headers: <String, String>{
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
+        });
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
