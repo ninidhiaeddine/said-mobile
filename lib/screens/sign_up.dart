@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/config/api_constants.dart';
 import 'package:said/screens/user_navigator_parent.dart';
 import 'package:said/services/dtos/register.dart';
 import 'package:said/services/register_service.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/utils/navigator.dart';
+import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/said_button.dart';
+import 'package:said/widgets/said_conditional_widget.dart';
 import 'package:said/widgets/said_password_field.dart';
 import 'package:said/widgets/said_text_field.dart';
 
@@ -20,12 +24,44 @@ class _SignUpPageState extends State<SignUpPage> {
   String _usernameValue = "";
   String _emailValue = "";
   String _passwordValue = "";
+  String _errorMsg = "";
+  bool _signUpInProgress = false;
 
-  Future<void> signUp() async {
+  Future<void> signUp(BuildContext context) async {
+    // blocking semaphore:
+    setState(() {
+      _errorMsg = '';
+      _signUpInProgress = true;
+    });
+
     var registerDto = Register(
         username: _usernameValue, email: _emailValue, password: _passwordValue);
     var response = await RegisterService.register(registerDto);
-    print(response.body);
+    Map<String, dynamic> temp = jsonDecode(response.body);
+
+    if (response.statusCode != 200) {
+      // sign up failed:
+      Map<String, dynamic> error = temp['error'];
+      setState(() {
+        _errorMsg = error['message'];
+      });
+
+      // release semaphore:
+      setState(() {
+        _signUpInProgress = false;
+      });
+
+      return;
+    }
+    // store session:
+    SaidSessionManager.storeJwt(temp['jwt']);
+
+    Map<String, dynamic> user = temp['user'];
+    SaidSessionManager.storeUser(user['id'], user['username'], user['email'], user['phoneNumber'],
+        user['sex'], user['age']);
+
+    // go to user home screen:
+    navigateToRoute(context, const UserNavigatorParent());
   }
 
   @override
@@ -73,10 +109,21 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
               ),
               const Padding(padding: EdgeInsets.all(12)),
+              SaidConditionalWidget(
+                  widget: Column(children: const [
+                    Padding(padding: EdgeInsets.all(12)),
+                    CircularProgressIndicator(),
+                    Padding(padding: EdgeInsets.all(12)),
+                  ]),
+                  condition: _signUpInProgress),
+              Text(_errorMsg,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.red)),
               SaidButton(
                 text: AppLocalizations.of(context).signUp,
                 context: context,
-                onPressed: signUp,
+                enabled: !_signUpInProgress,
+                onPressed: () => signUp(context),
               ),
               const Padding(padding: EdgeInsets.all(24)),
             ]),
