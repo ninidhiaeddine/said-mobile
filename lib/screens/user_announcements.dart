@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:said/services/announcement_service.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/said_announcement.dart';
 
@@ -32,55 +33,21 @@ class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SaidAnnouncement(
-                        content: "We are hosting out Walkathon soon!",
-                        dateTime: DateTime(2023, 7, 7)),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                    ),
-                    SaidAnnouncement(
-                        content: "We are hosting out Walkathon soon!",
-                        dateTime: DateTime(2023, 7, 7)),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                    ),
-                    SaidAnnouncement(
-                        content: "We are hosting out Walkathon soon!",
-                        dateTime: DateTime(2023, 7, 7)),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                    ),
-                    SaidAnnouncement(
-                        content: "We are hosting out Walkathon soon!",
-                        dateTime: DateTime(2023, 7, 7)),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                    ),
-                    SaidAnnouncement(
-                        content: "We are hosting out Walkathon soon!",
-                        dateTime: DateTime(2023, 7, 7)),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                    ),
-                    SaidAnnouncement(
-                        content: "We are hosting out Walkathon soon!",
-                        dateTime: DateTime(2023, 7, 7)),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                    ),
-                    SaidAnnouncement(
-                        content: "We are hosting out Walkathon soon!",
-                        dateTime: DateTime(2023, 7, 7)),
-                    const Padding(
-                      padding: EdgeInsets.all(8),
-                    ),
-                    SaidAnnouncement(
-                        content: "We are hosting out Walkathon soon!",
-                        dateTime: DateTime(2023, 7, 7)),
-                  ],
-                ),
+                child: FutureBuilder(
+                    future: AnnouncementService.getAllAnnouncements(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return ListView(
+                          children: snapshot.data!
+                              .map((e) => SaidAnnouncement(
+                                  content: e.content, dateTime: e.dateSent))
+                              .toList(),
+                        );
+                      } else {
+                        return Text(
+                            AppLocalizations.of(context).noAnnouncements);
+                      }
+                    }),
               ),
             )
           ],
