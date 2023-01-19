@@ -1,18 +1,18 @@
 class Auth {
-  final String email;
+  final String identifier;
   final String password;
 
-  const Auth({required this.email, required this.password});
+  const Auth({required this.identifier, required this.password});
 
   factory Auth.fromJson(Map<String, dynamic> json) {
     return Auth(
-      email: json['email'],
+      identifier: json['identifier'],
       password: json['password'],
     );
   }
 
   Map toJson() => {
-    'email': email,
+    'identifier': identifier,
     'password': password,
   };
 }
