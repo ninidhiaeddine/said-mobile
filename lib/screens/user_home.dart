@@ -65,7 +65,6 @@ class _UserHomePageState extends State<UserHomePage> {
         const Padding(
             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: SaidStepsCounter(
-              stepsDone: 0,
               stepsGoal: 8000,
             )),
         Padding(
