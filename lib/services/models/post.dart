@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:said/services/models/post_like.dart';
 import 'package:said/services/models/user.dart';
 
@@ -20,7 +21,7 @@ class Post {
     return Post(
       id: json['id'],
       user: json['user'],
-      datePosted: json['datePosted'],
+      datePosted: DateTime.parse(json['datePosted']),
       postContent: json['postContent'],
       postLikes: json['postLikes'],
     );

@@ -18,7 +18,7 @@ class Message {
       id: json['id'],
       user: json['user'],
       message: json['message'],
-      dateSent: json['dateSent'],
+      dateSent: DateTime.parse(json['dateSent']),
     );
   }
 

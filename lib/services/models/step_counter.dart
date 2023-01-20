@@ -18,7 +18,7 @@ class StepCounter {
       id: json['id'],
       user: json['user'],
       steps: json['steps'],
-      date: json['date'],
+      date: DateTime.parse(json['date']),
     );
   }
 

@@ -28,8 +28,8 @@ class Medication {
         amount: json['amount'],
         type: json['type'],
         method: json['method'],
-        startDate: json['startDate'],
-        endDate: json['endDate']);
+        startDate: DateTime.parse(json['startDate']),
+        endDate: DateTime.parse(json['endDate']));
   }
 
   Map toJson() => {
