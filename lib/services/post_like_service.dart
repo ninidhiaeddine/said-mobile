@@ -33,7 +33,7 @@ class PostLikeService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(PostLike));
+        body: jsonEncode(postLike));
   }
 
   static Future<http.Response> deletePostLike(PostLike postLike) {
@@ -43,7 +43,7 @@ class PostLikeService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(PostLike));
+        body: jsonEncode(postLike));
   }
 
   // helper method:

@@ -53,7 +53,7 @@ class StepCounterService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(stepCounter));
+        body: jsonEncode({"data": stepCounter}));
   }
 
   static Future<http.Response> updateStepCounter(StepCounter stepCounter) {
@@ -63,7 +63,7 @@ class StepCounterService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(stepCounter));
+        body: jsonEncode({"data": stepCounter}));
   }
 
   // helper method:

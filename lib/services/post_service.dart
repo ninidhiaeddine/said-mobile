@@ -32,7 +32,7 @@ class PostService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(post));
+        body: jsonEncode({"data": post}));
   }
 
   static Future<http.Response> updatePost(Post post) {
@@ -42,7 +42,7 @@ class PostService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(post));
+        body: jsonEncode({"data": post}));
   }
 
   static Future<http.Response> deletePost(Post post) {
@@ -52,7 +52,7 @@ class PostService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(post));
+        body: jsonEncode({"data": post}));
   }
 
   // helper method:
