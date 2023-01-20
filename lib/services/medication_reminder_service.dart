@@ -36,7 +36,7 @@ class MedicationReminderService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(MedicationReminder));
+        body: jsonEncode(medicationReminder));
   }
 
   static Future<http.Response> deleteMedicationReminder(
@@ -48,7 +48,7 @@ class MedicationReminderService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(MedicationReminder));
+        body: jsonEncode(medicationReminder));
   }
 
   // helper method:
@@ -58,7 +58,8 @@ class MedicationReminderService {
     var flattenedResponse = flattenApiResponse(responseBody);
 
     // map data to list of announcements:
-    var lst = flattenedResponse.map((e) => MedicationReminder.fromJson(e)).toList();
+    var lst =
+        flattenedResponse.map((e) => MedicationReminder.fromJson(e)).toList();
     return lst;
   }
 }

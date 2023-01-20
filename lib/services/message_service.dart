@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:http/http.dart' as http;
@@ -13,6 +14,6 @@ class MessageService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(message));
+        body: jsonEncode({"data": message}));
   }
 }
