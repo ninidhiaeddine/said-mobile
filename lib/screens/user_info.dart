@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:said/screens/about.dart';
 import 'package:said/screens/contact.dart';
 import 'package:said/screens/learn.dart';
+import 'package:said/services/models/user.dart';
+import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/said_button.dart';
 import 'package:said/widgets/said_outlined_button.dart';
 import 'package:said/widgets/said_user_bar.dart';
@@ -16,12 +19,32 @@ class UserInfoPage extends StatefulWidget {
 }
 
 class _UserInfoPageState extends State<UserInfoPage> {
+  late User _user;
+
+  Future<void> _loadUser() async {
+    // get user id:
+    int userId = await SaidSessionManager.getSessionValue('id');
+
+    // get user from API service:
+    _user = await UserService.getUser(userId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
       children: [
-        const SaidUserBar(),
+        FutureBuilder(future: _loadUser(), builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return SaidUserBar(
+              userFullName: _user.username,
+            );
+          } else {
+            return const SaidUserBar(
+              userFullName: "Unknown User",
+            );
+          }
+        }),
         Text(
           AppLocalizations.of(context).information,
           style: subHeader(),

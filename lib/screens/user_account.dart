@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:said/services/models/user.dart';
+import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/said_button.dart';
 import 'package:said/widgets/said_dropdown.dart';
 import 'package:said/widgets/said_text_field.dart';
@@ -16,13 +19,33 @@ class UserAccountPage extends StatefulWidget {
 class _UserAccountPageState extends State<UserAccountPage> {
   List<String> sexOptions = ["Male", "Female"];
 
+  late User _user;
+
+  Future<void> _loadUser() async {
+    // get user id:
+    int userId = await SaidSessionManager.getSessionValue('id');
+
+    // get user from API service:
+    _user = await UserService.getUser(userId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
             child: Column(
       children: [
-        const SaidUserBar(),
+        FutureBuilder(future: _loadUser(), builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return SaidUserBar(
+              userFullName: _user.username,
+            );
+          } else {
+            return const SaidUserBar(
+              userFullName: "Unknown User",
+            );
+          }
+        }),
         Text(
           AppLocalizations.of(context).accountSettings,
           style: subHeader(),
