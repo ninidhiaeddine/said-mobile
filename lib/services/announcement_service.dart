@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:said/config/api_constants.dart';
 import 'package:said/services/models/announcement.dart';
+import 'package:said/utils/flatten_api_response.dart';
 
 class AnnouncementService {
   static Future<Announcement> getAnnouncement(int id) async {
@@ -35,7 +36,8 @@ class AnnouncementService {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      return parseAnnouncements(response.body);
+      var lst = parseAnnouncements(response.body);
+      return lst;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
@@ -45,7 +47,11 @@ class AnnouncementService {
 
   // helper method:
   static List<Announcement> parseAnnouncements(String responseBody) {
-    final parsed = jsonDecode(responseBody);
-    return parsed.map((json) => Announcement.fromJson(json)).toList();
+    // flatten data:
+    var flattenedResponse = flattenApiResponse(responseBody);
+
+    // map data to list of announcements:
+    var lst = flattenedResponse.map((e) => Announcement.fromJson(e)).toList();
+    return lst;
   }
 }

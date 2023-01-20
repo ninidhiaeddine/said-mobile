@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:said/config/api_constants.dart';
 import 'package:said/services/models/medication_reminder.dart';
+import 'package:said/utils/flatten_api_response.dart';
 
 class MedicationReminderService {
   static Future<List<MedicationReminder>> getAllMedicationReminders(
@@ -53,7 +54,11 @@ class MedicationReminderService {
   // helper method:
   static List<MedicationReminder> parseMedicationReminders(
       String responseBody) {
-    final parsed = jsonDecode(responseBody);
-    return parsed.map((json) => MedicationReminder.fromJson(json)).toList();
+    // flatten data:
+    var flattenedResponse = flattenApiResponse(responseBody);
+
+    // map data to list of announcements:
+    var lst = flattenedResponse.map((e) => MedicationReminder.fromJson(e)).toList();
+    return lst;
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:said/config/api_constants.dart';
 import 'package:said/services/models/medication.dart';
+import 'package:said/utils/flatten_api_response.dart';
 
 class MedicationService {
   static Future<List<Medication>> getAllMedications(int userId) async {
@@ -57,7 +58,11 @@ class MedicationService {
 
   // helper method:
   static List<Medication> parseMedications(String responseBody) {
-    final parsed = jsonDecode(responseBody);
-    return parsed.map((json) => Medication.fromJson(json)).toList();
+    // flatten data:
+    var flattenedResponse = flattenApiResponse(responseBody);
+
+    // map data to list of announcements:
+    var lst = flattenedResponse.map((e) => Medication.fromJson(e)).toList();
+    return lst;
   }
 }
