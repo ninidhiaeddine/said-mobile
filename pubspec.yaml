@@ -45,6 +45,7 @@ dependencies:
   flutter_dotenv: 5.0.2
   flutter_session_manager: 1.0.2
   pedometer: 3.0.0
+  flat: 0.4.1
 
 dev_dependencies:
   flutter_test:
