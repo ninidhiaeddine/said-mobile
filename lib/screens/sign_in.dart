@@ -82,7 +82,7 @@ class _SignInPageState extends State<SignInPage> {
               SaidTextField(
                   placeholder: AppLocalizations.of(context).email,
                   suffixIcon: const Icon(Icons.email),
-                  callback: (newValue) => {
+                  callback: (newValue, controller) => {
                         setState(() {
                           _emailValue = newValue;
                         })
