@@ -177,5 +177,7 @@
   "communityM2pt7": "7.\tEncourage them to download the App.",
   "communityM3": "Early detection of cancer saves lives. We all need to adopt screening as a way of life. Spread the word and beat cancer.",
 
-  "noAnnouncements": "No Announcements were found :("
+  "noAnnouncements": "No Announcements were found :(",
+  "messageSentSuccess": "Message Sent Successfully!",
+  "messageSentError": "An error occurred while sending the message"
 }
