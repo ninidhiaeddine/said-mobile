@@ -3,25 +3,25 @@ import 'package:said/services/models/post_like.dart';
 import 'package:said/services/models/user.dart';
 
 class Post {
-  final int id;
+  final int? id;
 
   Post(
-      {required this.id,
+      {this.id,
         required this.user,
-        required this.datePosted,
+        required this.createdAt,
         required this.postContent,
         this.postLikes});
 
   final User user;
   final String postContent;
-  final DateTime datePosted;
+  final DateTime createdAt;
   final List<PostLike>? postLikes;
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
       id: json['id'],
       user: json['user'],
-      datePosted: DateTime.parse(json['datePosted']),
+      createdAt: DateTime.parse(json['createdAt']),
       postContent: json['postContent'],
       postLikes: json['postLikes'],
     );
@@ -30,7 +30,7 @@ class Post {
   Map toJson() => {
     'id': id,
     'user': user,
-    'datePosted': datePosted,
+    'createdAt': createdAt,
     'postContent': postContent,
     'postLikes': postLikes,
   };

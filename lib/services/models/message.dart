@@ -1,10 +1,10 @@
 import 'package:said/services/models/user.dart';
 
 class Message {
-  final int id;
+  final int? id;
 
   Message(
-      {required this.id,
+      {this.id,
       required this.user,
       required this.message,
       required this.dateSent});
@@ -26,6 +26,6 @@ class Message {
     'id': id,
     'user': user,
     'message': message,
-    'dateSent': dateSent,
+    'dateSent': dateSent.toIso8601String(),
   };
 }

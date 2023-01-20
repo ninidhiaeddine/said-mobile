@@ -2,7 +2,7 @@ import 'package:said/services/models/user.dart';
 
 class Medication {
   const Medication(
-      {required this.id,
+      {this.id,
       required this.user,
       required this.name,
       required this.amount,
@@ -11,7 +11,7 @@ class Medication {
       required this.startDate,
       required this.endDate});
 
-  final int id;
+  final int? id;
   final User user;
   final String name;
   final double amount;
@@ -39,7 +39,7 @@ class Medication {
     'amount': amount,
     'type': type,
     'method': method,
-    'startDate': startDate,
-    'endDate': endDate,
+    'startDate': startDate.toIso8601String(),
+    'endDate': endDate.toIso8601String(),
   };
 }

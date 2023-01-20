@@ -2,11 +2,11 @@ import 'package:said/services/models/medication.dart';
 import 'package:said/services/models/user.dart';
 
 class MedicationReminder {
-  final int id;
+  final int? id;
   final Medication medication;
 
   MedicationReminder(
-      {required this.id,
+      {this.id,
       required this.medication,
       required this.user,
       required this.alreadyTaken,
@@ -31,6 +31,6 @@ class MedicationReminder {
     'medication': medication,
     'user': user,
     'alreadyTaken': alreadyTaken,
-    'dateTime': dateTime,
+    'dateTime': dateTime.toIso8601String(),
   };
 }

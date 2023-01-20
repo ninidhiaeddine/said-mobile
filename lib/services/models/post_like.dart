@@ -2,10 +2,10 @@ import 'package:said/services/models/post.dart';
 import 'package:said/services/models/user.dart';
 
 class PostLike {
-  final int id;
+  final int? id;
 
   PostLike(
-      {required this.id,
+      {this.id,
         required this.user,
         required this.post});
 

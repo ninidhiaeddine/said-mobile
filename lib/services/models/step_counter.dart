@@ -1,10 +1,10 @@
 import 'package:said/services/models/user.dart';
 
 class StepCounter {
-  final int id;
+  final int? id;
 
   StepCounter(
-      {required this.id,
+      {this.id,
         required this.user,
         required this.steps,
         required this.date});
@@ -26,6 +26,6 @@ class StepCounter {
     'id': id,
     'user': user,
     'steps': steps,
-    'date': date
+    'date': date.toIso8601String()
   };
 }

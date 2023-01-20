@@ -1,10 +1,10 @@
 class Announcement {
-  final int id;
+  final int? id;
   final String content;
   final DateTime createdAt;
 
   const Announcement(
-      {required this.id,
+      {this.id,
       required this.content,
       required this.createdAt});
 
@@ -19,6 +19,6 @@ class Announcement {
   Map toJson() => {
     'id': id,
     'content': content,
-    'dateSent': createdAt
+    'createdAt': createdAt.toIso8601String()
   };
 }
