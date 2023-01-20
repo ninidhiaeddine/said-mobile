@@ -5,11 +5,11 @@ import 'package:said/theme/text_styles.dart';
 
 class SaidAnnouncement extends StatelessWidget {
   const SaidAnnouncement(
-      {Key? key, required this.content, required this.dateTime})
+      {Key? key, required this.content, required this.createdAt})
       : super(key: key);
 
   final String content;
-  final DateTime dateTime;
+  final DateTime createdAt;
 
   String formatDateTime(DateTime dateTime) {
     var date = DateFormat.yMd().format(dateTime);
@@ -40,7 +40,7 @@ class SaidAnnouncement extends StatelessWidget {
             Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  formatDateTime(dateTime),
+                  formatDateTime(createdAt),
                   style: announcementDate(),
                 ))
           ],

@@ -22,7 +22,7 @@ class MedicationReminder {
       medication: json['medication'],
       user: json['user'],
       alreadyTaken: json['alreadyTaken'],
-      dateTime: json['dateTime'],
+      dateTime: DateTime.parse(json['dateTime']),
     );
   }
 
