@@ -32,23 +32,21 @@ class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
               padding: EdgeInsets.all(16),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                child: FutureBuilder(
-                    future: AnnouncementService.getAllAnnouncements(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return ListView(
-                          children: snapshot.data!
-                              .map((e) => SaidAnnouncement(
-                                  content: e.content, dateTime: e.dateSent))
-                              .toList(),
-                        );
-                      } else {
-                        return Text(
-                            AppLocalizations.of(context).noAnnouncements);
-                      }
-                    }),
-              ),
+              child: FutureBuilder(
+                  future: AnnouncementService.getAllAnnouncements(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return ListView(
+                        children: snapshot.data!
+                            .map((e) => SaidAnnouncement(
+                            content: e.content, createdAt: e.createdAt))
+                            .toList(),
+                      );
+                    } else {
+                      return Text(
+                          AppLocalizations.of(context).noAnnouncements);
+                    }
+                  }),
             )
           ],
         ),
