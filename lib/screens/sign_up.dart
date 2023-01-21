@@ -6,7 +6,6 @@ import 'package:said/screens/user_navigator_parent.dart';
 import 'package:said/services/dtos/register.dart';
 import 'package:said/services/register_service.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/types/sex.dart';
 import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
@@ -61,10 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
     SaidSessionManager.storeUser(
         id: user['id'],
         username: user['username'],
-        email: user['email'],
-        phoneNumber: user['phoneNumber'],
-        sex: sexToEnum(user['sex']),
-        age: user['age']);
+        email: user['email']);
 
     // go to user home screen:
     navigateToRoute(context, const UserNavigatorParent());
