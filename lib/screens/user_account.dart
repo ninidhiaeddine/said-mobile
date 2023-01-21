@@ -27,17 +27,17 @@ class _UserAccountPageState extends State<UserAccountPage> {
   late Future<User> _user;
 
   Future<void> _saveChanges() async {
-    print("_saveChanges() called");
     var updatedUser = User(
         id: (await _user).id,
         username: (await _user).username,
         email: (await _user).email,
-        firstName: controllers[0].text,
-        lastName: controllers[1].text,
-        age: int.parse(controllers[2].text),
-        sex: sexToEnum(_sexValue));
+        firstName: controllers[0].text.isNotEmpty ? controllers[0].text : null,
+        lastName: controllers[1].text.isNotEmpty ? controllers[0].text : null,
+        age: controllers[2].text.isNotEmpty ? int.parse(controllers[2].text) : null,
+        sex: _sexValue.isNotEmpty ? sexToEnum(_sexValue) : null);
 
-    var response = await UserService.updateUser((await _user).id!, updatedUser);
+    print(updatedUser.sex);
+    var response = await UserService.updateUser(updatedUser.id!, updatedUser);
 
     if (response.statusCode == 200) {
       // show snackbar:
@@ -91,7 +91,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
                 );
               } else {
                 return const SaidUserBar(
-                  userFullName: "Unknown User",
+                  userFullName: "Loading",
                 );
               }
             }),

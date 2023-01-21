@@ -42,6 +42,6 @@ class User {
     'lastName': lastName,
     'phoneNumber': phoneNumber,
     'age': age,
-    'sex': sexToString(sex!),
+    'sex': sex != null ? sexToString(sex!) : null,
   };
 }

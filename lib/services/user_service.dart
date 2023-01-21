@@ -29,6 +29,7 @@ class UserService {
         Uri.parse('${ApiConstants.baseUrl}${ApiConstants.usersEndpoint}/$id'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
         body: jsonEncode({"data": user}));
   }

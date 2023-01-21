@@ -22,14 +22,20 @@ class UserHomePage extends StatefulWidget {
 }
 
 class _UserHomePageState extends State<UserHomePage> {
-  late User _user;
+  late Future<User> _user;
 
-  Future<void> _loadUser() async {
+  Future<User> _loadUser() async {
     // get user id:
     int userId = await SaidSessionManager.getSessionValue('id');
 
     // get user from API service:
-    _user = await UserService.getUser(userId);
+    return await UserService.getUser(userId);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _user = _loadUser();
   }
 
   @override
@@ -39,17 +45,26 @@ class _UserHomePageState extends State<UserHomePage> {
             child: SingleChildScrollView(
                 child: Column(
       children: [
-        FutureBuilder(future: _loadUser(), builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return SaidUserBar(
-              userFullName: _user.username,
-            );
-          } else {
-            return const SaidUserBar(
-              userFullName: "Unknown User",
-            );
-          }
-        }),
+        FutureBuilder(
+            future: _user,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.data!.firstName != null) {
+                  var fullName = '${snapshot.data!.firstName} ${snapshot.data!.lastName}';
+                  return SaidUserBar(
+                    userFullName: fullName,
+                  );
+                } else {
+                  return SaidUserBar(
+                    userFullName: snapshot.data!.username,
+                  );
+                }
+              } else {
+                return const SaidUserBar(
+                  userFullName: "Loading...",
+                );
+              }
+            }),
         const SaidUpcomingMedicationText(),
         const Padding(padding: EdgeInsets.all(8.0)),
         const SaidConditionalWidget(
