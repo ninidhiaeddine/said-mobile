@@ -1,6 +1,5 @@
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:said/services/models/user.dart';
-import 'package:said/types/sex.dart';
 
 class SaidSessionManager {
   static Future<void> storeUser(
@@ -10,17 +9,22 @@ class SaidSessionManager {
       String? firstName,
       String? lastName,
       String? phoneNumber,
-      Sex? sex,
+      String? sex,
       int? age}) async {
     var sessionManager = SessionManager();
     await sessionManager.set("id", id);
     await sessionManager.set("username", username);
     await sessionManager.set("email", email);
+
+    // nullable values:
     if (firstName != null) await sessionManager.set("firstName", firstName);
     if (lastName != null) await sessionManager.set("lastName", lastName);
-    //await sessionManager.set("phoneNumber", phoneNumber);
-    if (sex != null) await sessionManager.set("sex", sexToString(sex));
-    if (firstName != null) await sessionManager.set("age", age);
+    if (phoneNumber != null) {
+      await sessionManager.set("phoneNumber", phoneNumber);
+    }
+    if (sex != null) await sessionManager.set("sex", sex);
+    if (age != null) await sessionManager.set("age", age);
+
     await sessionManager.set("isLoggedIn", true);
   }
 
@@ -43,10 +47,7 @@ class SaidSessionManager {
 
   static Future<User> getUser() async {
     var sessionManager = SessionManager();
-
-    var sex = await sessionManager.get('sex');
-    if (sex != null) {
-      return User(
+    return User(
         id: await sessionManager.get('id'),
         username: await sessionManager.get('username'),
         email: await sessionManager.get('email'),
@@ -54,19 +55,7 @@ class SaidSessionManager {
         lastName: await sessionManager.get('lastName'),
         phoneNumber: await sessionManager.get('phoneNumber'),
         age: await sessionManager.get('age'),
-        sex: sexToEnum(sex),
-      );
-    } else {
-      return User(
-        id: await sessionManager.get('id'),
-        username: await sessionManager.get('username'),
-        email: await sessionManager.get('email'),
-        firstName: await sessionManager.get('firstName'),
-        lastName: await sessionManager.get('lastName'),
-        phoneNumber: await sessionManager.get('phoneNumber'),
-        age: await sessionManager.get('age'),
-      );
-    }
+        sex: await sessionManager.get('sex'));
   }
 
   static Future<void> clearUser() async {

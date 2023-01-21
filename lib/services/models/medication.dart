@@ -15,15 +15,15 @@ class Medication {
   final User user;
   final String name;
   final double amount;
-  final int type;
-  final int method;
+  final String type;
+  final String method;
   final DateTime startDate;
   final DateTime endDate;
 
   factory Medication.fromJson(Map<String, dynamic> json) {
     return Medication(
         id: json['id'],
-        user: json['user'],
+        user: User.fromJson(json['user']),
         name: json['name'],
         amount: json['amount'],
         type: json['type'],

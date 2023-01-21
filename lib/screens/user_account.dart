@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/types/sex.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 import 'package:said/widgets/dropdowns/said_dropdown.dart';
@@ -49,7 +48,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
         age: controllers[2].text.isNotEmpty
             ? int.parse(controllers[2].text)
             : null,
-        sex: _sexValue.isNotEmpty ? sexToEnum(_sexValue) : null);
+        sex: _sexValue.isNotEmpty ? _sexValue : null);
 
     // 1. make api call:
     var response = await UserService.updateUser(updatedUser.id!, updatedUser);
@@ -203,11 +202,10 @@ class _UserAccountPageState extends State<UserAccountPage> {
                 FutureBuilder(
                     future: widget.authenticatedUser,
                     builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done &&
-                          snapshot.data!.sex != null) {
+                      if (snapshot.connectionState == ConnectionState.done && snapshot.data!.sex != null) {
                         return SaidDropdown(
                           placeholder: AppLocalizations.of(context).sex,
-                          value: sexToString(snapshot.data!.sex!),
+                          value: snapshot.data!.sex,
                           options: sexOptions,
                           callback: (newValue) {
                             setState(() {

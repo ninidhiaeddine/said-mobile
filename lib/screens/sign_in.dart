@@ -7,7 +7,6 @@ import 'package:said/screens/user_navigator_parent.dart';
 import 'package:said/services/auth_service.dart';
 import 'package:said/services/dtos/auth.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/types/sex.dart';
 import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
@@ -57,7 +56,6 @@ class _SignInPageState extends State<SignInPage> {
     SaidSessionManager.storeJwt(data['jwt']);
 
     Map<String, dynamic> user = data['user'];
-    print(user['firstName']);
     SaidSessionManager.storeUser(
         id: user['id'],
         username: user['username'],
@@ -65,7 +63,7 @@ class _SignInPageState extends State<SignInPage> {
         firstName: user['firstName'],
         lastName: user['lastName'],
         phoneNumber: user['phoneNumber'],
-        sex: sexToEnum(user['sex']),
+        sex: user['sex'],
         age: user['age']);
 
     // go to user home screen:

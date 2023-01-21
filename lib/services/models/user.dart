@@ -1,5 +1,3 @@
-import 'package:said/types/sex.dart';
-
 class User {
   final int? id;
   final String username;
@@ -9,7 +7,7 @@ class User {
   final String? lastName;
   final String? phoneNumber;
   final int? age;
-  final Sex? sex;
+  final String? sex;
 
   User(
       {this.id,
@@ -30,7 +28,7 @@ class User {
       lastName: json['lastName'],
       phoneNumber: json['phoneNumber'],
       age: json['age'],
-      sex: sexToEnum(json['sex']),
+      sex: json['sex'],
     );
   }
 
@@ -42,6 +40,6 @@ class User {
     'lastName': lastName,
     'phoneNumber': phoneNumber,
     'age': age,
-    'sex': sex != null ? sexToString(sex!) : null,
+    'sex': sex
   };
 }
