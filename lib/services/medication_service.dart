@@ -4,13 +4,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:said/config/api_constants.dart';
 import 'package:said/services/models/medication.dart';
-import 'package:said/utils/flatten_api_response.dart';
 
 class MedicationService {
   static Future<List<Medication>> getAllMedications(int userId) async {
     final response = await http.get(
         Uri.parse(
-            '${ApiConstants.baseUrl}${ApiConstants.medicationsEndpoint}?user=$userId'),
+            '${ApiConstants.baseUrl}${ApiConstants.usersEndpoint}/$userId?populate[medications][populate][0]=user'),
         headers: <String, String>{
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         });
@@ -22,7 +21,7 @@ class MedicationService {
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to load Announcements');
+      throw Exception('Failed to load Medications');
     }
   }
 
@@ -38,7 +37,8 @@ class MedicationService {
 
   static Future<http.Response> updateMedication(Medication medication) {
     return http.put(
-        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.medicationsEndpoint}/${medication.id}'),
+        Uri.parse(
+            '${ApiConstants.baseUrl}${ApiConstants.medicationsEndpoint}/${medication.id}'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
@@ -48,7 +48,8 @@ class MedicationService {
 
   static Future<http.Response> deleteMedication(int medicationId) {
     return http.delete(
-        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.medicationsEndpoint}/$medicationId'),
+        Uri.parse(
+            '${ApiConstants.baseUrl}${ApiConstants.medicationsEndpoint}/$medicationId'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
@@ -57,11 +58,13 @@ class MedicationService {
 
   // helper method:
   static List<Medication> parseMedications(String responseBody) {
-    // flatten data:
-    var flattenedResponse = flattenApiResponse(responseBody);
+    var json = jsonDecode(responseBody);
+    var meds = json['medications'];
+
+    print(meds);
 
     // map data to list of announcements:
-    var lst = flattenedResponse.map((e) => Medication.fromJson(e)).toList();
+    var lst = meds.map((e) => Medication.fromJson(e)).toList();
     return lst;
   }
 }
