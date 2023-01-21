@@ -2,11 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 import 'package:said/widgets/buttons/said_outlined_button.dart';
 
 class SaidScreeningWarning extends StatelessWidget {
   const SaidScreeningWarning({Key? key}) : super(key: key);
+
+  Future<void> dismissWarning(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(AppLocalizations.of(context).screeningDialogTitle),
+            content: Text(AppLocalizations.of(context).screeningDialogBody),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    // store screening status:
+                    SaidSessionManager.storeScreeningStatus(false);
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(AppLocalizations.of(context).dismiss))
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +62,8 @@ class SaidScreeningWarning extends StatelessWidget {
               const Padding(padding: EdgeInsets.all(8)),
               SaidOutlinedButton(
                   text: AppLocalizations.of(context).updateRecords,
-                  context: context)
+                  context: context,
+                  onPressed: () => dismissWarning(context))
             ],
           )),
     );

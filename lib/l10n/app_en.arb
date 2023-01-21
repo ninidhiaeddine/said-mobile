@@ -184,5 +184,9 @@
   "changesSavedSuccess": "Changes have been saved successfully!",
   "changesSavedError": "An error occurred while saving the changes: ",
   "menu": "Menu",
-  "logOut": "Log Out"
+  "logOut": "Log Out",
+
+  "dismiss": "Dismiss",
+  "screeningDialogTitle": "Screen Warning",
+  "screeningDialogBody": "Do want to dismiss the warning reminder? It is meant to remind you that you must see a doctor ASAP! Are you sure?"
 }
