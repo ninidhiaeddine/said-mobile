@@ -1,12 +1,23 @@
 import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:said/services/models/user.dart';
+import 'package:said/types/sex.dart';
 
 class SaidSessionManager {
-  static Future<void> storeUser(int id, String username, String email, String? phoneNumber, int? sex,
-      int? age) async {
+  static Future<void> storeUser(
+      {required int id,
+      required String username,
+      required String email,
+      String? firstName,
+      String? lastName,
+      String? phoneNumber,
+      Sex? sex,
+      int? age}) async {
     var sessionManager = SessionManager();
     await sessionManager.set("id", id);
     await sessionManager.set("username", username);
     await sessionManager.set("email", email);
+    await sessionManager.set("firstName", firstName);
+    await sessionManager.set("lastName", lastName);
     await sessionManager.set("phoneNumber", phoneNumber);
     await sessionManager.set("sex", sex);
     await sessionManager.set("age", age);
@@ -28,6 +39,20 @@ class SaidSessionManager {
   static Future<void> clearSession() async {
     clearUser();
     clearJwt();
+  }
+
+  static Future<User> getUser() async {
+    var sessionManager = SessionManager();
+    return User(
+      id: await sessionManager.get('id'),
+      username: await sessionManager.get('username'),
+      email: await sessionManager.get('email'),
+      firstName: await sessionManager.get('firstName'),
+      lastName: await sessionManager.get('lastName'),
+      phoneNumber: await sessionManager.get('phoneNumber'),
+      age: await sessionManager.get('age'),
+      sex: await sessionManager.get('sex'),
+    );
   }
 
   static Future<void> clearUser() async {
