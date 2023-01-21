@@ -91,7 +91,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 text: AppLocalizations.of(context).setUpMeds,
                 context: context,
                 icon: const Icon(Icons.arrow_right_alt),
-                linkTo: const MedSetupPage(),
+                linkTo: MedSetupPage(authenticatedUser: widget.authenticatedUser),
               ),
               SaidButton(
                   text: AppLocalizations.of(context).selfScreening,
