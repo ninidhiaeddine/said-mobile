@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
@@ -8,12 +9,14 @@ import 'package:said/types/sex.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 import 'package:said/widgets/dropdowns/said_dropdown.dart';
-import 'package:said/widgets/textfields/said_text_field.dart';
 import 'package:said/widgets/misc/said_user_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:said/widgets/textfields/said_text_field.dart';
 
 class UserAccountPage extends StatefulWidget {
-  const UserAccountPage({Key? key}) : super(key: key);
+  const UserAccountPage({Key? key, required this.authenticatedUser})
+      : super(key: key);
+
+  final Future<User> authenticatedUser;
 
   @override
   State<UserAccountPage> createState() => _UserAccountPageState();
@@ -24,22 +27,37 @@ class _UserAccountPageState extends State<UserAccountPage> {
   final controllers = List.generate(3, (index) => TextEditingController());
   final sexOptions = ["Male", "Female"];
 
-  late Future<User> _user;
+  Future<void> _saveUserToSession(User updatedUser) async {
+    SaidSessionManager.storeUser(
+        id: updatedUser.id!,
+        username: updatedUser.username,
+        email: updatedUser.email,
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        sex: updatedUser.sex,
+        age: updatedUser.age);
+  }
 
   Future<void> _saveChanges() async {
+    User oldUser = await SaidSessionManager.getUser();
     var updatedUser = User(
-        id: (await _user).id,
-        username: (await _user).username,
-        email: (await _user).email,
+        id: oldUser.id,
+        username: oldUser.username,
+        email: oldUser.email,
         firstName: controllers[0].text.isNotEmpty ? controllers[0].text : null,
         lastName: controllers[1].text.isNotEmpty ? controllers[0].text : null,
-        age: controllers[2].text.isNotEmpty ? int.parse(controllers[2].text) : null,
+        age: controllers[2].text.isNotEmpty
+            ? int.parse(controllers[2].text)
+            : null,
         sex: _sexValue.isNotEmpty ? sexToEnum(_sexValue) : null);
 
-    print(updatedUser.sex);
+    // 1. make api call:
     var response = await UserService.updateUser(updatedUser.id!, updatedUser);
 
     if (response.statusCode == 200) {
+      // save user to local session storage:
+      _saveUserToSession(updatedUser);
+
       // show snackbar:
       final snackBar = SnackBar(
         content: Text(AppLocalizations.of(context).changesSavedSuccess),
@@ -61,29 +79,14 @@ class _UserAccountPageState extends State<UserAccountPage> {
     }
   }
 
-  Future<User> _loadUser() async {
-    // get user id:
-    int userId = await SaidSessionManager.getSessionValue('id');
-
-    // get user from API service:
-    return UserService.getUser(userId);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _user = _loadUser();
-  }
-
   @override
   Widget build(BuildContext context) {
-    print("rebuilding");
     return Scaffold(
         body: SingleChildScrollView(
             child: Column(
       children: [
         FutureBuilder(
-            future: _user,
+            future: widget.authenticatedUser,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return SaidUserBar(
@@ -104,7 +107,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
             child: Column(
               children: [
                 FutureBuilder(
-                    future: _user,
+                    future: widget.authenticatedUser,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         return SaidTextField(
@@ -133,7 +136,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
                   padding: EdgeInsets.all(8.0),
                 ),
                 FutureBuilder(
-                    future: _user,
+                    future: widget.authenticatedUser,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         return SaidTextField(
@@ -162,7 +165,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
                   padding: EdgeInsets.all(8.0),
                 ),
                 FutureBuilder(
-                    future: _user,
+                    future: widget.authenticatedUser,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         return SaidTextField(
@@ -191,7 +194,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
                   padding: EdgeInsets.all(8.0),
                 ),
                 FutureBuilder(
-                    future: _user,
+                    future: widget.authenticatedUser,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done &&
                           snapshot.data!.sex != null) {

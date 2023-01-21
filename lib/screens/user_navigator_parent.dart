@@ -4,6 +4,8 @@ import 'package:said/screens/user_club.dart';
 import 'package:said/screens/user_home.dart';
 import 'package:said/screens/user_info.dart';
 import 'package:said/screens/user_announcements.dart';
+import 'package:said/services/models/user.dart';
+import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/nav/said_bottom_nav_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -17,10 +19,18 @@ class UserNavigatorParent extends StatefulWidget {
 class _UserNavigatorParentState extends State<UserNavigatorParent> {
   int _selectedIndex = 2;
 
+  late Future<User> _user;
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _user = SaidSessionManager.getUser();
   }
 
   @override
@@ -54,12 +64,12 @@ class _UserNavigatorParentState extends State<UserNavigatorParent> {
     ];
 
     // prepare views:
-    List<Widget> views = const [
-      UserClubPage(),
-      UserInfoPage(),
-      UserHomePage(),
-      UserAnnouncementsPage(),
-      UserAccountPage()
+    List<Widget> views = [
+      const UserClubPage(),
+      UserInfoPage(authenticatedUser: _user),
+      UserHomePage(authenticatedUser: _user),
+      const UserAnnouncementsPage(),
+      UserAccountPage(authenticatedUser: _user)
     ];
 
     // return scaffold with bottom navigation bar and corresponding view

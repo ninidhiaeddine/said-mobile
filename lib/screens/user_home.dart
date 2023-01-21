@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/screens/med_setup.dart';
 import 'package:said/screens/screening1.dart';
 import 'package:said/services/models/user.dart';
-import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 import 'package:said/widgets/misc/said_conditional_widget.dart';
 import 'package:said/widgets/misc/said_screening_warning.dart';
@@ -12,32 +11,17 @@ import 'package:said/widgets/misc/said_steps_counter.dart';
 import 'package:said/widgets/misc/said_upcoming_med.dart';
 import 'package:said/widgets/misc/said_upcoming_med_text.dart';
 import 'package:said/widgets/misc/said_user_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserHomePage extends StatefulWidget {
-  const UserHomePage({super.key});
+  const UserHomePage({super.key, required this.authenticatedUser});
+
+  final Future<User> authenticatedUser;
 
   @override
   State<StatefulWidget> createState() => _UserHomePageState();
 }
 
 class _UserHomePageState extends State<UserHomePage> {
-  late Future<User> _user;
-
-  Future<User> _loadUser() async {
-    // get user id:
-    int userId = await SaidSessionManager.getSessionValue('id');
-
-    // get user from API service:
-    return await UserService.getUser(userId);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _user = _loadUser();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +30,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 child: Column(
       children: [
         FutureBuilder(
-            future: _user,
+            future: widget.authenticatedUser,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.data!.firstName != null) {
