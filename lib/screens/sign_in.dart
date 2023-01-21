@@ -57,10 +57,13 @@ class _SignInPageState extends State<SignInPage> {
     SaidSessionManager.storeJwt(data['jwt']);
 
     Map<String, dynamic> user = data['user'];
+    print(user['firstName']);
     SaidSessionManager.storeUser(
         id: user['id'],
         username: user['username'],
         email: user['email'],
+        firstName: user['firstName'],
+        lastName: user['lastName'],
         phoneNumber: user['phoneNumber'],
         sex: sexToEnum(user['sex']),
         age: user['age']);

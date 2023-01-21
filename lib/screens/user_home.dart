@@ -4,6 +4,7 @@ import 'package:said/screens/med_setup.dart';
 import 'package:said/screens/screening1.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 import 'package:said/widgets/misc/said_conditional_widget.dart';
 import 'package:said/widgets/misc/said_screening_warning.dart';
@@ -22,6 +23,14 @@ class UserHomePage extends StatefulWidget {
 }
 
 class _UserHomePageState extends State<UserHomePage> {
+  late Future<dynamic> _mustSeeDoctor;
+
+  @override
+  void initState() {
+    super.initState();
+    _mustSeeDoctor = SaidSessionManager.getSessionValue("mustSeeDoctor");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +43,8 @@ class _UserHomePageState extends State<UserHomePage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.data!.firstName != null) {
-                  var fullName = '${snapshot.data!.firstName} ${snapshot.data!.lastName}';
+                  var fullName =
+                      '${snapshot.data!.firstName} ${snapshot.data!.lastName}';
                   return SaidUserBar(
                     userFullName: fullName,
                   );
@@ -51,11 +61,21 @@ class _UserHomePageState extends State<UserHomePage> {
             }),
         const SaidUpcomingMedicationText(),
         const Padding(padding: EdgeInsets.all(8.0)),
-        const SaidConditionalWidget(
-            widget: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                child: SaidScreeningWarning()),
-            condition: true),
+        FutureBuilder(
+            future: _mustSeeDoctor,
+            builder: (context, snapshot) {
+              bool show = false;
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.data != null) {
+                show = snapshot.data as bool;
+              }
+
+              return SaidConditionalWidget(
+                  widget: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24),
+                      child: SaidScreeningWarning()),
+                  condition: show);
+            }),
         const Padding(
             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: SaidStepsCounter(

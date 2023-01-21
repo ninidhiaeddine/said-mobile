@@ -31,6 +31,6 @@ class UserService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode({"data": user}));
+        body: jsonEncode(user));
   }
 }

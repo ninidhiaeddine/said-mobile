@@ -40,15 +40,14 @@ class MedicationReminderService {
   }
 
   static Future<http.Response> deleteMedicationReminder(
-      MedicationReminder medicationReminder) {
+      int medicationReminderId) {
     return http.delete(
         Uri.parse(
-            ApiConstants.baseUrl + ApiConstants.medicationRemindersEndpoint),
+            '${ApiConstants.baseUrl}${ApiConstants.medicationRemindersEndpoint}/$medicationReminderId'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
-        },
-        body: jsonEncode(medicationReminder));
+        });
   }
 
   // helper method:

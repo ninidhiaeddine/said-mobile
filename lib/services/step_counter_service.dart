@@ -58,12 +58,12 @@ class StepCounterService {
 
   static Future<http.Response> updateStepCounter(StepCounter stepCounter) {
     return http.put(
-        Uri.parse(ApiConstants.baseUrl + ApiConstants.stepCountersEndpoint),
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.stepCountersEndpoint}/$stepCounter.id'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode({"data": stepCounter}));
+        body: jsonEncode(stepCounter));
   }
 
   // helper method:

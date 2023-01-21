@@ -182,5 +182,7 @@
   "messageSentError": "An error occurred while sending the message",
 
   "changesSavedSuccess": "Changes have been saved successfully!",
-  "changesSavedError": "An error occurred while saving the changes: "
+  "changesSavedError": "An error occurred while saving the changes: ",
+  "menu": "Menu",
+  "logOut": "Log Out"
 }

@@ -45,7 +45,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
         username: oldUser.username,
         email: oldUser.email,
         firstName: controllers[0].text.isNotEmpty ? controllers[0].text : null,
-        lastName: controllers[1].text.isNotEmpty ? controllers[0].text : null,
+        lastName: controllers[1].text.isNotEmpty ? controllers[1].text : null,
         age: controllers[2].text.isNotEmpty
             ? int.parse(controllers[2].text)
             : null,
@@ -89,12 +89,19 @@ class _UserAccountPageState extends State<UserAccountPage> {
             future: widget.authenticatedUser,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return SaidUserBar(
-                  userFullName: snapshot.data!.username,
-                );
+                if (snapshot.data!.firstName != null) {
+                  var fullName = '${snapshot.data!.firstName} ${snapshot.data!.lastName}';
+                  return SaidUserBar(
+                    userFullName: fullName,
+                  );
+                } else {
+                  return SaidUserBar(
+                    userFullName: snapshot.data!.username,
+                  );
+                }
               } else {
                 return const SaidUserBar(
-                  userFullName: "Loading",
+                  userFullName: "Loading...",
                 );
               }
             }),

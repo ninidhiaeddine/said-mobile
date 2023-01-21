@@ -36,14 +36,14 @@ class PostLikeService {
         body: jsonEncode(postLike));
   }
 
-  static Future<http.Response> deletePostLike(PostLike postLike) {
+  static Future<http.Response> deletePostLike(int postLikeId) {
     return http.delete(
-        Uri.parse(ApiConstants.baseUrl + ApiConstants.postLikesEndpoint),
+        Uri.parse(
+            '${ApiConstants.baseUrl}${ApiConstants.postLikesEndpoint}/$postLikeId'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
-        },
-        body: jsonEncode(postLike));
+        });
   }
 
   // helper method:

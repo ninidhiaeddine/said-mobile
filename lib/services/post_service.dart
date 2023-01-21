@@ -37,22 +37,22 @@ class PostService {
 
   static Future<http.Response> updatePost(Post post) {
     return http.put(
-        Uri.parse(ApiConstants.baseUrl + ApiConstants.postsEndpoint),
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.postsEndpoint}/$post.id'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode({"data": post}));
+        body: jsonEncode(post));
   }
 
-  static Future<http.Response> deletePost(Post post) {
+  static Future<http.Response> deletePost(int postId) {
     return http.delete(
-        Uri.parse(ApiConstants.baseUrl + ApiConstants.postsEndpoint),
+        Uri.parse(
+            '${ApiConstants.baseUrl}${ApiConstants.postsEndpoint}/$postId'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
-        },
-        body: jsonEncode({"data": post}));
+        });
   }
 
   // helper method:

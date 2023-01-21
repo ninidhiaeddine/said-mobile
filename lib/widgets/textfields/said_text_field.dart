@@ -25,7 +25,6 @@ class _SaidTextFieldState extends State<SaidTextField> {
   void initState() {
     super.initState();
     if (widget.text != null) {
-      print("widget.text from initState() : ${widget.text}");
       _controller.text = widget.text!;
     }
   }

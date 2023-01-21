@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:said/config/color_constants.dart';
 import 'package:said/screens/user_account.dart';
 import 'package:said/screens/user_club.dart';
 import 'package:said/screens/user_home.dart';
@@ -8,6 +9,7 @@ import 'package:said/services/models/user.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/nav/said_bottom_nav_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:said/widgets/nav/said_navigation_drawer.dart';
 
 class UserNavigatorParent extends StatefulWidget {
   const UserNavigatorParent({super.key});
@@ -46,21 +48,11 @@ class _UserNavigatorParentState extends State<UserNavigatorParent> {
 
     // prepare labels:
     List<String> labels = [
-      AppLocalizations
-          .of(context)
-          .club,
-      AppLocalizations
-          .of(context)
-          .info,
-      AppLocalizations
-          .of(context)
-          .home,
-      AppLocalizations
-          .of(context)
-          .announcements,
-      AppLocalizations
-          .of(context)
-          .account,
+      AppLocalizations.of(context).club,
+      AppLocalizations.of(context).info,
+      AppLocalizations.of(context).home,
+      AppLocalizations.of(context).announcements,
+      AppLocalizations.of(context).account,
     ];
 
     // prepare views:
@@ -74,15 +66,17 @@ class _UserNavigatorParentState extends State<UserNavigatorParent> {
 
     // return scaffold with bottom navigation bar and corresponding view
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: ColorConstants.backgroundColor,
+          elevation: 0,
+        ),
+        drawer: const SaidNavigationDrawer(),
         bottomNavigationBar: SaidBottomNavigationBar(
           icons: icons,
           labels: labels,
           selectedIndex: _selectedIndex,
           onTap: _onItemTapped,
         ),
-        body: SafeArea(
-            child: views[_selectedIndex]
-        )
-    );
+        body: views[_selectedIndex]);
   }
 }

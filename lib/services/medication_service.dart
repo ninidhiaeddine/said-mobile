@@ -38,7 +38,7 @@ class MedicationService {
 
   static Future<http.Response> updateMedication(Medication medication) {
     return http.put(
-        Uri.parse(ApiConstants.baseUrl + ApiConstants.medicationsEndpoint),
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.medicationsEndpoint}/${medication.id}'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
@@ -46,14 +46,13 @@ class MedicationService {
         body: jsonEncode(medication));
   }
 
-  static Future<http.Response> deleteMedication(Medication medication) {
+  static Future<http.Response> deleteMedication(int medicationId) {
     return http.delete(
-        Uri.parse(ApiConstants.baseUrl + ApiConstants.medicationsEndpoint),
+        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.medicationsEndpoint}/$medicationId'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
-        },
-        body: jsonEncode(medication));
+        });
   }
 
   // helper method:
