@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/services/announcement_service.dart';
+import 'package:said/services/models/announcement.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/misc/said_announcement.dart';
 
@@ -12,6 +13,14 @@ class UserAnnouncementsPage extends StatefulWidget {
 }
 
 class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
+  late Future<List<Announcement>> _announcements;
+
+  @override
+  void initState() {
+    super.initState();
+    _announcements = AnnouncementService.getAllAnnouncements();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +42,7 @@ class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
             ),
             Expanded(
               child: FutureBuilder(
-                  future: AnnouncementService.getAllAnnouncements(),
+                  future: _announcements,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       return ListView(
