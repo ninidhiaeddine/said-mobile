@@ -58,6 +58,7 @@ class _UserHomePageState extends State<UserHomePage> {
                 );
               }
             }),
+            const Padding(padding: EdgeInsets.all(8.0)),
             const SaidUpcomingMedicationText(),
             const Padding(padding: EdgeInsets.all(8.0)),
             FutureBuilder(
@@ -105,11 +106,11 @@ class _UserHomePageState extends State<UserHomePage> {
                     return Column(
                       children: snapshot.data!
                           .map((e) => Dismissible(
-                          key: ValueKey<int>(e.hashCode),
-                          child: SaidUpcomingMed(
-                              medName: e.medication.name,
-                              method: e.medication.method,
-                              timeOfTaking: e.dateTime)))
+                              key: ValueKey<int>(e.hashCode),
+                              child: SaidUpcomingMed(
+                                  medName: e.medication.name,
+                                  method: e.medication.method,
+                                  timeOfTaking: e.dateTime)))
                           .toList(),
                     );
                   } else if (snapshot.connectionState ==

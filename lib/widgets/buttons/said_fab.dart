@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 
 class SaidFab extends StatelessWidget {
   const SaidFab(
-      {Key? key, required this.dimensions, required this.backgroundColor, required this.icon, this.linkTo, this.onPressed})
+      {Key? key,
+      required this.dimensions,
+      required this.backgroundColor,
+      required this.icon,
+      this.linkTo,
+      this.onPressed,
+      this.enabled = true})
       : super(key: key);
 
   final double dimensions;
@@ -10,6 +16,7 @@ class SaidFab extends StatelessWidget {
   final Icon icon;
   final Widget? linkTo;
   final Function? onPressed;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +25,12 @@ class SaidFab extends StatelessWidget {
         height: dimensions,
         child: FloatingActionButton(
             backgroundColor: backgroundColor,
-            onPressed: () =>
-            {
-              linkTo == null
-                  ? onPressed
-                  : Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => linkTo!))
-            },
-            child: icon
-        ));
+            onPressed: !enabled ? null : () => {
+                  linkTo == null
+                      ? onPressed!.call()
+                      : Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => linkTo!))
+                },
+            child: icon));
   }
 }

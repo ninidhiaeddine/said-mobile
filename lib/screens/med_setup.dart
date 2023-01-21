@@ -33,6 +33,12 @@ class _MedSetupPageState extends State<MedSetupPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _loadMedications();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -57,8 +63,7 @@ class _MedSetupPageState extends State<MedSetupPage> {
                             return ListView(
                               children: snapshot.data!
                                   .map((e) => SaidEditableMed(
-                                        medName: e.name,
-                                        method: e.method.toString(),
+                                        medication: e,
                                         authenticatedStudent:
                                             widget.authenticatedUser,
                                       ))
