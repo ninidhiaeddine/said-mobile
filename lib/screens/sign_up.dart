@@ -63,6 +63,9 @@ class _SignUpPageState extends State<SignUpPage> {
         email: user['email']);
 
     // go to user home screen:
+    if (!mounted) {
+      return;
+    }
     navigateToRoute(context, const UserNavigatorParent());
   }
 

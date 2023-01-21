@@ -32,7 +32,7 @@ class MedicationService {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         },
-        body: jsonEncode(medication));
+        body: jsonEncode({"data": medication}));
   }
 
   static Future<http.Response> updateMedication(Medication medication) {

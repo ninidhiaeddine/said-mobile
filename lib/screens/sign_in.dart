@@ -67,6 +67,9 @@ class _SignInPageState extends State<SignInPage> {
         age: user['age']);
 
     // go to user home screen:
+    if (!mounted) {
+      return;
+    }
     navigateToRoute(context, const UserNavigatorParent());
   }
 

@@ -43,6 +43,14 @@ class _ContactPageState extends State<ContactPage> {
     var response = await MessageService.addMessage(message);
 
     if (response.statusCode == 200) {
+      // empty message box:
+      _controller.text = "";
+      _messageValue = "";
+
+      if (!mounted) {
+        return;
+      }
+
       // show snackbar:
       final snackBar = SnackBar(
         content: Text(AppLocalizations.of(context).messageSentSuccess),
@@ -50,13 +58,14 @@ class _ContactPageState extends State<ContactPage> {
         behavior: SnackBarBehavior.floating,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-      // empty message box:
-      _controller.text = "";
-      _messageValue = "";
     } else {
       var body = jsonDecode(response.body);
       var errMsg = body['error']['message'];
+
+      if (!mounted) {
+        return;
+      }
+
       // show snackbar:
       final snackBar = SnackBar(
         content:

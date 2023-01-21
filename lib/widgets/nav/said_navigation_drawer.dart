@@ -10,6 +10,7 @@ class SaidNavigationDrawer extends StatelessWidget {
 
   Future<void> logOut(BuildContext context) async {
     await SaidSessionManager.clearSession();
+
     navigateToRoute(context, const HomePage());
   }
 

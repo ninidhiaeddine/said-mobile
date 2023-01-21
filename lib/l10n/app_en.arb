@@ -52,6 +52,7 @@
   "diarrheaOrConstipation": "Diarrhea or Constipation",
   "clubPosts": "Club Posts",
   "addMedication": "Add Medication",
+  "editMedication": "Edit Medication",
   "medName": "Medication Name",
   "amount": "Amount",
   "type": "Type",
@@ -179,6 +180,7 @@
 
   "noAnnouncements": "No Announcements were found :(",
   "noMedications": "No Medications were found. Try adding some!",
+  "noReminders": "No Reminders were found!",
   "messageSentSuccess": "Message Sent Successfully!",
   "messageSentError": "An error occurred while sending the message",
 

@@ -57,6 +57,10 @@ class _UserAccountPageState extends State<UserAccountPage> {
       // save user to local session storage:
       _saveUserToSession(updatedUser);
 
+      if (!mounted) {
+        return;
+      }
+
       // show snackbar:
       final snackBar = SnackBar(
         content: Text(AppLocalizations.of(context).changesSavedSuccess),
@@ -67,6 +71,11 @@ class _UserAccountPageState extends State<UserAccountPage> {
     } else {
       var body = jsonDecode(response.body);
       var errMsg = body['error']['message'];
+
+      if (!mounted) {
+        return;
+      }
+
       // show snackbar:
       final snackBar = SnackBar(
         content:
@@ -84,19 +93,23 @@ class _UserAccountPageState extends State<UserAccountPage> {
         body: SingleChildScrollView(
             child: Column(
       children: [
-        Builder(builder: (context) {
-          if (widget.authenticatedUser.firstName != null) {
-            var fullName =
-                '${widget.authenticatedUser.firstName} ${widget.authenticatedUser.lastName}';
-            return SaidUserBar(
-              userFullName: fullName,
-            );
-          } else {
-            return SaidUserBar(
-              userFullName: widget.authenticatedUser.username,
-            );
-          }
-        }),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 32),
+          child: Builder(builder: (context) {
+            if (widget.authenticatedUser.firstName != null) {
+              var fullName =
+                  '${widget.authenticatedUser.firstName} ${widget.authenticatedUser.lastName}';
+              return SaidUserBar(
+                userFullName: fullName,
+              );
+            } else {
+              return SaidUserBar(
+                userFullName: widget.authenticatedUser.username,
+              );
+            }
+          }),
+        ),
+        const Padding(padding: EdgeInsets.all(16)),
         Text(
           AppLocalizations.of(context).accountSettings,
           style: subHeader(),

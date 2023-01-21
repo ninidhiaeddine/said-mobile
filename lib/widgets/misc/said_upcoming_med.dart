@@ -1,12 +1,12 @@
-import 'package:said/config/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class SaidUpcomingMed extends StatelessWidget {
   const SaidUpcomingMed(
-      {super.key, required this.medName, required this.method});
+      {super.key, required this.medName, required this.method, required this.timeOfTaking});
 
   final String medName;
   final String method;
+  final DateTime timeOfTaking;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class SaidUpcomingMed extends StatelessWidget {
               ),
               const Spacer(),
               Column(
-                children: [const Text("9:00")],
+                children: [Text(timeOfTaking.toString())],
               )
             ],
           )),

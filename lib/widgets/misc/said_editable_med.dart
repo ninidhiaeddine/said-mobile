@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
-import 'package:said/screens/single_med_setup.dart';
+import 'package:said/screens/edit_medication_page.dart';
+import 'package:said/services/models/user.dart';
 import 'package:said/widgets/buttons/said_fab.dart';
 
 class SaidEditableMed extends StatefulWidget {
   const SaidEditableMed(
-      {super.key, required this.medName, required this.method});
+      {super.key,
+      required this.authenticatedStudent,
+      required this.medName,
+      required this.method});
 
+  final User authenticatedStudent;
   final String medName;
   final String method;
 
@@ -62,14 +67,15 @@ class _SaidEditableMedState extends State<SaidEditableMed> {
               ),
               const Spacer(),
               Row(
-                children: const [
+                children: [
                   SaidFab(
                       dimensions: 40,
                       backgroundColor: ColorConstants.secondaryColor,
-                      icon: Icon(Icons.edit),
-                      linkTo: SingleMedSetupPage()),
-                  Padding(padding: EdgeInsets.all(4)),
-                  SaidFab(
+                      icon: const Icon(Icons.edit),
+                      linkTo: EditMedicationPage(
+                          authenticatedUser: widget.authenticatedStudent)),
+                  const Padding(padding: EdgeInsets.all(4)),
+                  const SaidFab(
                       dimensions: 40,
                       backgroundColor: Colors.red,
                       icon: Icon(Icons.delete),

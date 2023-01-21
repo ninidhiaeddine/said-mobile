@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:said/screens/sign_in.dart';
 import 'package:said/screens/user_navigator_parent.dart';
 import 'package:said/utils/navigator.dart';

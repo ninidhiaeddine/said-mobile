@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/screens/single_med_setup.dart';
+import 'package:said/screens/add_medication_page.dart';
 import 'package:said/services/medication_service.dart';
 import 'package:said/services/models/medication.dart';
 import 'package:said/services/models/user.dart';
@@ -52,12 +52,16 @@ class _MedSetupPageState extends State<MedSetupPage> {
                         future: _medications,
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
-                              ConnectionState.done && snapshot.hasData) {
+                                  ConnectionState.done &&
+                              snapshot.hasData) {
                             return ListView(
                               children: snapshot.data!
                                   .map((e) => SaidEditableMed(
-                                  medName: e.name,
-                                  method: e.method.toString()))
+                                        medName: e.name,
+                                        method: e.method.toString(),
+                                        authenticatedStudent:
+                                            widget.authenticatedUser,
+                                      ))
                                   .toList(),
                             );
                           } else if (snapshot.connectionState ==
@@ -67,14 +71,14 @@ class _MedSetupPageState extends State<MedSetupPage> {
                             return Text(
                                 AppLocalizations.of(context).noMedications);
                           }
-
                         })),
                 const Padding(padding: EdgeInsets.all(8)),
                 SaidButton(
                   text: AppLocalizations.of(context).addMedication,
                   context: context,
                   icon: const Icon(Icons.add_circle_outline),
-                  linkTo: const SingleMedSetupPage(),
+                  linkTo: AddMedicationPage(
+                      authenticatedUser: widget.authenticatedUser),
                 )
               ],
             )),

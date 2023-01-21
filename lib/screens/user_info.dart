@@ -10,7 +10,8 @@ import 'package:said/widgets/buttons/said_outlined_button.dart';
 import 'package:said/widgets/misc/said_user_bar.dart';
 
 class UserInfoPage extends StatefulWidget {
-  const UserInfoPage({Key? key, required this.authenticatedUser}) : super(key: key);
+  const UserInfoPage({Key? key, required this.authenticatedUser})
+      : super(key: key);
 
   final User authenticatedUser;
 
@@ -24,19 +25,22 @@ class _UserInfoPageState extends State<UserInfoPage> {
     return Scaffold(
         body: Column(
       children: [
-        Builder(builder: (context) {
-          if (widget.authenticatedUser.firstName != null) {
-            var fullName =
-                '${widget.authenticatedUser.firstName} ${widget.authenticatedUser.lastName}';
-            return SaidUserBar(
-              userFullName: fullName,
-            );
-          } else {
-            return SaidUserBar(
-              userFullName: widget.authenticatedUser.username,
-            );
-          }
-        }),
+        Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32),
+            child: Builder(builder: (context) {
+              if (widget.authenticatedUser.firstName != null) {
+                var fullName =
+                    '${widget.authenticatedUser.firstName} ${widget.authenticatedUser.lastName}';
+                return SaidUserBar(
+                  userFullName: fullName,
+                );
+              } else {
+                return SaidUserBar(
+                  userFullName: widget.authenticatedUser.username,
+                );
+              }
+            })),
+        const Padding(padding: EdgeInsets.all(16.0)),
         Text(
           AppLocalizations.of(context).information,
           style: subHeader(),

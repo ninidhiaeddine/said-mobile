@@ -28,11 +28,15 @@ class _SaidTimePickerState extends State<SaidTimePicker> {
       return;
     }
 
-    // update text on field:
-    _controller.text = formatTime(newTime, context);
 
     // callback with new time value:
     widget.callback!(newTime);
+
+    // update text on field:
+    if (!mounted) {
+      return;
+    }
+    _controller.text = formatTime(newTime, context);
   }
 
   @override

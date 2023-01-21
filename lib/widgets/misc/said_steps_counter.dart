@@ -31,7 +31,6 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
   void onStepCount(StepCount event) {
     /// Handle step count changed
     int steps = event.steps;
-    DateTime timeStamp = event.timeStamp;
 
     setState(() {
       _stepsDone = steps;
@@ -42,9 +41,9 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
     /// Handle the error
   }
 
-  Future<void> initPlatformState() async {
+  void initPlatformState() {
     /// Init stream
-    _stepCountStream = await Pedometer.stepCountStream;
+    _stepCountStream = Pedometer.stepCountStream;
 
     /// Listen to stream and handle errors
     _stepCountStream.listen(onStepCount).onError(onStepCountError);
