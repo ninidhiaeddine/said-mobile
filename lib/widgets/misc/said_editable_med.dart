@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:said/screens/single_med_setup.dart';
-import 'package:said/widgets/said_fab.dart';
+import 'package:said/widgets/buttons/said_fab.dart';
 
 class SaidEditableMed extends StatefulWidget {
   const SaidEditableMed(

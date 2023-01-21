@@ -6,9 +6,9 @@ import 'package:said/services/models/user.dart';
 import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/said_button.dart';
-import 'package:said/widgets/said_outlined_button.dart';
-import 'package:said/widgets/said_user_bar.dart';
+import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_outlined_button.dart';
+import 'package:said/widgets/misc/said_user_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserInfoPage extends StatefulWidget {

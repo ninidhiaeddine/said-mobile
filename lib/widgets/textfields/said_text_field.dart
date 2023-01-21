@@ -3,13 +3,14 @@ import 'package:said/config/color_constants.dart';
 
 class SaidTextField extends StatefulWidget {
   const SaidTextField(
-      {super.key, this.callback, this.prefixIcon, this.suffixIcon, this.placeholder = "", this.linesCount = 1, this.textInputType = TextInputType.text, this.blackVariant = false});
+      {super.key, this.callback, this.text, this.prefixIcon, this.suffixIcon, this.placeholder = "", this.linesCount = 1, this.textInputType = TextInputType.text, this.blackVariant = false});
 
   final Function(String, TextEditingController)? callback;
   final String placeholder;
   final bool blackVariant;
   final int linesCount;
   final TextInputType textInputType;
+  final String? text;
   final Icon? prefixIcon;
   final Icon? suffixIcon;
 
@@ -19,6 +20,14 @@ class SaidTextField extends StatefulWidget {
 
 class _SaidTextFieldState extends State<SaidTextField> {
   final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.text != null) {
+      _controller.text = widget.text!;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

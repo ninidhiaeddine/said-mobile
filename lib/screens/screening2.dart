@@ -4,7 +4,7 @@ import 'package:said/config/color_constants.dart';
 import 'package:said/screens/screening_bad.dart';
 import 'package:said/screens/screening_good.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/widgets/said_button.dart';
+import 'package:said/widgets/buttons/said_button.dart';
 
 class Screening2Page extends StatefulWidget {
   const Screening2Page({Key? key}) : super(key: key);

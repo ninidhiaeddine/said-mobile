@@ -8,10 +8,10 @@ import 'package:said/services/register_service.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/said_button.dart';
-import 'package:said/widgets/said_conditional_widget.dart';
-import 'package:said/widgets/said_password_field.dart';
-import 'package:said/widgets/said_text_field.dart';
+import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/misc/said_conditional_widget.dart';
+import 'package:said/widgets/textfields/said_password_field.dart';
+import 'package:said/widgets/textfields/said_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/expansion_panel_generator.dart';
-import 'package:said/widgets/said_text_field.dart';
+import 'package:said/widgets/textFields/said_text_field.dart';
 
 class LearnPage extends StatefulWidget {
   const LearnPage({Key? key}) : super(key: key);

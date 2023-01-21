@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/widgets/said_user_post.dart';
+import 'package:said/widgets/misc/said_user_post.dart';
 
 class UserClubPage extends StatefulWidget {
   const UserClubPage({Key? key}) : super(key: key);

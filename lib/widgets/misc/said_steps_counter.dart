@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pedometer/pedometer.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/widgets/said_button.dart';
+import 'package:said/widgets/buttons/said_button.dart';
 
 class SaidStepsCounter extends StatefulWidget {
   const SaidStepsCounter(

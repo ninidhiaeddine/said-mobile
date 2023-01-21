@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
-import 'package:said/widgets/said_avatar.dart';
+import 'package:said/widgets/misc/said_avatar.dart';
 
 class UserPost extends StatefulWidget {
   const UserPost(

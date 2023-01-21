@@ -9,10 +9,10 @@ import 'package:said/services/dtos/auth.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/said_button.dart';
-import 'package:said/widgets/said_conditional_widget.dart';
-import 'package:said/widgets/said_password_field.dart';
-import 'package:said/widgets/said_text_field.dart';
+import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/misc/said_conditional_widget.dart';
+import 'package:said/widgets/textfields/said_password_field.dart';
+import 'package:said/widgets/textfields/said_text_field.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

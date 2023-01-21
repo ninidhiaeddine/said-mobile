@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/screens/single_med_setup.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/widgets/said_button.dart';
-import 'package:said/widgets/said_editable_med.dart';
+import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/misc/said_editable_med.dart';
 
 class MedSetupPage extends StatefulWidget {
   const MedSetupPage({Key? key}) : super(key: key);

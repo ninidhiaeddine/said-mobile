@@ -9,9 +9,9 @@ import 'package:said/services/models/user.dart';
 import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/said_button.dart';
-import 'package:said/widgets/said_social_media_bar.dart';
-import 'package:said/widgets/said_text_field.dart';
+import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/misc/said_social_media_bar.dart';
+import 'package:said/widgets/textfields//said_text_field.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({Key? key}) : super(key: key);

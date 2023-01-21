@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/widgets/said_button.dart';
-import 'package:said/widgets/said_outlined_button.dart';
+import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_outlined_button.dart';
 
 class SaidScreeningWarning extends StatelessWidget {
   const SaidScreeningWarning({Key? key}) : super(key: key);

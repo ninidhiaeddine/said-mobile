@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/screens/screening2.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/widgets/said_button.dart';
+import 'package:said/widgets/buttons/said_button.dart';
 
 class Screening1Page extends StatelessWidget {
   const Screening1Page({Key? key}) : super(key: key);

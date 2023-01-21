@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:said/widgets/said_button.dart';
-import 'package:said/widgets/said_date_range_picker.dart';
-import 'package:said/widgets/said_dropdown.dart';
-import 'package:said/widgets/said_text_field.dart';
+import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/dates/said_date_range_picker.dart';
+import 'package:said/widgets/dropdowns/said_dropdown.dart';
+import 'package:said/widgets/textfields/said_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/widgets/said_time_picker.dart';
+import 'package:said/widgets/dates/said_time_picker.dart';
 
 class SingleMedSetupPage extends StatefulWidget {
   const SingleMedSetupPage({Key? key}) : super(key: key);

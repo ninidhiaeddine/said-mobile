@@ -3,11 +3,12 @@ import 'package:said/config/color_constants.dart';
 
 class SaidDropdown extends StatefulWidget {
   const SaidDropdown(
-      {Key? key, this.callback, required this.placeholder, required this.options})
+      {Key? key, this.callback, this.value, required this.placeholder, required this.options})
       : super(key: key);
 
   final Function(String?)? callback;
   final String placeholder;
+  final String? value;
   final List<String> options;
 
   @override
@@ -15,9 +16,11 @@ class SaidDropdown extends StatefulWidget {
 }
 
 class _SaidDropdownState extends State<SaidDropdown> {
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+        value: widget.value,
         decoration: InputDecoration(
           filled: true,
           fillColor: ColorConstants.textFieldColor,

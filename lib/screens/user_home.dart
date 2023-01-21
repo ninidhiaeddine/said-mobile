@@ -5,13 +5,13 @@ import 'package:said/services/models/user.dart';
 import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/said_button.dart';
-import 'package:said/widgets/said_conditional_widget.dart';
-import 'package:said/widgets/said_screening_warning.dart';
-import 'package:said/widgets/said_steps_counter.dart';
-import 'package:said/widgets/said_upcoming_med.dart';
-import 'package:said/widgets/said_upcoming_med_text.dart';
-import 'package:said/widgets/said_user_bar.dart';
+import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/misc/said_conditional_widget.dart';
+import 'package:said/widgets/misc/said_screening_warning.dart';
+import 'package:said/widgets/misc/said_steps_counter.dart';
+import 'package:said/widgets/misc/said_upcoming_med.dart';
+import 'package:said/widgets/misc/said_upcoming_med_text.dart';
+import 'package:said/widgets/misc/said_user_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserHomePage extends StatefulWidget {

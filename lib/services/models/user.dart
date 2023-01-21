@@ -1,15 +1,22 @@
+import 'package:said/types/sex.dart';
+
 class User {
   final int? id;
   final String username;
   final String email;
+
+  final String? firstName;
+  final String? lastName;
   final String? phoneNumber;
   final int? age;
-  final int? sex;
+  final Sex? sex;
 
   User(
       {this.id,
       required this.username,
       required this.email,
+      this.firstName,
+      this.lastName,
       this.phoneNumber,
       this.age,
       this.sex});
@@ -19,9 +26,11 @@ class User {
       id: json['id'],
       username: json['username'],
       email: json['email'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
       phoneNumber: json['phoneNumber'],
       age: json['age'],
-      sex: json['sex'],
+      sex: sexToEnum(json['sex']),
     );
   }
 
@@ -29,8 +38,10 @@ class User {
     'id': id,
     'username': username,
     'email': email,
+    'firstName': firstName,
+    'lastName': lastName,
     'phoneNumber': phoneNumber,
     'age': age,
-    'sex': sex,
+    'sex': sexToString(sex!),
   };
 }
