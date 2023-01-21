@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:said/screens/user_navigator_parent.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 
-class ScreeningBadPage extends StatelessWidget {
+class ScreeningBadPage extends StatefulWidget {
   const ScreeningBadPage(
       {Key? key,
       required this.symptomsCount,
@@ -16,8 +17,29 @@ class ScreeningBadPage extends StatelessWidget {
   final int symptomsCount;
   final int totalSymptomsCount;
 
+  @override
+  State<ScreeningBadPage> createState() => _ScreeningBadPageState();
+}
+
+class _ScreeningBadPageState extends State<ScreeningBadPage> {
+  late double _probability;
+  static const double threshold = 0.4;
+
   double _computeProbability() {
-    return symptomsCount / totalSymptomsCount;
+    return widget.symptomsCount / widget.totalSymptomsCount;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _probability = _computeProbability();
+
+    // store screening status in local session storage:
+    if (_probability >= threshold) {
+      SaidSessionManager.storeScreeningStatus(true);
+    } else {
+      SaidSessionManager.storeScreeningStatus(false);
+    }
   }
 
   @override
@@ -57,7 +79,7 @@ class ScreeningBadPage extends StatelessWidget {
                       const Padding(padding: EdgeInsets.all(4)),
                       Column(
                           children:
-                              symptoms!.map((e) => Text("• $e")).toList()),
+                              widget.symptoms!.map((e) => Text("• $e")).toList()),
                     ],
                   ),
                 ),
@@ -70,14 +92,14 @@ class ScreeningBadPage extends StatelessWidget {
                       child: CircularProgressIndicator(
                         strokeWidth: 12,
                         backgroundColor: Colors.white54,
-                        value: _computeProbability(),
+                        value: _probability,
                       ),
                     ),
                     Positioned(
                         top: 65,
                         left: 53,
                         child: Text(
-                          "${(_computeProbability() * 100).toInt()}%",
+                          "${(_probability * 100).toInt()}%",
                           textAlign: TextAlign.center,
                           style: const TextStyle(fontSize: 30),
                         )),
@@ -85,7 +107,7 @@ class ScreeningBadPage extends StatelessWidget {
                 ),
                 const Padding(padding: EdgeInsets.all(16)),
                 Text(
-                  "${AppLocalizations.of(context).youHaveA} ${(_computeProbability() * 100).toInt()}% ${AppLocalizations.of(context).crcChances}",
+                  "${AppLocalizations.of(context).youHaveA} ${(_probability * 100).toInt()}% ${AppLocalizations.of(context).crcChances}",
                   textAlign: TextAlign.center,
                 ),
                 const Padding(padding: EdgeInsets.all(8)),
