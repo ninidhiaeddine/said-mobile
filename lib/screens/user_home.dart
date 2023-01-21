@@ -16,7 +16,7 @@ import 'package:said/widgets/misc/said_user_bar.dart';
 class UserHomePage extends StatefulWidget {
   const UserHomePage({super.key, required this.authenticatedUser});
 
-  final Future<User> authenticatedUser;
+  final User authenticatedUser;
 
   @override
   State<StatefulWidget> createState() => _UserHomePageState();
@@ -38,27 +38,19 @@ class _UserHomePageState extends State<UserHomePage> {
             child: SingleChildScrollView(
                 child: Column(
       children: [
-        FutureBuilder(
-            future: widget.authenticatedUser,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.data!.firstName != null) {
-                  var fullName =
-                      '${snapshot.data!.firstName} ${snapshot.data!.lastName}';
-                  return SaidUserBar(
-                    userFullName: fullName,
-                  );
-                } else {
-                  return SaidUserBar(
-                    userFullName: snapshot.data!.username,
-                  );
-                }
-              } else {
-                return const SaidUserBar(
-                  userFullName: "Loading...",
-                );
-              }
-            }),
+        Builder(builder: (context) {
+          if (widget.authenticatedUser.firstName != null) {
+            var fullName =
+                '${widget.authenticatedUser.firstName} ${widget.authenticatedUser.lastName}';
+            return SaidUserBar(
+              userFullName: fullName,
+            );
+          } else {
+            return SaidUserBar(
+              userFullName: widget.authenticatedUser.username,
+            );
+          }
+        }),
         const SaidUpcomingMedicationText(),
         const Padding(padding: EdgeInsets.all(8.0)),
         FutureBuilder(

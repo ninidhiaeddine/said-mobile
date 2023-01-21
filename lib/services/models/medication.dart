@@ -25,7 +25,7 @@ class Medication {
         id: json['id'],
         user: User.fromJson(json['user']),
         name: json['name'],
-        amount: json['amount'],
+        amount: (json['amount'] as int).toDouble(),
         type: json['type'],
         method: json['method'],
         startDate: DateTime.parse(json['startDate']),

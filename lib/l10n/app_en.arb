@@ -189,5 +189,7 @@
 
   "dismiss": "Dismiss",
   "screeningDialogTitle": "Screen Warning",
-  "screeningDialogBody": "Do want to dismiss the warning reminder? It is meant to remind you that you must see a doctor ASAP! Are you sure?"
+  "screeningDialogBody": "Do want to dismiss the warning reminder? It is meant to remind you that you must see a doctor ASAP! Are you sure?",
+
+  "loading": "Loading..."
 }

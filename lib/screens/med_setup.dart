@@ -12,7 +12,7 @@ class MedSetupPage extends StatefulWidget {
   const MedSetupPage({Key? key, required this.authenticatedUser})
       : super(key: key);
 
-  final Future<User> authenticatedUser;
+  final User authenticatedUser;
 
   @override
   State<MedSetupPage> createState() => _MedSetupPageState();
@@ -21,15 +21,15 @@ class MedSetupPage extends StatefulWidget {
 class _MedSetupPageState extends State<MedSetupPage> {
   late Future<List<Medication>> _medications;
 
-  Future<void> _loadData() async {
-    int? userId = (await widget.authenticatedUser).id;
+  Future<void> _loadMedications() async {
+    var userId = widget.authenticatedUser.id;
     _medications = MedicationService.getAllMedications(userId!);
   }
 
   @override
   void initState() {
     super.initState();
-    _loadData();
+    _loadMedications();
   }
 
   @override
@@ -52,18 +52,22 @@ class _MedSetupPageState extends State<MedSetupPage> {
                         future: _medications,
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
-                              ConnectionState.done) {
+                              ConnectionState.done && snapshot.hasData) {
                             return ListView(
                               children: snapshot.data!
                                   .map((e) => SaidEditableMed(
-                                      medName: e.name,
-                                      method: e.method.toString()))
+                                  medName: e.name,
+                                  method: e.method.toString()))
                                   .toList(),
                             );
+                          } else if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Text(AppLocalizations.of(context).loading);
                           } else {
                             return Text(
                                 AppLocalizations.of(context).noMedications);
                           }
+
                         })),
                 const Padding(padding: EdgeInsets.all(8)),
                 SaidButton(

@@ -58,13 +58,12 @@ class MedicationService {
 
   // helper method:
   static List<Medication> parseMedications(String responseBody) {
+    // extract medications out of the Json:
     var json = jsonDecode(responseBody);
     var meds = json['medications'];
 
-    print(meds);
-
-    // map data to list of announcements:
-    var lst = meds.map((e) => Medication.fromJson(e)).toList();
+    // map data to list of medications:
+    var lst = List.generate(meds.length, (i) => Medication.fromJson(meds[i]));
     return lst;
   }
 }

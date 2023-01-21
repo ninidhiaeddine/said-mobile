@@ -12,7 +12,7 @@ import 'package:said/widgets/misc/said_user_bar.dart';
 class UserInfoPage extends StatefulWidget {
   const UserInfoPage({Key? key, required this.authenticatedUser}) : super(key: key);
 
-  final Future<User> authenticatedUser;
+  final User authenticatedUser;
 
   @override
   State<UserInfoPage> createState() => _UserInfoPageState();
@@ -24,21 +24,16 @@ class _UserInfoPageState extends State<UserInfoPage> {
     return Scaffold(
         body: Column(
       children: [
-        FutureBuilder(future: widget.authenticatedUser, builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.data!.firstName != null) {
-              var fullName = '${snapshot.data!.firstName} ${snapshot.data!.lastName}';
-              return SaidUserBar(
-                userFullName: fullName,
-              );
-            } else {
-              return SaidUserBar(
-                userFullName: snapshot.data!.username,
-              );
-            }
+        Builder(builder: (context) {
+          if (widget.authenticatedUser.firstName != null) {
+            var fullName =
+                '${widget.authenticatedUser.firstName} ${widget.authenticatedUser.lastName}';
+            return SaidUserBar(
+              userFullName: fullName,
+            );
           } else {
-            return const SaidUserBar(
-              userFullName: "Loading...",
+            return SaidUserBar(
+              userFullName: widget.authenticatedUser.username,
             );
           }
         }),

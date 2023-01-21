@@ -51,6 +51,9 @@ class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
                             content: e.content, createdAt: e.createdAt))
                             .toList(),
                       );
+                    } else if (snapshot.connectionState == ConnectionState.waiting){
+                      return Text(
+                          AppLocalizations.of(context).loading);
                     } else {
                       return Text(
                           AppLocalizations.of(context).noAnnouncements);

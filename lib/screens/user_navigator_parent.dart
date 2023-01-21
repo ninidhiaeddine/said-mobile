@@ -21,7 +21,7 @@ class UserNavigatorParent extends StatefulWidget {
 class _UserNavigatorParentState extends State<UserNavigatorParent> {
   int _selectedIndex = 2;
 
-  late Future<User> _user;
+  late User _authenticatedUser;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -29,10 +29,17 @@ class _UserNavigatorParentState extends State<UserNavigatorParent> {
     });
   }
 
+  Future<void> _loadUserAsync() async {
+    var user = await SaidSessionManager.getUser();
+    setState(() {
+      _authenticatedUser = user;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    _user = SaidSessionManager.getUser();
+    _loadUserAsync();
   }
 
   @override
@@ -58,10 +65,10 @@ class _UserNavigatorParentState extends State<UserNavigatorParent> {
     // prepare views:
     List<Widget> views = [
       const UserClubPage(),
-      UserInfoPage(authenticatedUser: _user),
-      UserHomePage(authenticatedUser: _user),
+      UserInfoPage(authenticatedUser: _authenticatedUser),
+      UserHomePage(authenticatedUser: _authenticatedUser),
       const UserAnnouncementsPage(),
-      UserAccountPage(authenticatedUser: _user)
+      UserAccountPage(authenticatedUser: _authenticatedUser)
     ];
 
     // return scaffold with bottom navigation bar and corresponding view
