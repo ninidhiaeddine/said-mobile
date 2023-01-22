@@ -23,8 +23,6 @@ class SaidEditableMed extends StatefulWidget {
 }
 
 class _SaidEditableMedState extends State<SaidEditableMed> {
-  bool _enabled = true;
-
   Future<void> _deleteMedication(BuildContext context) async {
     var response =
         await MedicationService.deleteMedication(widget.medication.id!);
@@ -46,10 +44,6 @@ class _SaidEditableMedState extends State<SaidEditableMed> {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
-      setState(() {
-        _enabled = false;
-      });
-
       if (!mounted) {
         return;
       }
@@ -112,19 +106,17 @@ class _SaidEditableMedState extends State<SaidEditableMed> {
               const Spacer(),
               Row(
                 children: [
-                  SaidFab(
-                      dimensions: 40,
-                      backgroundColor: ColorConstants.secondaryColor,
-                      icon: const Icon(Icons.edit),
-                      enabled: _enabled,
-                      linkTo: EditMedicationPage(
-                          authenticatedUser: widget.authenticatedStudent)),
+                  // SaidFab(
+                  //     dimensions: 40,
+                  //     backgroundColor: ColorConstants.secondaryColor,
+                  //     icon: const Icon(Icons.edit),
+                  //     linkTo: EditMedicationPage(
+                  //         authenticatedUser: widget.authenticatedStudent)),
                   const Padding(padding: EdgeInsets.all(4)),
                   SaidFab(
                       dimensions: 40,
                       backgroundColor: Colors.red,
                       icon: const Icon(Icons.delete),
-                      enabled: _enabled,
                       onPressed: () => _deleteMedication(context))
                 ],
               )

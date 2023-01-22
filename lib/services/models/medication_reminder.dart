@@ -19,7 +19,7 @@ class MedicationReminder {
   factory MedicationReminder.fromJson(Map<String, dynamic> json) {
     return MedicationReminder(
       id: json['id'],
-      medication: json['medication'],
+      medication: Medication.fromJson(json['medication']),
       user: json['user'],
       alreadyTaken: json['alreadyTaken'],
       dateTime: DateTime.parse(json['dateTime']),

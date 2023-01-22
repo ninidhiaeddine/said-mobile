@@ -5,12 +5,10 @@ import 'package:said/widgets/misc/said_avatar.dart';
 class UserPost extends StatefulWidget {
   const UserPost(
       {super.key,
-      this.nameInitials,
       this.profilePic,
       required this.fullName,
       required this.postContent});
 
-  final String? nameInitials;
   final NetworkImage? profilePic;
   final String fullName;
   final String postContent;
@@ -20,6 +18,21 @@ class UserPost extends StatefulWidget {
 }
 
 class _UserPostState extends State<UserPost> {
+  String _extractNameInitials(String userFullName) {
+    String nameInitials = "";
+
+    var names = userFullName.toUpperCase().split(' ');
+    for (var value in names) {
+      if (nameInitials.length >= 2) {
+        break;
+      }
+
+      nameInitials += value[0];
+    }
+
+    return nameInitials;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +54,7 @@ class _UserPostState extends State<UserPost> {
               child: Row(
                 children: [
                   SaidAvatar(
-                    nameInitials: widget.nameInitials,
+                    nameInitials: _extractNameInitials(widget.fullName),
                     networkImg: widget.profilePic,
                     dimensions: 30,
                   ),

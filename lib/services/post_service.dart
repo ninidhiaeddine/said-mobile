@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flat/flat.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:said/config/api_constants.dart';
@@ -9,7 +10,8 @@ import 'package:said/utils/flatten_api_response.dart';
 class PostService {
   static Future<List<Post>> getAllPosts() async {
     final response = await http.get(
-        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.postsEndpoint}'),
+        Uri.parse(
+            '${ApiConstants.baseUrl}${ApiConstants.postsEndpoint}?populate=*'),
         headers: <String, String>{
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         });
@@ -37,7 +39,8 @@ class PostService {
 
   static Future<http.Response> updatePost(Post post) {
     return http.put(
-        Uri.parse('${ApiConstants.baseUrl}${ApiConstants.postsEndpoint}/$post.id'),
+        Uri.parse(
+            '${ApiConstants.baseUrl}${ApiConstants.postsEndpoint}/$post.id'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
@@ -55,10 +58,38 @@ class PostService {
         });
   }
 
-  // helper method:
+  // helper methods:
+
+  static List<Map<String, dynamic>> flattenPostApiResponse(apiResponse) {
+    var parsed = jsonDecode(apiResponse);
+    var data = parsed['data'];
+
+    List<Map<String, dynamic>> newList = [];
+    for (var d in data) {
+      var flatMap = flatten(d);
+      Map<String, dynamic> newMap = {};
+
+      flatMap.forEach((key, value) {
+        String keyWithoutParent = key;
+        if (key.contains('attributes')) {
+          keyWithoutParent = key.split('.')[1];
+        }
+
+        newMap[keyWithoutParent] = value;
+      });
+
+      var user = d['data']['user'];
+      newMap['user'] = user;
+
+      newList.add(newMap);
+    }
+
+    return newList;
+  }
+
   static List<Post> parsePosts(String responseBody) {
     // flatten data:
-    var flattenedResponse = flattenApiResponse(responseBody);
+    var flattenedResponse = flattenPostApiResponse(responseBody);
 
     // map data to list of announcements:
     var lst = flattenedResponse.map((e) => Post.fromJson(e)).toList();

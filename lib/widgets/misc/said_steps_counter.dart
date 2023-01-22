@@ -1,13 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:pedometer/pedometer.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:said/services/models/post.dart';
+import 'package:said/services/models/user.dart';
+import 'package:said/services/post_service.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 
 class SaidStepsCounter extends StatefulWidget {
   const SaidStepsCounter(
-      {super.key, required this.stepsGoal});
+      {super.key, required this.authenticatedUser, required this.stepsGoal});
 
+  final User authenticatedUser;
   final int stepsGoal;
 
   @override
@@ -51,6 +57,49 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
 
   double _computeProgressValue() {
     return _stepsDone / widget.stepsGoal;
+  }
+
+  Future<void> _shareMilestone(BuildContext context) async {
+    // prepare post:
+    var postContent = 'Here is my steps milestone!\n$_stepsDone';
+    var post = Post(
+        user: widget.authenticatedUser,
+        createdAt: DateTime.now(),
+        postContent: postContent,
+        postLikes: []);
+
+    // make api call:
+    var response = await PostService.addPost(post);
+
+    if (response.statusCode == 200) {
+      if (!mounted) {
+        return;
+      }
+
+      // show snackbar:
+      final snackBar = SnackBar(
+        content: Text(AppLocalizations.of(context).changesSavedSuccess),
+        backgroundColor: Colors.green,
+        behavior: SnackBarBehavior.floating,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      if (!mounted) {
+        return;
+      }
+
+      var body = jsonDecode(response.body);
+      var errMsg = body['error']['message'];
+
+      // show snackbar:
+      final snackBar = SnackBar(
+        content:
+            Text('${AppLocalizations.of(context).changesSavedError}: $errMsg'),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   @override
@@ -107,7 +156,8 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
                 text: AppLocalizations.of(context).shareMilestone,
                 context: context,
                 icon: const Icon(Icons.star_purple500),
-                enabled: widget.stepsGoal <= _stepsDone))
+                enabled: widget.stepsGoal <= _stepsDone,
+                onPressed: () => _shareMilestone(context)))
       ]),
     );
   }

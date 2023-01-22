@@ -72,7 +72,8 @@ class _UserHomePageState extends State<UserHomePage> {
                   return SaidConditionalWidget(
                       widget: const SaidScreeningWarning(), condition: show);
                 }),
-            const SaidStepsCounter(
+            SaidStepsCounter(
+              authenticatedUser: widget.authenticatedUser,
               stepsGoal: 8000,
             ),
             const Padding(padding: EdgeInsets.all(16.0)),

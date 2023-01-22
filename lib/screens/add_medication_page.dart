@@ -99,13 +99,13 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
         timeOfTaking.hour, timeOfTaking.minute);
     while (iter.isBefore(endDate)) {
       for (int i = 0; i < 7; i++) {
-        if (iter.weekday == (i + 1) % 7) {
+        if (iter.weekday == ((i + 1) % 7) && daysSelections[(i + 1) % 7]) {
           lstTargetDays.add(iter);
         }
       }
 
       // increment day:
-      iter.add(const Duration(days: 1));
+      iter = iter.add(const Duration(days: 1));
     }
 
     var reminders = List.generate(
@@ -127,6 +127,8 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
       List<bool> daysSelections) async {
     var reminders = _generateMedicationReminders(
         medication, startDate, endDate, timeOfTaking, daysSelections);
+
+    print("reminders.length = " + reminders.length.toString());
 
     for (var reminder in reminders) {
       // make api call:

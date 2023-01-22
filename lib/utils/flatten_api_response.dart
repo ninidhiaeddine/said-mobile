@@ -13,6 +13,7 @@ List<Map<String, dynamic>> flattenApiResponse(apiResponse) {
     Map<String, dynamic> newMap = {};
 
     flatMap.forEach((key, value) {
+      print('$key : $value');
       String keyWithoutParent = key;
       if (key.contains('attributes')) {
         keyWithoutParent = key.split('.')[1];

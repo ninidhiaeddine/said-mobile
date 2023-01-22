@@ -181,6 +181,7 @@
   "noAnnouncements": "No Announcements were found :(",
   "noMedications": "No Medications were found. Try adding some!",
   "noReminders": "No Reminders were found!",
+  "noPosts": "No Posts were found!",
   "messageSentSuccess": "Message Sent Successfully!",
   "messageSentError": "An error occurred while sending the message",
 
