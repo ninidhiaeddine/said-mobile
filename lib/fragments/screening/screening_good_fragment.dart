@@ -9,39 +9,31 @@ class ScreeningGoodFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-            padding: const EdgeInsets.all(48),
-            child: Column(
-              children: [
-                Text(AppLocalizations.of(context).response, style: subHeader()),
-                const Padding(padding: EdgeInsets.all(24)),
-                const Icon(
-                  Icons.check_circle,
-                  size: 40,
-                ),
-                const Padding(padding: EdgeInsets.all(8)),
-                Text(
-                  AppLocalizations.of(context).screeningGoodBody,
-                  textAlign: TextAlign.center,
-                ),
-                const Padding(padding: EdgeInsets.all(32)),
-                Text(
-                  AppLocalizations.of(context).screeningGoodTitle,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 28),
-                ),
-                const Padding(padding: EdgeInsets.all(16)),
-                SaidButton(
-                  text: AppLocalizations.of(context).goBackHome,
-                  context: context,
-                  icon: const Icon(Icons.home_outlined),
-                  linkTo: const UserScreen(),
-                )
-              ],
-            )),
-      ),
-    );
+    return Expanded(
+        child: Column(
+      children: [
+        const Icon(
+          Icons.check_circle,
+          size: 40,
+        ),
+        const Padding(padding: EdgeInsets.all(8)),
+        Text(
+          AppLocalizations.of(context).screeningGoodBody,
+          textAlign: TextAlign.center,
+        ),
+        const Padding(padding: EdgeInsets.all(32)),
+        Text(
+          AppLocalizations.of(context).screeningGoodTitle,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+        ),
+        const Spacer(),
+        SaidButton(
+          text: AppLocalizations.of(context).goBackHome,
+          context: context,
+          icon: const Icon(Icons.home_outlined),
+          linkTo: const UserScreen(),
+        )
+      ],
+    ));
   }
 }

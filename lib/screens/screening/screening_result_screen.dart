@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:said/fragments/screening/screening_bad_fragment.dart';
 import 'package:said/fragments/screening/screening_good_fragment.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:said/theme/text_styles.dart';
 
 class ScreeningResultScreen extends StatelessWidget {
   const ScreeningResultScreen(
@@ -18,11 +20,20 @@ class ScreeningResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isPositive) {
-      return const ScreeningGoodFragment();
-    } else {
-      return ScreeningBadFragment(
-          symptomsCount: symptomsCount, totalSymptomsCount: totalSymptomsCount);
-    }
+    return Scaffold(
+        body: SafeArea(
+            child: Padding(
+                padding: const EdgeInsets.all(48),
+                child: Column(children: [
+                  Text(AppLocalizations.of(context).response,
+                      style: subHeader()),
+                  const Padding(padding: EdgeInsets.all(24)),
+                  isPositive
+                      ? const ScreeningGoodFragment()
+                      : ScreeningBadFragment(
+                          symptoms: symptoms,
+                          symptomsCount: symptomsCount,
+                          totalSymptomsCount: totalSymptomsCount)
+                ]))));
   }
 }

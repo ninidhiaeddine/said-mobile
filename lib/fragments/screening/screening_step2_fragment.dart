@@ -50,49 +50,47 @@ class _ScreeningStep2FragmentState extends State<ScreeningStep2Fragment> {
       AppLocalizations.of(context).diarrheaOrConstipation,
     ];
 
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(48.0),
-            child: Column(
-              children: [
-                Text(AppLocalizations.of(context).selfScreening,
-                    style: subHeader()),
-                const Padding(padding: EdgeInsets.all(32)),
-                SizedBox(
-                  width: double.infinity,
-                  child: ToggleButtons(
-                      isSelected: _selections,
-                      direction: Axis.vertical,
-                      onPressed: (index) {
-                        setState(() {
-                          _selections[index] = !_selections[index];
-                        });
-                      },
-                      fillColor: ColorConstants.announcementColor,
-                      selectedColor: ColorConstants.secondaryColor,
-                      splashColor: ColorConstants.secondaryColor,
-                      borderRadius: BorderRadius.circular(16),
-                      selectedBorderColor: ColorConstants.secondaryColor,
-                      children: symptoms.map((e) => Text(e)).toList()),
-                ),
-                const Padding(padding: EdgeInsets.all(32)),
-                SaidButton(
-                  text: AppLocalizations.of(context).cntn,
-                  context: context,
-                  linkTo: ScreeningResultScreen(
-                      isPositive: _determineGoodOrBad(),
-                      symptoms: _getSelectedSymptoms(symptoms),
-                      symptomsCount: _getSelectionsCount(),
-                      totalSymptomsCount: _selections.length),
-                )
-              ],
+    return Expanded(
+        child: Padding(
+      padding: const EdgeInsets.all(48.0),
+      child: Column(
+        children: [
+          Text(AppLocalizations.of(context).selfScreening, style: subHeader()),
+          const Padding(padding: EdgeInsets.all(32)),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+                border: Border.all(color: ColorConstants.secondaryColor),
+                borderRadius: const BorderRadius.all(Radius.circular(5.0))),
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: ToggleButtons(
+                  isSelected: _selections,
+                  direction: Axis.vertical,
+                  onPressed: (index) {
+                    setState(() {
+                      _selections[index] = !_selections[index];
+                    });
+                  },
+                  fillColor: ColorConstants.secondaryColor,
+                  selectedColor: Colors.white,
+                  splashColor: ColorConstants.secondaryColor,
+                  renderBorder: false,
+                  children: symptoms.map((e) => Text(e)).toList()),
             ),
           ),
-        ));
+          const Spacer(),
+          SaidButton(
+            text: AppLocalizations.of(context).cntn,
+            context: context,
+            linkTo: ScreeningResultScreen(
+                isPositive: _determineGoodOrBad(),
+                symptoms: _getSelectedSymptoms(symptoms),
+                symptomsCount: _getSelectionsCount(),
+                totalSymptomsCount: _selections.length),
+          )
+        ],
+      ),
+    ));
   }
 }

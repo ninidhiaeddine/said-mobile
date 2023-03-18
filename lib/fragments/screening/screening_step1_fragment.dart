@@ -13,7 +13,8 @@ class ScreeningStep1Fragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Expanded(
+        child: Padding(
       padding: const EdgeInsets.all(48.0),
       child: Column(
         children: [
@@ -27,7 +28,7 @@ class ScreeningStep1Fragment extends StatelessWidget {
             AppLocalizations.of(context).warningText,
             textAlign: TextAlign.justify,
           ),
-          const Padding(padding: EdgeInsets.all(32)),
+          const Spacer(),
           SaidButton(
             text: AppLocalizations.of(context).proceed,
             context: context,
@@ -35,6 +36,6 @@ class ScreeningStep1Fragment extends StatelessWidget {
           )
         ],
       ),
-    );
+    ));
   }
 }

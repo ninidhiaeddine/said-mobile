@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
+import 'package:said/config/color_constants.dart';
 import 'package:said/fragments/screening/screening_step1_fragment.dart';
 import 'package:said/fragments/screening/screening_step2_fragment.dart';
 import 'package:said/fragments/screening/step_interface.dart';
@@ -65,14 +66,15 @@ class _ScreeningScreenState extends State<ScreeningScreen>
               dotRadius: 12,
               dotCount: numberOfSteps,
               spacing: 50,
-              fixedDotDecoration: const FixedDotDecoration(color: Colors.black),
+              fixedDotDecoration:
+                  const FixedDotDecoration(color: ColorConstants.secondaryColor),
               indicatorDecoration: const IndicatorDecoration(
-                  color: Colors.white,
+                  color: ColorConstants.backgroundColor,
                   strokeWidth: 2,
-                  strokeColor: Colors.black),
+                  strokeColor: ColorConstants.secondaryColor),
               lineConnectorsEnabled: true,
               lineConnectorDecoration: const LineConnectorDecoration(
-                  color: Colors.black, strokeWidth: 2),
+                  color: ColorConstants.secondaryColor, strokeWidth: 2),
               tappingEnabled: false,
             ),
             fragments.elementAt(_stepIndex)
