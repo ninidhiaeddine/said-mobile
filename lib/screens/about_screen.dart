@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/expansion_panel_generator.dart';
+import 'package:said/widgets/buttons/said_icon_back_button.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -39,6 +40,9 @@ class _AboutScreenState extends State<AboutScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+            centerTitle: true,
+            title: Text(AppLocalizations.of(context).about, style: subHeader()),
+            leading: const SaidIconBackButton()
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -46,9 +50,8 @@ class _AboutScreenState extends State<AboutScreen> {
             padding: const EdgeInsets.all(32),
             child: Column(
               children: [
-                Text(AppLocalizations.of(context).about, style: subHeader()),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 48, vertical: 12),
+                  padding: EdgeInsets.fromLTRB(32, 0, 32, 32),
                   child: Image(image: AssetImage('assets/images/logo.png')),
                 ),
                 const Padding(padding: EdgeInsets.all(8)),

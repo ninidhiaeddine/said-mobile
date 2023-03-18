@@ -55,7 +55,7 @@ class _ScreeningStep2FragmentState extends State<ScreeningStep2Fragment> {
       padding: const EdgeInsets.all(48.0),
       child: Column(
         children: [
-          Text(AppLocalizations.of(context).selfScreening, style: subHeader()),
+          Text(AppLocalizations.of(context).step2, style: subHeader()),
           const Padding(padding: EdgeInsets.all(32)),
           Container(
             width: double.infinity,

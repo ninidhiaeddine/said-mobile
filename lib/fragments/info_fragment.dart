@@ -46,7 +46,7 @@ class _InfoFragmentState extends State<InfoFragment> {
           style: subHeader(),
         ),
         Padding(
-            padding: const EdgeInsets.all(48.0),
+            padding: const EdgeInsets.all(32.0),
             child: Column(
               children: [
                 SaidButton(

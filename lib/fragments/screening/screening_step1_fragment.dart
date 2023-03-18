@@ -18,7 +18,7 @@ class ScreeningStep1Fragment extends StatelessWidget {
       padding: const EdgeInsets.all(48.0),
       child: Column(
         children: [
-          Text(AppLocalizations.of(context).selfScreening, style: subHeader()),
+          Text(AppLocalizations.of(context).step1, style: subHeader()),
           const Padding(padding: EdgeInsets.all(32)),
           const Icon(Icons.warning, size: 36),
           Text(AppLocalizations.of(context).warning,

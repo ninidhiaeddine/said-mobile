@@ -10,6 +10,7 @@ import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_icon_back_button.dart';
 import 'package:said/widgets/misc/said_social_media_bar.dart';
 import 'package:said/widgets/textfields//said_text_field.dart';
 
@@ -88,23 +89,23 @@ class _ContactScreenState extends State<ContactScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Colors.white,
-      ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          foregroundColor: Colors.white,
+          title: Text(AppLocalizations.of(context).contactUs,
+              style: subHeaderWhite()),
+          centerTitle: true,
+          leading: const SaidIconBackButton()),
       backgroundColor: ColorConstants.secondaryColor,
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Expanded(
           child: Padding(
               padding: const EdgeInsets.all(32),
               child: Column(
                 children: [
-                  Text(AppLocalizations.of(context).contactUs,
-                      style: subHeaderWhite()),
-                  const Padding(padding: EdgeInsets.all(16.0)),
                   SaidTextField(
                     placeholder: AppLocalizations.of(context).message,
-                    linesCount: 6,
+                    linesCount: 10,
                     blackVariant: true,
                     callback: (newValue, controller) => {
                       setState(() {
@@ -166,6 +167,7 @@ class _ContactScreenState extends State<ContactScreen> {
                         ],
                       )),
                   const Padding(padding: EdgeInsets.all(2.0)),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -9,6 +9,7 @@ import 'package:said/services/models/medication_reminder.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_icon_back_button.dart';
 import 'package:said/widgets/dates/said_date_range_picker.dart';
 import 'package:said/widgets/dropdowns/said_dropdown.dart';
 import 'package:said/widgets/textfields/said_text_field.dart';
@@ -163,6 +164,10 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+          title: Text(AppLocalizations.of(context).addMedication,
+              style: subHeader()),
+          centerTitle: true,
+          leading: const SaidIconBackButton(),
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -183,9 +188,6 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                               size: 30,
                               color: ColorConstants.secondaryColor,
                             ))),
-                    const Padding(padding: EdgeInsets.all(8)),
-                    Text(AppLocalizations.of(context).addMedication,
-                        style: subHeader()),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidTextField(
                       placeholder: AppLocalizations.of(context).medName,

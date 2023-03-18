@@ -6,6 +6,7 @@ import 'package:said/services/models/medication.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_icon_back_button.dart';
 import 'package:said/widgets/misc/said_editable_med.dart';
 
 class SetupMedScreen extends StatefulWidget {
@@ -44,14 +45,15 @@ class _SetupMedScreenState extends State<SetupMedScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        title: Text(AppLocalizations.of(context).setUpMeds, style: subHeader()),
+        centerTitle: true,
+        leading: const SaidIconBackButton()
       ),
       body: SafeArea(
         child: Padding(
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.fromLTRB(32, 0, 32, 32),
             child: Column(
               children: [
-                Text(AppLocalizations.of(context).setUpMeds,
-                    style: subHeader()),
                 const Padding(padding: EdgeInsets.all(8)),
                 Expanded(
                     child: FutureBuilder(

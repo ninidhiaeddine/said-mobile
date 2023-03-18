@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/expansion_panel_generator.dart';
+import 'package:said/widgets/buttons/said_icon_back_button.dart';
 import 'package:said/widgets/textFields/said_text_field.dart';
 
 class LearnScreen extends StatefulWidget {
@@ -177,22 +178,23 @@ class _LearnScreenState extends State<LearnScreen> {
       ),
     ];
 
-    List<ExpansionPanel> panels = generateExpansionPanels(titles, bodies, _isOpen);
+    List<ExpansionPanel> panels =
+        generateExpansionPanels(titles, bodies, _isOpen);
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text(AppLocalizations.of(context).educationContent,
+                style: subHeader()),
+            centerTitle: true,
+            leading: const SaidIconBackButton()),
         body: SafeArea(
             child: SingleChildScrollView(
           child: Padding(
               padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
               child: Column(
                 children: [
-                  Text(AppLocalizations.of(context).educationContent,
-                      style: subHeader()),
-                  const Padding(padding: EdgeInsets.all(8)),
                   SaidTextField(
                     placeholder: AppLocalizations.of(context).search,
                     prefixIcon: const Icon(Icons.search),

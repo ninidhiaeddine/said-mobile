@@ -197,5 +197,8 @@
   "loading": "Loading...",
 
   "male": "Male",
-  "female": "Female"
+  "female": "Female",
+
+  "step1": "Step 1",
+  "step2": "Step 2"
 }

@@ -4,6 +4,9 @@ import 'package:said/config/color_constants.dart';
 import 'package:said/fragments/screening/screening_step1_fragment.dart';
 import 'package:said/fragments/screening/screening_step2_fragment.dart';
 import 'package:said/fragments/screening/step_interface.dart';
+import 'package:said/theme/text_styles.dart';
+import 'package:said/widgets/buttons/said_icon_back_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScreeningScreen extends StatefulWidget {
   const ScreeningScreen({Key? key}) : super(key: key);
@@ -54,20 +57,26 @@ class _ScreeningScreenState extends State<ScreeningScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text(AppLocalizations.of(context).selfScreening,
+                style: subHeader()),
+            centerTitle: true,
+            leading: const SaidIconBackButton()),
         body: SafeArea(
             child: Column(
           children: [
+            const SizedBox(
+              height: 24,
+            ),
             DotStepper(
               activeStep: _stepIndex,
               shape: Shape.squircle,
               dotRadius: 12,
               dotCount: numberOfSteps,
               spacing: 50,
-              fixedDotDecoration:
-                  const FixedDotDecoration(color: ColorConstants.secondaryColor),
+              fixedDotDecoration: const FixedDotDecoration(
+                  color: ColorConstants.secondaryColor),
               indicatorDecoration: const IndicatorDecoration(
                   color: ColorConstants.backgroundColor,
                   strokeWidth: 2,
