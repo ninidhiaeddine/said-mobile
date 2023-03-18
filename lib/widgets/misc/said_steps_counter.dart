@@ -105,60 +105,71 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: 350,
-      decoration: const BoxDecoration(
-          color: ColorConstants.secondaryColor,
-          borderRadius: BorderRadius.all(Radius.circular(16))),
-      child: Stack(alignment: Alignment.center, children: [
-        Positioned(
-            top: 50,
-            child: SizedBox(
-              width: 200,
-              height: 200,
-              child: CircularProgressIndicator(
-                value: _computeProgressValue(),
-                strokeWidth: 20,
-                color: ColorConstants.primaryColor,
-                backgroundColor: const Color(0xff2d4385),
-              ),
-            )),
-        Positioned(
-            top: 110,
-            child: Text(AppLocalizations.of(context).steps,
-                style: const TextStyle(color: Colors.white, fontSize: 18))),
-        Positioned(
-            top: 130,
-            child: Text(_stepsDone.toString(),
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 34))),
-        Positioned(
-            top: 190,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  AppLocalizations.of(context).goal,
-                  style: const TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                Text(widget.stepsGoal.toString(),
-                    style: const TextStyle(
-                        color: ColorConstants.primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18)),
-              ],
-            )),
-        Positioned(
-            bottom: 16,
-            child: SaidPrimaryButton(
-                text: AppLocalizations.of(context).shareMilestone,
-                context: context,
-                icon: const Icon(Icons.star_purple500),
-                enabled: widget.stepsGoal <= _stepsDone,
-                onPressed: () => _shareMilestone(context)))
-      ]),
-    );
+        width: double.infinity,
+        height: 315,
+        decoration: const BoxDecoration(
+            color: ColorConstants.secondaryColor,
+            borderRadius: BorderRadius.all(Radius.circular(16))),
+        child: Column(
+          children: [
+            SizedBox(
+                height: 235,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                        top: 30,
+                        child: SizedBox(
+                          width: 200,
+                          height: 200,
+                          child: CircularProgressIndicator(
+                            value: _computeProgressValue(),
+                            strokeWidth: 20,
+                            color: ColorConstants.primaryColor,
+                            backgroundColor: const Color(0xff2d4385),
+                          ),
+                        )),
+                    Positioned(
+                        top: 90,
+                        child: Text(AppLocalizations.of(context).steps,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 18))),
+                    Positioned(
+                        top: 110,
+                        child: Text(_stepsDone.toString(),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 34))),
+                    Positioned(
+                        top: 170,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context).goal,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 18),
+                            ),
+                            Text(widget.stepsGoal.toString(),
+                                style: const TextStyle(
+                                    color: ColorConstants.primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18)),
+                          ],
+                        )),
+                  ],
+                )),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: SaidPrimaryButton(
+                  text: AppLocalizations.of(context).shareMilestone,
+                  context: context,
+                  icon: const Icon(Icons.star_purple500),
+                  enabled: widget.stepsGoal <= _stepsDone,
+                  onPressed: () => _shareMilestone(context)),
+            )
+          ],
+        ));
   }
 }
