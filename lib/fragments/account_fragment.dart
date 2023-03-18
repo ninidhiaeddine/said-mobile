@@ -11,22 +11,22 @@ import 'package:said/widgets/dropdowns/said_dropdown.dart';
 import 'package:said/widgets/misc/said_user_bar.dart';
 import 'package:said/widgets/textfields/said_text_field.dart';
 
-class UserAccountPage extends StatefulWidget {
-  const UserAccountPage({Key? key, required this.authenticatedUser})
+class AccountFragment extends StatefulWidget {
+  const AccountFragment({Key? key, required this.authenticatedUser})
       : super(key: key);
 
   final User authenticatedUser;
 
   @override
-  State<UserAccountPage> createState() => _UserAccountPageState();
+  State<AccountFragment> createState() => _AccountFragmentState();
 }
 
-class _UserAccountPageState extends State<UserAccountPage> {
+class _AccountFragmentState extends State<AccountFragment> {
   String _sexValue = "";
   final controllers = List.generate(3, (index) => TextEditingController());
-  final sexOptions = ["Male", "Female"];
+  late List<String> sexOptions;
 
-  Future<void> _saveUserToSession(User updatedUser) async {
+  Future<void> _saveUserToSessionAsync(User updatedUser) async {
     SaidSessionManager.storeUser(
         id: updatedUser.id!,
         username: updatedUser.username,
@@ -37,7 +37,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
         age: updatedUser.age);
   }
 
-  Future<void> _saveChanges() async {
+  Future<void> _saveChangesAsync() async {
     User oldUser = await SaidSessionManager.getUser();
     var updatedUser = User(
         id: oldUser.id,
@@ -55,7 +55,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
 
     if (response.statusCode == 200) {
       // save user to local session storage:
-      _saveUserToSession(updatedUser);
+      _saveUserToSessionAsync(updatedUser);
 
       if (!mounted) {
         return;
@@ -88,13 +88,22 @@ class _UserAccountPageState extends State<UserAccountPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    sexOptions = [
+      AppLocalizations.of(context).male,
+      AppLocalizations.of(context).female
+    ];
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
             child: Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Builder(builder: (context) {
             if (widget.authenticatedUser.firstName != null) {
               var fullName =
@@ -173,7 +182,7 @@ class _UserAccountPageState extends State<UserAccountPage> {
                 SaidButton(
                     text: AppLocalizations.of(context).save,
                     context: context,
-                    onPressed: _saveChanges)
+                    onPressed: _saveChangesAsync)
               ],
             )),
       ],

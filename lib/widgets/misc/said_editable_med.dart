@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
-import 'package:said/screens/edit_medication_page.dart';
+import 'package:said/screens/medication/edit_medication_screen.dart';
 import 'package:said/services/medication_service.dart';
 import 'package:said/services/models/medication.dart';
 import 'package:said/services/models/user.dart';

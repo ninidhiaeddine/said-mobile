@@ -13,22 +13,23 @@ import 'package:said/widgets/buttons/said_button.dart';
 import 'package:said/widgets/misc/said_social_media_bar.dart';
 import 'package:said/widgets/textfields//said_text_field.dart';
 
-class ContactPage extends StatefulWidget {
-  const ContactPage({Key? key}) : super(key: key);
+class ContactScreen extends StatefulWidget {
+  const ContactScreen({Key? key}) : super(key: key);
 
   @override
-  State<ContactPage> createState() => _ContactPageState();
+  State<ContactScreen> createState() => _ContactScreenState();
 }
 
-class _ContactPageState extends State<ContactPage> {
+class _ContactScreenState extends State<ContactScreen> {
   late String _messageValue = "";
   late TextEditingController _controller;
 
   User? _user;
 
-  Future<void> _loadUser() async {
+  Future<void> _loadUserAsync() async {
     // get user id:
     int userId = await SaidSessionManager.getSessionValue('id');
+    print("Loading User Async | UserId = " + userId.toString());
 
     // get user from API service:
     _user = await UserService.getUser(userId);
@@ -80,7 +81,7 @@ class _ContactPageState extends State<ContactPage> {
   @override
   void initState() {
     super.initState();
-    _loadUser();
+    _loadUserAsync();
   }
 
   @override

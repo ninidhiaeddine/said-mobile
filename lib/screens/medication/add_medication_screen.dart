@@ -15,17 +15,17 @@ import 'package:said/widgets/textfields/said_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/widgets/dates/said_time_picker.dart';
 
-class AddMedicationPage extends StatefulWidget {
-  const AddMedicationPage({Key? key, required this.authenticatedUser})
+class AddMedicationScreen extends StatefulWidget {
+  const AddMedicationScreen({Key? key, required this.authenticatedUser})
       : super(key: key);
 
   final User authenticatedUser;
 
   @override
-  State<AddMedicationPage> createState() => _AddMedicationPageState();
+  State<AddMedicationScreen> createState() => _AddMedicationScreenState();
 }
 
-class _AddMedicationPageState extends State<AddMedicationPage> {
+class _AddMedicationScreenState extends State<AddMedicationScreen> {
   bool _notifsAreOn = false;
   final List<bool> _selections = List.generate(7, (index) => false);
 

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/screens/sign_up.dart';
-import 'package:said/screens/user_navigator_parent.dart';
+import 'package:said/screens/authentication/sign_up_screen.dart';
+import 'package:said/screens/user_screen.dart';
 import 'package:said/services/auth_service.dart';
 import 'package:said/services/dtos/auth.dart';
 import 'package:said/theme/text_styles.dart';
@@ -14,14 +14,14 @@ import 'package:said/widgets/misc/said_conditional_widget.dart';
 import 'package:said/widgets/textfields/said_password_field.dart';
 import 'package:said/widgets/textfields/said_text_field.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SignInPageState();
+  State<StatefulWidget> createState() => _SignInScreenState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignInScreenState extends State<SignInScreen> {
   String _emailValue = "";
   String _passwordValue = "";
   String _errorMsg = "";
@@ -70,7 +70,7 @@ class _SignInPageState extends State<SignInPage> {
     if (!mounted) {
       return;
     }
-    navigateToRoute(context, const UserNavigatorParent());
+    navigateToRoute(context, const UserScreen());
   }
 
   @override
@@ -129,7 +129,7 @@ class _SignInPageState extends State<SignInPage> {
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SignUpPage())),
+                            builder: (context) => const SignUpScreen())),
                     child: Text(AppLocalizations.of(context).createAccount,
                         style: primaryText()),
                   )

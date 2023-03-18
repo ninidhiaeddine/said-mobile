@@ -20,7 +20,7 @@ class UserService {
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to load User');
+      throw Exception('Failed to load User | ${response.body}');
     }
   }
 

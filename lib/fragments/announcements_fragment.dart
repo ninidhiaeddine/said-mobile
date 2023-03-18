@@ -5,14 +5,14 @@ import 'package:said/services/models/announcement.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/misc/said_announcement.dart';
 
-class UserAnnouncementsPage extends StatefulWidget {
-  const UserAnnouncementsPage({Key? key}) : super(key: key);
+class AnnouncementsFragment extends StatefulWidget {
+  const AnnouncementsFragment({Key? key}) : super(key: key);
 
   @override
-  State<UserAnnouncementsPage> createState() => _UserAnnouncementsPageState();
+  State<AnnouncementsFragment> createState() => _AnnouncementsFragmentState();
 }
 
-class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
+class _AnnouncementsFragmentState extends State<AnnouncementsFragment> {
   late Future<List<Announcement>> _announcements;
 
   @override
@@ -44,7 +44,7 @@ class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
               child: FutureBuilder(
                   future: _announcements,
                   builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
                       return ListView(
                         children: snapshot.data!
                             .map((e) => SaidAnnouncement(
@@ -55,6 +55,7 @@ class _UserAnnouncementsPageState extends State<UserAnnouncementsPage> {
                       return Text(
                           AppLocalizations.of(context).loading);
                     } else {
+                      print("No Announcements");
                       return Text(
                           AppLocalizations.of(context).noAnnouncements);
                     }

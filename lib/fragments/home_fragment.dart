@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/screens/med_setup.dart';
-import 'package:said/screens/screening1.dart';
+import 'package:said/screens/medication/setup_med_screen.dart';
+import 'package:said/fragments/screening/screening_step1_fragment.dart';
+import 'package:said/screens/screening/screening_screen.dart';
 import 'package:said/services/medication_reminder_service.dart';
 import 'package:said/services/models/medication_reminder.dart';
 import 'package:said/services/models/user.dart';
@@ -15,16 +16,16 @@ import 'package:said/widgets/misc/said_upcoming_med.dart';
 import 'package:said/widgets/misc/said_upcoming_med_text.dart';
 import 'package:said/widgets/misc/said_user_bar.dart';
 
-class UserHomePage extends StatefulWidget {
-  const UserHomePage({super.key, required this.authenticatedUser});
+class HomeFragment extends StatefulWidget {
+  const HomeFragment({super.key, required this.authenticatedUser});
 
   final User authenticatedUser;
 
   @override
-  State<StatefulWidget> createState() => _UserHomePageState();
+  State<StatefulWidget> createState() => _HomeFragmentState();
 }
 
-class _UserHomePageState extends State<UserHomePage> {
+class _HomeFragmentState extends State<HomeFragment> {
   late Future<dynamic> _mustSeeDoctor;
   late Future<List<MedicationReminder>> _medicationReminders;
 
@@ -86,13 +87,13 @@ class _UserHomePageState extends State<UserHomePage> {
               text: AppLocalizations.of(context).setUpMeds,
               context: context,
               icon: const Icon(Icons.arrow_right_alt),
-              linkTo: MedSetupPage(authenticatedUser: widget.authenticatedUser),
+              linkTo: SetupMedScreen(authenticatedUser: widget.authenticatedUser),
             ),
             SaidButton(
                 text: AppLocalizations.of(context).selfScreening,
                 context: context,
                 icon: const Icon(Icons.arrow_right_alt),
-                linkTo: const Screening1Page()),
+                linkTo: const ScreeningScreen()),
             const Padding(padding: EdgeInsets.all(8.0)),
             Align(
                 alignment: Alignment.centerLeft,
@@ -120,7 +121,8 @@ class _UserHomePageState extends State<UserHomePage> {
                   } else {
                     return Text(AppLocalizations.of(context).noReminders);
                   }
-                })
+                }),
+            const Padding(padding: EdgeInsets.all(8.0))
           ],
         ),
       ),

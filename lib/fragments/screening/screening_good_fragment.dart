@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:said/screens/user_navigator_parent.dart';
+import 'package:said/screens/user_screen.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 
-class ScreeningGoodPage extends StatelessWidget {
-  const ScreeningGoodPage({Key? key}) : super(key: key);
+class ScreeningGoodFragment extends StatelessWidget {
+  const ScreeningGoodFragment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class ScreeningGoodPage extends StatelessWidget {
                   text: AppLocalizations.of(context).goBackHome,
                   context: context,
                   icon: const Icon(Icons.home_outlined),
-                  linkTo: const UserNavigatorParent(),
+                  linkTo: const UserScreen(),
                 )
               ],
             )),

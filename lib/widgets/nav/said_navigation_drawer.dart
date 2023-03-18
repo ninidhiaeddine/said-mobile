@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/screens/home.dart';
+import 'package:said/screens/landing_screen.dart';
 import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
 
@@ -11,7 +11,7 @@ class SaidNavigationDrawer extends StatelessWidget {
   Future<void> logOut(BuildContext context) async {
     await SaidSessionManager.clearSession();
 
-    navigateToRoute(context, const HomePage());
+    navigateToRoute(context, const LandingScreen());
   }
 
   @override

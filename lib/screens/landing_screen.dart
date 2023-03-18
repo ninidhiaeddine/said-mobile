@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/screens/sign_in.dart';
-import 'package:said/screens/user_navigator_parent.dart';
+import 'package:said/screens/authentication/sign_in_screen.dart';
+import 'package:said/screens/user_screen.dart';
 import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class LandingScreen extends StatefulWidget {
+  const LandingScreen({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<LandingScreen> createState() => _LandingScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _LandingScreenState extends State<LandingScreen> {
 
   Future<void> _checkLoggedInStatus() async {
     // check whether user is logged in:
     if (await SaidSessionManager.containsKey("isLoggedIn") &&
         await SaidSessionManager.getSessionValue("isLoggedIn")) {
-      navigateToRoute(context, const UserNavigatorParent());
+      navigateToRoute(context, const UserScreen());
     }
   }
 
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                   child: SaidButton(
                       text: AppLocalizations.of(context).getStarted,
                       context: context,
-                      linkTo: const SignInPage())))
+                      linkTo: const SignInScreen())))
         ])));
   }
 }

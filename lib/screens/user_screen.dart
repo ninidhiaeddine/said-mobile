@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
-import 'package:said/screens/user_account.dart';
-import 'package:said/screens/user_club.dart';
-import 'package:said/screens/user_home.dart';
-import 'package:said/screens/user_info.dart';
-import 'package:said/screens/user_announcements.dart';
+import 'package:said/fragments/account_fragment.dart';
+import 'package:said/fragments/club_fragment.dart';
+import 'package:said/fragments/home_fragment.dart';
+import 'package:said/fragments/info_fragment.dart';
+import 'package:said/fragments/announcements_fragment.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/nav/said_bottom_nav_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/widgets/nav/said_navigation_drawer.dart';
 
-class UserNavigatorParent extends StatefulWidget {
-  const UserNavigatorParent({super.key});
+class UserScreen extends StatefulWidget {
+  const UserScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _UserNavigatorParentState();
+  State<StatefulWidget> createState() => _UserScreenState();
 }
 
-class _UserNavigatorParentState extends State<UserNavigatorParent> {
+class _UserScreenState extends State<UserScreen> {
   int _selectedIndex = 2;
 
   late User _authenticatedUser;
@@ -64,11 +64,11 @@ class _UserNavigatorParentState extends State<UserNavigatorParent> {
 
     // prepare views:
     List<Widget> views = [
-      const UserClubPage(),
-      UserInfoPage(authenticatedUser: _authenticatedUser),
-      UserHomePage(authenticatedUser: _authenticatedUser),
-      const UserAnnouncementsPage(),
-      UserAccountPage(authenticatedUser: _authenticatedUser)
+      const ClubFragment(),
+      InfoFragment(authenticatedUser: _authenticatedUser),
+      HomeFragment(authenticatedUser: _authenticatedUser),
+      const AnnouncementsFragment(),
+      AccountFragment(authenticatedUser: _authenticatedUser)
     ];
 
     // return scaffold with bottom navigation bar and corresponding view

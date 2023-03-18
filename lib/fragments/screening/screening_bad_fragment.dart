@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:said/screens/user_navigator_parent.dart';
+import 'package:said/screens/user_screen.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 
-class ScreeningBadPage extends StatefulWidget {
-  const ScreeningBadPage(
+class ScreeningBadFragment extends StatefulWidget {
+  const ScreeningBadFragment(
       {Key? key,
       required this.symptomsCount,
       required this.totalSymptomsCount,
@@ -18,10 +18,10 @@ class ScreeningBadPage extends StatefulWidget {
   final int totalSymptomsCount;
 
   @override
-  State<ScreeningBadPage> createState() => _ScreeningBadPageState();
+  State<ScreeningBadFragment> createState() => _ScreeningBadFragmentState();
 }
 
-class _ScreeningBadPageState extends State<ScreeningBadPage> {
+class _ScreeningBadFragmentState extends State<ScreeningBadFragment> {
   late double _probability;
   static const double threshold = 0.4;
 
@@ -115,7 +115,7 @@ class _ScreeningBadPageState extends State<ScreeningBadPage> {
                   text: AppLocalizations.of(context).goBackHome,
                   context: context,
                   icon: const Icon(Icons.home_outlined),
-                  linkTo: const UserNavigatorParent(),
+                  linkTo: const UserScreen(),
                 )
               ],
             )),

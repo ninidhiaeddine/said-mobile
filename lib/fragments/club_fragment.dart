@@ -5,14 +5,14 @@ import 'package:said/services/post_service.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/misc/said_user_post.dart';
 
-class UserClubPage extends StatefulWidget {
-  const UserClubPage({Key? key}) : super(key: key);
+class ClubFragment extends StatefulWidget {
+  const ClubFragment({Key? key}) : super(key: key);
 
   @override
-  State<UserClubPage> createState() => _UserClubPageState();
+  State<ClubFragment> createState() => _ClubFragmentState();
 }
 
-class _UserClubPageState extends State<UserClubPage> {
+class _ClubFragmentState extends State<ClubFragment> {
   late Future<List<Post>> _posts;
 
   @override

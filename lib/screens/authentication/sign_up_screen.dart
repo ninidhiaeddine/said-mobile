@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/screens/user_navigator_parent.dart';
+import 'package:said/screens/user_screen.dart';
 import 'package:said/services/dtos/register.dart';
 import 'package:said/services/register_service.dart';
 import 'package:said/theme/text_styles.dart';
@@ -13,14 +13,14 @@ import 'package:said/widgets/misc/said_conditional_widget.dart';
 import 'package:said/widgets/textfields/said_password_field.dart';
 import 'package:said/widgets/textfields/said_text_field.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _SignUpPageState();
+  State<StatefulWidget> createState() => _SignUpScreenState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpScreenState extends State<SignUpScreen> {
   String _usernameValue = "";
   String _emailValue = "";
   String _passwordValue = "";
@@ -66,7 +66,7 @@ class _SignUpPageState extends State<SignUpPage> {
     if (!mounted) {
       return;
     }
-    navigateToRoute(context, const UserNavigatorParent());
+    navigateToRoute(context, const UserScreen());
   }
 
   @override

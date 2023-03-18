@@ -3,14 +3,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/expansion_panel_generator.dart';
 
-class AboutPage extends StatefulWidget {
-  const AboutPage({Key? key}) : super(key: key);
+class AboutScreen extends StatefulWidget {
+  const AboutScreen({Key? key}) : super(key: key);
 
   @override
-  State<AboutPage> createState() => _AboutPageState();
+  State<AboutScreen> createState() => _AboutScreenState();
 }
 
-class _AboutPageState extends State<AboutPage> {
+class _AboutScreenState extends State<AboutScreen> {
   final List<bool> _isOpen = List.generate(4, (index) => false);
 
   @override

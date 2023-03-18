@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/screens/home.dart';
+import 'package:said/screens/landing_screen.dart';
 import 'package:said/theme/theme.dart';
 
 Future main() async {
@@ -20,7 +20,7 @@ class SaidApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: saidTheme(),
-      home: const HomePage(),
+      home: const LandingScreen(),
     );
   }
 }

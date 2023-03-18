@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/screens/add_medication_page.dart';
+import 'package:said/screens/medication/add_medication_screen.dart';
 import 'package:said/services/medication_service.dart';
 import 'package:said/services/models/medication.dart';
 import 'package:said/services/models/user.dart';
@@ -8,17 +8,17 @@ import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 import 'package:said/widgets/misc/said_editable_med.dart';
 
-class MedSetupPage extends StatefulWidget {
-  const MedSetupPage({Key? key, required this.authenticatedUser})
+class SetupMedScreen extends StatefulWidget {
+  const SetupMedScreen({Key? key, required this.authenticatedUser})
       : super(key: key);
 
   final User authenticatedUser;
 
   @override
-  State<MedSetupPage> createState() => _MedSetupPageState();
+  State<SetupMedScreen> createState() => _SetupMedScreenState();
 }
 
-class _MedSetupPageState extends State<MedSetupPage> {
+class _SetupMedScreenState extends State<SetupMedScreen> {
   late Future<List<Medication>> _medications;
 
   Future<void> _loadMedications() async {
@@ -82,7 +82,7 @@ class _MedSetupPageState extends State<MedSetupPage> {
                   text: AppLocalizations.of(context).addMedication,
                   context: context,
                   icon: const Icon(Icons.add_circle_outline),
-                  linkTo: AddMedicationPage(
+                  linkTo: AddMedicationScreen(
                       authenticatedUser: widget.authenticatedUser),
                 )
               ],

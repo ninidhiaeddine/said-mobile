@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/config/color_constants.dart';
-import 'package:said/screens/screening_bad.dart';
-import 'package:said/screens/screening_good.dart';
+import 'package:said/screens/screening/screening_result_screen.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/buttons/said_button.dart';
 
-class Screening2Page extends StatefulWidget {
-  const Screening2Page({Key? key}) : super(key: key);
+class ScreeningStep2Fragment extends StatefulWidget {
+  const ScreeningStep2Fragment(
+      {Key? key, required this.onStepCancelled, required this.onStepFinished})
+      : super(key: key);
+
+  final Function() onStepCancelled;
+  final Function() onStepFinished;
 
   @override
-  State<Screening2Page> createState() => _Screening2PageState();
+  State<ScreeningStep2Fragment> createState() => _ScreeningStep2FragmentState();
 }
 
-class _Screening2PageState extends State<Screening2Page> {
+class _ScreeningStep2FragmentState extends State<ScreeningStep2Fragment> {
   final List<bool> _selections = List.generate(5, (index) => false);
 
   int _getSelectionsCount() {
@@ -80,12 +84,11 @@ class _Screening2PageState extends State<Screening2Page> {
                 SaidButton(
                   text: AppLocalizations.of(context).cntn,
                   context: context,
-                  linkTo: _determineGoodOrBad()
-                      ? const ScreeningGoodPage()
-                      : ScreeningBadPage(
-                          symptoms: _getSelectedSymptoms(symptoms),
-                          symptomsCount: _getSelectionsCount(),
-                          totalSymptomsCount: _selections.length),
+                  linkTo: ScreeningResultScreen(
+                      isPositive: _determineGoodOrBad(),
+                      symptoms: _getSelectedSymptoms(symptoms),
+                      symptomsCount: _getSelectionsCount(),
+                      totalSymptomsCount: _selections.length),
                 )
               ],
             ),
