@@ -58,10 +58,12 @@ class SaidScreeningWarning extends StatelessWidget {
                 AppLocalizations.of(context).screeningWarningBody,
               ),
               const Padding(padding: EdgeInsets.all(8)),
-              SaidOutlinedButton(
-                  text: AppLocalizations.of(context).updateRecords,
-                  context: context,
-                  onPressed: () => dismissWarning(context))
+              SizedBox(
+                  width: double.infinity,
+                  child: SaidOutlinedButton(
+                      text: AppLocalizations.of(context).updateRecords,
+                      context: context,
+                      onPressed: () => dismissWarning(context)))
             ],
           )),
     );
