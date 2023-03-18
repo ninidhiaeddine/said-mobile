@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:said/utils/navigator.dart';
 
-class SaidButton extends StatelessWidget {
-  const SaidButton(
+class SaidPrimaryButton extends StatelessWidget {
+  const SaidPrimaryButton(
       {super.key,
       required this.text,
       required this.context,
