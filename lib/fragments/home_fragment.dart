@@ -71,7 +71,11 @@ class _HomeFragmentState extends State<HomeFragment> {
                     show = snapshot.data as bool;
                   }
                   return SaidConditionalWidget(
-                      widget: const SaidScreeningWarning(), condition: show);
+                      widget: const Padding(
+                        padding: EdgeInsets.only(bottom: 16),
+                        child: SaidScreeningWarning(),
+                      ),
+                      condition: show);
                 }),
             SaidStepsCounter(
               authenticatedUser: widget.authenticatedUser,
@@ -87,7 +91,8 @@ class _HomeFragmentState extends State<HomeFragment> {
               text: AppLocalizations.of(context).setUpMeds,
               context: context,
               icon: const Icon(Icons.arrow_right_alt),
-              linkTo: SetupMedScreen(authenticatedUser: widget.authenticatedUser),
+              linkTo:
+                  SetupMedScreen(authenticatedUser: widget.authenticatedUser),
             ),
             SaidButton(
                 text: AppLocalizations.of(context).selfScreening,
