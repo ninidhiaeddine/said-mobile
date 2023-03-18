@@ -8,7 +8,7 @@ import 'package:said/services/register_service.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/misc/said_conditional_widget.dart';
 import 'package:said/widgets/textfields/said_password_field.dart';
 import 'package:said/widgets/textfields/said_text_field.dart';
@@ -124,7 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Text(_errorMsg,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.red)),
-              SaidButton(
+              SaidPrimaryButton(
                 text: AppLocalizations.of(context).signUp,
                 context: context,
                 enabled: !_signUpInProgress,

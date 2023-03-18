@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 
 class ScreeningStep1Fragment extends StatelessWidget {
   const ScreeningStep1Fragment(
@@ -29,7 +29,7 @@ class ScreeningStep1Fragment extends StatelessWidget {
             textAlign: TextAlign.justify,
           ),
           const Spacer(),
-          SaidButton(
+          SaidPrimaryButton(
             text: AppLocalizations.of(context).proceed,
             context: context,
             onPressed: onStepFinished,

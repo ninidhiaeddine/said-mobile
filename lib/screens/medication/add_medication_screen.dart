@@ -8,7 +8,7 @@ import 'package:said/services/models/medication.dart';
 import 'package:said/services/models/medication_reminder.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/buttons/said_icon_back_button.dart';
 import 'package:said/widgets/dates/said_date_range_picker.dart';
 import 'package:said/widgets/dropdowns/said_dropdown.dart';
@@ -286,7 +286,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                       )),
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
-                    SaidButton(
+                    SaidPrimaryButton(
                         text: AppLocalizations.of(context).save,
                         context: context,
                         onPressed: () => _addMedication(context))

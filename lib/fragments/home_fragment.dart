@@ -8,7 +8,7 @@ import 'package:said/services/models/medication_reminder.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/misc/said_conditional_widget.dart';
 import 'package:said/widgets/misc/said_screening_warning.dart';
 import 'package:said/widgets/misc/said_steps_counter.dart';
@@ -87,14 +87,14 @@ class _HomeFragmentState extends State<HomeFragment> {
                 child: Text(AppLocalizations.of(context).actions,
                     style: subHeader())),
             const Padding(padding: EdgeInsets.all(4.0)),
-            SaidButton(
+            SaidPrimaryButton(
               text: AppLocalizations.of(context).setUpMeds,
               context: context,
               icon: const Icon(Icons.arrow_right_alt),
               linkTo:
                   SetupMedScreen(authenticatedUser: widget.authenticatedUser),
             ),
-            SaidButton(
+            SaidPrimaryButton(
                 text: AppLocalizations.of(context).selfScreening,
                 context: context,
                 icon: const Icon(Icons.arrow_right_alt),

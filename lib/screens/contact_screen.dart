@@ -9,7 +9,7 @@ import 'package:said/services/models/user.dart';
 import 'package:said/services/user_service.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/buttons/said_icon_back_button.dart';
 import 'package:said/widgets/misc/said_social_media_bar.dart';
 import 'package:said/widgets/textfields//said_text_field.dart';
@@ -115,7 +115,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     },
                   ),
                   const Padding(padding: EdgeInsets.all(4)),
-                  SaidButton(
+                  SaidPrimaryButton(
                     text: AppLocalizations.of(context).send,
                     context: context,
                     icon: const Icon(Icons.send),

@@ -5,7 +5,7 @@ import 'package:said/services/medication_service.dart';
 import 'package:said/services/models/medication.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/buttons/said_icon_back_button.dart';
 import 'package:said/widgets/misc/said_editable_med.dart';
 
@@ -80,7 +80,7 @@ class _SetupMedScreenState extends State<SetupMedScreen> {
                           }
                         })),
                 const Padding(padding: EdgeInsets.all(8)),
-                SaidButton(
+                SaidPrimaryButton(
                   text: AppLocalizations.of(context).addMedication,
                   context: context,
                   icon: const Icon(Icons.add_circle_outline),

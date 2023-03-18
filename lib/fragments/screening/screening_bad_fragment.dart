@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:said/screens/user_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 
 class ScreeningBadFragment extends StatefulWidget {
   const ScreeningBadFragment(
@@ -102,7 +102,7 @@ class _ScreeningBadFragmentState extends State<ScreeningBadFragment> {
           textAlign: TextAlign.center,
         ),
         const Spacer(),
-        SaidButton(
+        SaidPrimaryButton(
           text: AppLocalizations.of(context).goBackHome,
           context: context,
           icon: const Icon(Icons.home_outlined),

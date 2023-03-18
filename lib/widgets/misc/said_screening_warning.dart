@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_outlined_button.dart';
+import 'package:said/widgets/buttons/said_secondary_button.dart';
 
 class SaidScreeningWarning extends StatelessWidget {
   const SaidScreeningWarning({Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class SaidScreeningWarning extends StatelessWidget {
               const Padding(padding: EdgeInsets.all(8)),
               SizedBox(
                   width: double.infinity,
-                  child: SaidOutlinedButton(
+                  child: SaidSecondaryButton(
                       text: AppLocalizations.of(context).updateRecords,
                       context: context,
                       onPressed: () => dismissWarning(context)))

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:said/screens/user_screen.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 
 class ScreeningGoodFragment extends StatelessWidget {
   const ScreeningGoodFragment({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class ScreeningGoodFragment extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
         ),
         const Spacer(),
-        SaidButton(
+        SaidPrimaryButton(
           text: AppLocalizations.of(context).goBackHome,
           context: context,
           icon: const Icon(Icons.home_outlined),

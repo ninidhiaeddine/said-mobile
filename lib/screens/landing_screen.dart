@@ -4,7 +4,7 @@ import 'package:said/screens/authentication/sign_in_screen.dart';
 import 'package:said/screens/user_screen.dart';
 import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -47,7 +47,7 @@ class _LandingScreenState extends State<LandingScreen> {
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(
                   width: 200,
-                  child: SaidButton(
+                  child: SaidPrimaryButton(
                       text: AppLocalizations.of(context).getStarted,
                       context: context,
                       linkTo: const SignInScreen())))

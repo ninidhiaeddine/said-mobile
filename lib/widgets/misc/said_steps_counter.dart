@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/services/models/post.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/services/post_service.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 
 class SaidStepsCounter extends StatefulWidget {
   const SaidStepsCounter(
@@ -152,7 +152,7 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
             )),
         Positioned(
             bottom: 16,
-            child: SaidButton(
+            child: SaidPrimaryButton(
                 text: AppLocalizations.of(context).shareMilestone,
                 context: context,
                 icon: const Icon(Icons.star_purple500),

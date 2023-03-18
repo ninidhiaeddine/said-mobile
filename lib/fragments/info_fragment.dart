@@ -5,7 +5,7 @@ import 'package:said/screens/contact_screen.dart';
 import 'package:said/screens/learn_screen.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/widgets/buttons/said_button.dart';
+import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/buttons/said_outlined_button.dart';
 import 'package:said/widgets/misc/said_user_bar.dart';
 
@@ -49,7 +49,7 @@ class _InfoFragmentState extends State<InfoFragment> {
             padding: const EdgeInsets.all(32.0),
             child: Column(
               children: [
-                SaidButton(
+                SaidPrimaryButton(
                   text: AppLocalizations.of(context).learnAboutCRC,
                   context: context,
                   icon: const Icon(Icons.bar_chart),
