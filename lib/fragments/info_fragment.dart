@@ -55,12 +55,17 @@ class _InfoFragmentState extends State<InfoFragment> {
                   icon: const Icon(Icons.bar_chart),
                   linkTo: const LearnScreen(),
                 ),
-                const Padding(padding: EdgeInsets.all(8.0)),
+                const SizedBox(
+                  height: 32,
+                ),
                 SaidOutlinedButton(
                   text: AppLocalizations.of(context).about,
                   context: context,
                   icon: const Icon(Icons.info_rounded),
                   linkTo: const AboutScreen(),
+                ),
+                const SizedBox(
+                  height: 16,
                 ),
                 SaidOutlinedButton(
                   text: AppLocalizations.of(context).contactUs,

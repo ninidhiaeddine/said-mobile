@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:said/config/app_constants.dart';
 import 'package:said/utils/navigator.dart';
 
 class SaidPrimaryButton extends StatelessWidget {
@@ -22,48 +23,65 @@ class SaidPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (icon != null) {
       if (enabled) {
-        return ElevatedButton(
-            onPressed: () => {
-                  linkTo == null ? onPressed!.call() : navigateToRoute(context, linkTo!)
-                },
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(
-                width: 5,
-              ),
-              icon!,
-            ]));
+        return SizedBox(
+          height: AppConstants.buttonHeight,
+          child: ElevatedButton(
+              onPressed: () => {
+                    linkTo == null
+                        ? onPressed!.call()
+                        : navigateToRoute(context, linkTo!)
+                  },
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  width: 5,
+                ),
+                icon!,
+              ])),
+        );
       }
-      return ElevatedButton(
-          onPressed: null,
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(
-              width: 5,
-            ),
-            icon!,
-          ]));
+      return SizedBox(
+          height: AppConstants.buttonHeight,
+          child: ElevatedButton(
+              onPressed: null,
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  width: 5,
+                ),
+                icon!,
+              ])));
     } else {
       if (enabled) {
-        return ElevatedButton(
-            onPressed: () {
-                  linkTo == null ? onPressed!.call() : navigateToRoute(context, linkTo!);
+        return SizedBox(
+            height: AppConstants.buttonHeight,
+            child: ElevatedButton(
+                onPressed: () {
+                  linkTo == null
+                      ? onPressed!.call()
+                      : navigateToRoute(context, linkTo!);
                 },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(text, style: const TextStyle(fontWeight: FontWeight.bold))
-              ],
-            ));
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(text,
+                        style: const TextStyle(fontWeight: FontWeight.bold))
+                  ],
+                )));
       }
-      return ElevatedButton(
-          onPressed: null,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(text, style: const TextStyle(fontWeight: FontWeight.bold))
-            ],
-          ));
+      return SizedBox(
+          height: AppConstants.buttonHeight,
+          child: ElevatedButton(
+              onPressed: null,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(text,
+                      style: const TextStyle(fontWeight: FontWeight.bold))
+                ],
+              )));
     }
   }
 }

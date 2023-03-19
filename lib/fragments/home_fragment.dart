@@ -81,7 +81,9 @@ class _HomeFragmentState extends State<HomeFragment> {
               authenticatedUser: widget.authenticatedUser,
               stepsGoal: 8000,
             ),
-            const Padding(padding: EdgeInsets.all(16.0)),
+            const SizedBox(
+              height: 32,
+            ),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(AppLocalizations.of(context).actions,
@@ -94,12 +96,17 @@ class _HomeFragmentState extends State<HomeFragment> {
               linkTo:
                   SetupMedScreen(authenticatedUser: widget.authenticatedUser),
             ),
+            const SizedBox(
+              height: 16,
+            ),
             SaidPrimaryButton(
                 text: AppLocalizations.of(context).selfScreening,
                 context: context,
                 icon: const Icon(Icons.arrow_right_alt),
                 linkTo: const ScreeningScreen()),
-            const Padding(padding: EdgeInsets.all(8.0)),
+            const SizedBox(
+              height: 16,
+            ),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(AppLocalizations.of(context).upcomingMedReminders,
