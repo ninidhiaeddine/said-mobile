@@ -16,10 +16,13 @@ class _LearnScreenState extends State<LearnScreen> {
   final List<bool> _isOpen = List.generate(10, (index) => false);
   final List<bool> _nestedIsOpen = List.generate(2, (index) => false);
 
-  @override
-  Widget build(BuildContext context) {
+  late List<String> titles = [];
+  late List<Widget> bodies = [];
+  late List<ExpansionPanel> panels = [];
+
+  void initVariables() {
     // prepare titles:
-    final List<String> titles = [
+    titles = [
       AppLocalizations.of(context).whatIsCrcTitle,
       AppLocalizations.of(context).symptomsOfCrcTitle,
       AppLocalizations.of(context).riskTitle,
@@ -33,88 +36,240 @@ class _LearnScreenState extends State<LearnScreen> {
     ];
 
     // prepare bodies:
-    final List<Widget> bodies = [
+    bodies = [
       Column(
         children: [
-          Text(AppLocalizations.of(context).whatIsCrcBody1),
-          Text(AppLocalizations.of(context).whatIsCrcBody2),
+          Text(
+            AppLocalizations.of(context).whatIsCrcBody1,
+            textAlign: TextAlign.justify,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const Placeholder(),
+          const SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Text(AppLocalizations.of(context).whatIsCrcBody2,
+                textAlign: TextAlign.justify),
+          ),
+        ],
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("\t\u2022 ${AppLocalizations.of(context).symptom1}"),
+          Text("\t\u2022 ${AppLocalizations.of(context).symptom2}"),
+          Text("\t\u2022 ${AppLocalizations.of(context).symptom3}"),
+          Text("\t\u2022 ${AppLocalizations.of(context).symptom4}"),
+          Text("\t\u2022 ${AppLocalizations.of(context).symptom5}"),
+          Text("\t\u2022 ${AppLocalizations.of(context).symptom6}"),
         ],
       ),
       Column(
         children: [
-          Text(AppLocalizations.of(context).symptom1),
-          Text(AppLocalizations.of(context).symptom2),
-          Text(AppLocalizations.of(context).symptom3),
-          Text(AppLocalizations.of(context).symptom4),
-          Text(AppLocalizations.of(context).symptom5),
-          Text(AppLocalizations.of(context).symptom6),
+          Text(
+            AppLocalizations.of(context).riskBody,
+            textAlign: TextAlign.justify,
+            style: const TextStyle(decoration: TextDecoration.underline),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Text(AppLocalizations.of(context).risk1,
+                textAlign: TextAlign.justify),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Text(AppLocalizations.of(context).risk2,
+                  textAlign: TextAlign.justify)),
+          const SizedBox(
+            height: 8,
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Text(AppLocalizations.of(context).risk2a,
+                  textAlign: TextAlign.justify)),
+          const SizedBox(
+            height: 8,
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Text(AppLocalizations.of(context).risk2b,
+                  textAlign: TextAlign.justify)),
+          const SizedBox(
+            height: 8,
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Text(AppLocalizations.of(context).risk3,
+                  textAlign: TextAlign.justify)),
+          const SizedBox(
+            height: 8,
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Text(AppLocalizations.of(context).risk4,
+                  textAlign: TextAlign.justify)),
+          const SizedBox(
+            height: 8,
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Text(AppLocalizations.of(context).risk5,
+                  textAlign: TextAlign.justify)),
+          Text(
+            AppLocalizations.of(context).riskNote,
+            textAlign: TextAlign.justify,
+            style: const TextStyle(fontWeight: FontWeight.w300),
+          ),
         ],
       ),
       Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).riskBody),
-          Text(AppLocalizations.of(context).risk1),
-          Text(AppLocalizations.of(context).risk2),
-          Text(AppLocalizations.of(context).risk2a),
-          Text(AppLocalizations.of(context).risk2b),
-          Text(AppLocalizations.of(context).risk3),
-          Text(AppLocalizations.of(context).risk4),
-          Text(AppLocalizations.of(context).risk5),
-          Text(AppLocalizations.of(context).risk6),
+          const Placeholder(),
+          Text(
+            AppLocalizations.of(context).screeningType1Title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 12),
+            child: Text(
+              AppLocalizations.of(context).screeningType1Body,
+              textAlign: TextAlign.justify,
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(AppLocalizations.of(context).screeningType2Title,
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: Text(
+                AppLocalizations.of(context).screeningType2Body,
+                textAlign: TextAlign.justify,
+              )),
         ],
       ),
       Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).screeningTypes),
-          Text(AppLocalizations.of(context).screeningType1Title),
-          Text(AppLocalizations.of(context).screeningType1Body),
-          Text(AppLocalizations.of(context).screeningType2Title),
-          Text(AppLocalizations.of(context).screeningType2Body),
+          Text(
+            AppLocalizations.of(context).stagesOfCrcBody1,
+            textAlign: TextAlign.justify,
+          ),
+          const Placeholder(),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(AppLocalizations.of(context).stagesOfCrcBody2,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text("\n${AppLocalizations.of(context).stage} 0:",
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(AppLocalizations.of(context).stage0,
+              textAlign: TextAlign.justify),
+          Text("\n${AppLocalizations.of(context).stage} 1:",
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(AppLocalizations.of(context).stage1,
+              textAlign: TextAlign.justify),
+          Text("\n${AppLocalizations.of(context).stage} 2:",
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(AppLocalizations.of(context).stage2,
+              textAlign: TextAlign.justify),
+          Text("\n${AppLocalizations.of(context).stage} 3:",
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(AppLocalizations.of(context).stage3,
+              textAlign: TextAlign.justify),
+          Text("\n${AppLocalizations.of(context).stage} 4:",
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(AppLocalizations.of(context).stage4,
+              textAlign: TextAlign.justify),
         ],
       ),
       Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).stagesOfCrcTitle),
-          Text(AppLocalizations.of(context).stagesOfCrcBody1),
-          Text(AppLocalizations.of(context).stagesOfCrcBody2),
-          Text(AppLocalizations.of(context).stage0),
-          Text(AppLocalizations.of(context).stage2),
-          Text(AppLocalizations.of(context).stage3),
-          Text(AppLocalizations.of(context).stage4),
+          Text(
+            AppLocalizations.of(context).screeningMsg1,
+            textAlign: TextAlign.justify,
+          ),
+          const Text("--"),
+          Text(
+            "\n${AppLocalizations.of(context).screeningMsg2}",
+            textAlign: TextAlign.justify,
+          ),
+          const Text("\n--"),
+          Text(
+            AppLocalizations.of(context).screeningMsg3,
+            textAlign: TextAlign.justify,
+          ),
+          const Placeholder(),
+          Text("\n${AppLocalizations.of(context).screeningMsg4}",
+              textAlign: TextAlign.justify),
+          Text(
+            AppLocalizations.of(context).screeningMsg5,
+            textAlign: TextAlign.justify,
+            style: const TextStyle(fontWeight: FontWeight.w300),
+          ),
+          const Placeholder(),
         ],
       ),
       Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).screeningImportance),
-          Text(AppLocalizations.of(context).screeningMsg1),
-          Text(AppLocalizations.of(context).screeningMsg2),
-          Text(AppLocalizations.of(context).screeningMsg3),
-          Text(AppLocalizations.of(context).screeningMsg4),
-          Text(AppLocalizations.of(context).screeningMsg5),
+          Text(AppLocalizations.of(context).screeningGHighRisk,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline)),
+          Text(
+            AppLocalizations.of(context).screeningGHighRisk1,
+            textAlign: TextAlign.justify,
+          ),
+          Text(AppLocalizations.of(context).screeningGHighRisk2,
+              textAlign: TextAlign.justify),
+          Text(AppLocalizations.of(context).screeningGHighRisk3,
+              textAlign: TextAlign.justify),
+          Text(AppLocalizations.of(context).screeningGHighRisk4,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(AppLocalizations.of(context).screeningGLowRisk,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline)),
+          Text(AppLocalizations.of(context).screeningGLowRisk1,
+              textAlign: TextAlign.justify),
         ],
       ),
       Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context).screeningGuidelines),
-          Text(AppLocalizations.of(context).screeningGHighRisk),
-          Text(AppLocalizations.of(context).screeningGHighRisk1),
-          Text(AppLocalizations.of(context).screeningGHighRisk2),
-          Text(AppLocalizations.of(context).screeningGHighRisk3),
-          Text(AppLocalizations.of(context).screeningGHighRisk4),
-          Text(AppLocalizations.of(context).screeningGLowRisk),
-          Text(AppLocalizations.of(context).screeningGLowRisk1),
-        ],
-      ),
-      Column(
-        children: [
-          Text(AppLocalizations.of(context).preventionQ),
-          Text(AppLocalizations.of(context).preventionA),
-          Text(AppLocalizations.of(context).preventionTitle),
-          Text(AppLocalizations.of(context).screeningGHighRisk2),
-          Text(AppLocalizations.of(context).screeningGHighRisk3),
-          Text(AppLocalizations.of(context).screeningGHighRisk4),
-          Text(AppLocalizations.of(context).screeningGLowRisk),
-          Text(AppLocalizations.of(context).screeningGLowRisk1),
+          Text(AppLocalizations.of(context).preventionQ,
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(
+            AppLocalizations.of(context).preventionA,
+            textAlign: TextAlign.justify,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(AppLocalizations.of(context).preventionTitle,
+              style: const TextStyle(fontWeight: FontWeight.bold)),
+          Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Text(
+              AppLocalizations.of(context).preventionBody,
+              textAlign: TextAlign.justify,
+            ),
+          ),
           ExpansionPanelList(
             animationDuration: const Duration(milliseconds: 500),
             expansionCallback: (i, isOpen) {
@@ -135,7 +290,9 @@ class _LearnScreenState extends State<LearnScreen> {
                   body: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Text(
-                          AppLocalizations.of(context).primaryPreventionBody))),
+                        AppLocalizations.of(context).primaryPreventionBody,
+                        textAlign: TextAlign.justify,
+                      ))),
               ExpansionPanel(
                   canTapOnHeader: true,
                   isExpanded: _nestedIsOpen[1],
@@ -147,39 +304,112 @@ class _LearnScreenState extends State<LearnScreen> {
                   },
                   body: Padding(
                       padding: const EdgeInsets.all(16),
-                      child: Text(
-                          AppLocalizations.of(context).tertiaryPreventionBody)))
+                      child: Column(
+                        children: [
+                          Text(
+                            AppLocalizations.of(context).tertiaryPreventionBody,
+                            textAlign: TextAlign.justify,
+                          ),
+                          const Placeholder(),
+                        ],
+                      )))
             ],
           )
         ],
       ),
       Column(
         children: [
-          Text(AppLocalizations.of(context).stat1),
-          Text(AppLocalizations.of(context).stat2),
-          Text(AppLocalizations.of(context).stat3),
-          Text(AppLocalizations.of(context).stat4),
-          Text(AppLocalizations.of(context).stat5),
+          Text(
+            AppLocalizations.of(context).stat1,
+            textAlign: TextAlign.justify,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).stat2,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).stat3,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).stat4,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).stat5,
+              textAlign: TextAlign.justify),
         ],
       ),
       Column(
         children: [
-          Text(AppLocalizations.of(context).communityM1),
-          Text(AppLocalizations.of(context).communityM2title),
-          Text(AppLocalizations.of(context).communityM2pt1),
-          Text(AppLocalizations.of(context).communityM2pt2),
-          Text(AppLocalizations.of(context).communityM2pt3),
-          Text(AppLocalizations.of(context).communityM2pt4),
-          Text(AppLocalizations.of(context).communityM2pt5),
-          Text(AppLocalizations.of(context).communityM2pt6),
-          Text(AppLocalizations.of(context).communityM2pt7),
-          Text(AppLocalizations.of(context).communityM3),
+          Text(
+            AppLocalizations.of(context).communityM1,
+            textAlign: TextAlign.justify,
+          ),
+          const Placeholder(),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(AppLocalizations.of(context).communityM2title,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).communityM2pt1,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).communityM2pt2,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).communityM2pt3,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).communityM2pt4,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).communityM2pt5,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).communityM2pt6,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).communityM2pt7,
+              textAlign: TextAlign.justify),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(AppLocalizations.of(context).communityM3,
+              style: const TextStyle(fontWeight: FontWeight.w300),
+              textAlign: TextAlign.justify),
         ],
       ),
     ];
 
-    List<ExpansionPanel> panels =
-        generateExpansionPanels(titles, bodies, _isOpen);
+    // generate panels:
+    panels = generateExpansionPanels(titles, bodies, _isOpen);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    initVariables();
 
     return Scaffold(
         appBar: AppBar(
@@ -192,14 +422,9 @@ class _LearnScreenState extends State<LearnScreen> {
         body: SafeArea(
             child: SingleChildScrollView(
           child: Padding(
-              padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
               child: Column(
                 children: [
-                  SaidTextField(
-                    placeholder: AppLocalizations.of(context).search,
-                    prefixIcon: const Icon(Icons.search),
-                  ),
-                  const Padding(padding: EdgeInsets.all(8)),
                   ExpansionPanelList(
                     animationDuration: const Duration(milliseconds: 500),
                     children: panels,
