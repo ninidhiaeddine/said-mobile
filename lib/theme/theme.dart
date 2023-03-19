@@ -5,5 +5,6 @@ import 'package:said/utils/material_color_builder.dart';
 saidTheme () => ThemeData(
     scaffoldBackgroundColor: ColorConstants.backgroundColor,
     primarySwatch: buildMaterialColor(ColorConstants.primaryColor),
-    accentColor: buildMaterialColor(const Color(0xff000000))
+    accentColor: buildMaterialColor(const Color(0xff000000)),
+    fontFamily: 'SfUi'
 );
