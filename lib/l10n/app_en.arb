@@ -183,6 +183,7 @@
   "noPosts": "No Posts were found!",
   "messageSentSuccess": "Message Sent Successfully!",
   "messageSentError": "An error occurred while sending the message",
+  "unexpectedError": "An unexpected error occurred :(",
 
   "changesSavedSuccess": "Changes have been saved successfully!",
   "changesSavedError": "An error occurred while saving the changes: ",
