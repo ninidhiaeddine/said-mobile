@@ -27,6 +27,21 @@ class _SignInScreenState extends State<SignInScreen> {
   String _errorMsg = "";
   bool _signInInProgress = false;
 
+  Future<void> storeUserInSession(Map<String, dynamic> data) async {
+    await SaidSessionManager.storeJwt(data['jwt']);
+
+    Map<String, dynamic> user = data['user'];
+    await SaidSessionManager.storeUser(
+        id: user['id'],
+        username: user['username'],
+        email: user['email'],
+        firstName: user['firstName'],
+        lastName: user['lastName'],
+        phoneNumber: user['phoneNumber'],
+        sex: user['sex'],
+        age: user['age']);
+  }
+
   Future<void> signIn(BuildContext context) async {
     // blocking semaphore:
     setState(() {
@@ -53,24 +68,16 @@ class _SignInScreenState extends State<SignInScreen> {
       return;
     }
     // store session:
-    SaidSessionManager.storeJwt(data['jwt']);
-
-    Map<String, dynamic> user = data['user'];
-    SaidSessionManager.storeUser(
-        id: user['id'],
-        username: user['username'],
-        email: user['email'],
-        firstName: user['firstName'],
-        lastName: user['lastName'],
-        phoneNumber: user['phoneNumber'],
-        sex: user['sex'],
-        age: user['age']);
+    await storeUserInSession(data);
 
     // go to user home screen:
     if (!mounted) {
       return;
     }
-    navigateToRoute(context, const UserScreen());
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const UserScreen()),
+        (route) => false);
   }
 
   @override
@@ -79,7 +86,7 @@ class _SignInScreenState extends State<SignInScreen> {
         body: SafeArea(
             child: SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(48.0),
+        padding: const EdgeInsets.all(32.0),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

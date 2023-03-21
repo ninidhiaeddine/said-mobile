@@ -66,7 +66,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (!mounted) {
       return;
     }
-    navigateToRoute(context, const UserScreen());
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const UserScreen()),
+            (route) => false);
   }
 
   @override
@@ -75,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         body: SafeArea(
             child: SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(48.0),
+        padding: const EdgeInsets.all(32.0),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
