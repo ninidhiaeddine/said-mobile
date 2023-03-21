@@ -1,3 +1,5 @@
+import 'package:said/services/models/user.dart';
+
 abstract class RefreshUserInterface {
-  void onRefreshUser();
+  void onRefreshUser(User updatedUser);
 }
