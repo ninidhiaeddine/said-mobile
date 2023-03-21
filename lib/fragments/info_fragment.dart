@@ -25,22 +25,7 @@ class _InfoFragmentState extends State<InfoFragment> {
     return Scaffold(
         body: Column(
       children: [
-        Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: Builder(builder: (context) {
-              if (widget.authenticatedUser.firstName != null) {
-                var fullName =
-                    '${widget.authenticatedUser.firstName} ${widget.authenticatedUser.lastName}';
-                return SaidUserBar(
-                  userFullName: fullName,
-                );
-              } else {
-                return SaidUserBar(
-                  userFullName: widget.authenticatedUser.username,
-                );
-              }
-            })),
-        const Padding(padding: EdgeInsets.all(16.0)),
+        const SizedBox(height: 32),
         Text(
           AppLocalizations.of(context).information,
           style: subHeader(),
@@ -71,7 +56,7 @@ class _InfoFragmentState extends State<InfoFragment> {
                   text: AppLocalizations.of(context).contactUs,
                   context: context,
                   icon: const Icon(Icons.email_rounded),
-                  linkTo: const ContactScreen(),
+                  linkTo: ContactScreen(authenticatedUser: widget.authenticatedUser,),
                 )
               ],
             )),
