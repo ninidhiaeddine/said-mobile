@@ -35,7 +35,7 @@ class SaidOutlinedButton extends StatelessWidget {
                   },
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(text),
                 const SizedBox(
                   width: 5,
                 ),
@@ -55,8 +55,7 @@ class SaidOutlinedButton extends StatelessWidget {
                         : Navigator.push(context,
                             MaterialPageRoute(builder: (context) => linkTo!))
                   },
-              child: Text(text,
-                  style: const TextStyle(fontWeight: FontWeight.bold))));
+              child: Text(text)));
     }
   }
 }

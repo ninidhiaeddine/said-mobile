@@ -33,7 +33,7 @@ class SaidPrimaryButton extends StatelessWidget {
                   },
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(text),
                 const SizedBox(
                   width: 5,
                 ),
@@ -47,7 +47,7 @@ class SaidPrimaryButton extends StatelessWidget {
               onPressed: null,
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(text),
                 const SizedBox(
                   width: 5,
                 ),
@@ -66,8 +66,7 @@ class SaidPrimaryButton extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(text,
-                        style: const TextStyle(fontWeight: FontWeight.bold))
+                    Text(text)
                   ],
                 )));
       }
@@ -78,8 +77,7 @@ class SaidPrimaryButton extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(text,
-                      style: const TextStyle(fontWeight: FontWeight.bold))
+                  Text(text)
                 ],
               )));
     }

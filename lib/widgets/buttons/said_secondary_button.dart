@@ -36,8 +36,7 @@ class SaidSecondaryButton extends StatelessWidget {
                     foregroundColor: Colors.white),
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(text,
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Text(text),
                   const SizedBox(
                     width: 5,
                   ),
@@ -52,7 +51,7 @@ class SaidSecondaryButton extends StatelessWidget {
                   backgroundColor: Colors.black, foregroundColor: Colors.white),
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(text),
                 const SizedBox(
                   width: 5,
                 ),
@@ -74,8 +73,7 @@ class SaidSecondaryButton extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(text,
-                        style: const TextStyle(fontWeight: FontWeight.bold))
+                    Text(text)
                   ],
                 )));
       }
@@ -88,8 +86,7 @@ class SaidSecondaryButton extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(text,
-                      style: const TextStyle(fontWeight: FontWeight.bold))
+                  Text(text)
                 ],
               )));
     }
