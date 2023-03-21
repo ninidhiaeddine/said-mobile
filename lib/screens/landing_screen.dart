@@ -19,7 +19,10 @@ class _LandingScreenState extends State<LandingScreen> {
     // check whether user is logged in:
     if (await SaidSessionManager.containsKey("isLoggedIn") &&
         await SaidSessionManager.getSessionValue("isLoggedIn")) {
-      navigateToRoute(context, const UserScreen());
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const UserScreen()),
+              (route) => false);
     }
   }
 

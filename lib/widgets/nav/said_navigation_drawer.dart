@@ -11,7 +11,10 @@ class SaidNavigationDrawer extends StatelessWidget {
   Future<void> logOut(BuildContext context) async {
     await SaidSessionManager.clearSession();
 
-    navigateToRoute(context, const LandingScreen());
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const LandingScreen()),
+        (route) => false);
   }
 
   @override
@@ -31,7 +34,8 @@ class SaidNavigationDrawer extends StatelessWidget {
                 ),
                 Text(
                   AppLocalizations.of(context).menu,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 )
               ],
             ),
