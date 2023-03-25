@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/expansion_panel_generator.dart';
 import 'package:said/widgets/buttons/said_icon_back_button.dart';
-import 'package:said/widgets/textFields/said_text_field.dart';
 
 class LearnScreen extends StatefulWidget {
   const LearnScreen({Key? key}) : super(key: key);
@@ -46,7 +45,9 @@ class _LearnScreenState extends State<LearnScreen> {
           const SizedBox(
             height: 16,
           ),
-          const Placeholder(),
+          const Image(
+              image:
+                  AssetImage("assets/images/learn_content/key-message-1.jpg")),
           const SizedBox(
             height: 16,
           ),
@@ -132,7 +133,12 @@ class _LearnScreenState extends State<LearnScreen> {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Placeholder(),
+          const Image(
+            image: AssetImage("assets/images/learn_content/risk.png"),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
           Text(
             AppLocalizations.of(context).screeningType1Title,
             style: const TextStyle(fontWeight: FontWeight.bold),
@@ -164,33 +170,40 @@ class _LearnScreenState extends State<LearnScreen> {
             AppLocalizations.of(context).stagesOfCrcBody1,
             textAlign: TextAlign.justify,
           ),
-          const Placeholder(),
+          const Image(
+            image: AssetImage("assets/images/learn_content/stages.png"),
+          ),
           const SizedBox(
             height: 16,
           ),
           Text(AppLocalizations.of(context).stagesOfCrcBody2,
               textAlign: TextAlign.justify,
               style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text("\n${AppLocalizations.of(context).stage} 0:",
-              style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(AppLocalizations.of(context).stage0,
-              textAlign: TextAlign.justify),
-          Text("\n${AppLocalizations.of(context).stage} 1:",
-              style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(AppLocalizations.of(context).stage1,
-              textAlign: TextAlign.justify),
-          Text("\n${AppLocalizations.of(context).stage} 2:",
-              style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(AppLocalizations.of(context).stage2,
-              textAlign: TextAlign.justify),
-          Text("\n${AppLocalizations.of(context).stage} 3:",
-              style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(AppLocalizations.of(context).stage3,
-              textAlign: TextAlign.justify),
-          Text("\n${AppLocalizations.of(context).stage} 4:",
-              style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(AppLocalizations.of(context).stage4,
-              textAlign: TextAlign.justify),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("\n${AppLocalizations.of(context).stage} 0:",
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(AppLocalizations.of(context).stage0,
+                  textAlign: TextAlign.justify),
+              Text("\n${AppLocalizations.of(context).stage} 1:",
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(AppLocalizations.of(context).stage1,
+                  textAlign: TextAlign.justify),
+              Text("\n${AppLocalizations.of(context).stage} 2:",
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(AppLocalizations.of(context).stage2,
+                  textAlign: TextAlign.justify),
+              Text("\n${AppLocalizations.of(context).stage} 3:",
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(AppLocalizations.of(context).stage3,
+                  textAlign: TextAlign.justify),
+              Text("\n${AppLocalizations.of(context).stage} 4:",
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(AppLocalizations.of(context).stage4,
+                  textAlign: TextAlign.justify),
+            ],
+          )
         ],
       ),
       Column(
@@ -210,7 +223,7 @@ class _LearnScreenState extends State<LearnScreen> {
             AppLocalizations.of(context).screeningMsg3,
             textAlign: TextAlign.justify,
           ),
-          const Placeholder(),
+          const Image(image: AssetImage("assets/images/learn_content/screening.png"),),
           Text("\n${AppLocalizations.of(context).screeningMsg4}",
               textAlign: TextAlign.justify),
           Text(
@@ -218,7 +231,7 @@ class _LearnScreenState extends State<LearnScreen> {
             textAlign: TextAlign.justify,
             style: const TextStyle(fontWeight: FontWeight.w300),
           ),
-          const Placeholder(),
+          const Image(image: AssetImage("assets/images/learn_content/screening2.png"),),
         ],
       ),
       Column(
@@ -310,7 +323,7 @@ class _LearnScreenState extends State<LearnScreen> {
                             AppLocalizations.of(context).tertiaryPreventionBody,
                             textAlign: TextAlign.justify,
                           ),
-                          const Placeholder(),
+                          const Image(image: AssetImage("assets/images/learn_content/tertiary-prevention.png"),),
                         ],
                       )))
             ],
@@ -351,7 +364,10 @@ class _LearnScreenState extends State<LearnScreen> {
             AppLocalizations.of(context).communityM1,
             textAlign: TextAlign.justify,
           ),
-          const Placeholder(),
+          const SizedBox(
+            height: 16,
+          ),
+          const Image(image: AssetImage("assets/images/learn_content/community.jpg"),),
           const SizedBox(
             height: 16,
           ),
@@ -421,6 +437,7 @@ class _LearnScreenState extends State<LearnScreen> {
             leading: const SaidIconBackButton()),
         body: SafeArea(
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
           child: Padding(
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
               child: Column(
