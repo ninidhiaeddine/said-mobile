@@ -25,6 +25,7 @@ class _ClubFragmentState extends State<ClubFragment> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16),

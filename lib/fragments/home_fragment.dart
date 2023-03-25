@@ -42,6 +42,7 @@ class _HomeFragmentState extends State<HomeFragment> {
     return Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: Column(

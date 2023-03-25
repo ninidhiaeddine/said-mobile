@@ -46,6 +46,7 @@ class _AboutScreenState extends State<AboutScreen> {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
               child: Padding(
             padding: const EdgeInsets.all(32),
             child: Column(
