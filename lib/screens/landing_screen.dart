@@ -14,7 +14,6 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-
   Future<void> _checkLoggedInStatus() async {
     // check whether user is logged in:
     if (await SaidSessionManager.containsKey("isLoggedIn") &&
@@ -22,7 +21,7 @@ class _LandingScreenState extends State<LandingScreen> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const UserScreen()),
-              (route) => false);
+          (route) => false);
     }
   }
 

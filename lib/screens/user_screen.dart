@@ -41,27 +41,37 @@ class _UserScreenState extends State<UserScreen>
     });
   }
 
-  Future<User> _loadUserAsync() async {
+  Future<User?> _loadUserAsync() async {
     var user = await SaidSessionManager.getUser();
-    setState(() {
-      _authenticatedUser = user;
-    });
+
+    if (user != null) {
+      setState(() {
+        _authenticatedUser = user;
+      });
+    }
 
     return user;
   }
 
   Future<void> init() async {
     // wait on loading the user:
-    User user = await _loadUserAsync();
+    User? user = await _loadUserAsync();
+
+    print(user);
+    if (user == null)
+      {
+        fragments = [];
+        return;
+      }
 
     // prepare views:
     fragments = [
       const ClubFragment(),
-      InfoFragment(authenticatedUser: user),
-      HomeFragment(authenticatedUser: user),
+      InfoFragment(authenticatedUser: user!),
+      HomeFragment(authenticatedUser: user!),
       const AnnouncementsFragment(),
       AccountFragment(
-        authenticatedUser: user,
+        authenticatedUser: user!,
         onRefreshUser: onRefreshUser,
       )
     ];

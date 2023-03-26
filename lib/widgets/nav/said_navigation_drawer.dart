@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/screens/landing_screen.dart';
-import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
 
 class SaidNavigationDrawer extends StatelessWidget {
   const SaidNavigationDrawer({Key? key}) : super(key: key);
 
-  Future<void> logOut(BuildContext context) async {
+  Future<void> logOutAsync(BuildContext context) async {
     await SaidSessionManager.clearSession();
 
-    Navigator.pushAndRemoveUntil(
+    await Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const LandingScreen()),
         (route) => false);
@@ -44,7 +43,7 @@ class SaidNavigationDrawer extends StatelessWidget {
             title: Text(AppLocalizations.of(context).logOut),
             trailing: const Icon(Icons.login_outlined),
             onTap: () {
-              logOut(context);
+              logOutAsync(context);
             },
           ),
         ],

@@ -41,12 +41,16 @@ class SaidSessionManager {
   }
 
   static Future<void> clearSession() async {
-    clearUser();
-    clearJwt();
+    await clearUser();
+    await clearJwt();
   }
 
-  static Future<User> getUser() async {
+  static Future<User?> getUser() async {
     var sessionManager = SessionManager();
+    if (!(await containsKey('id'))) {
+      return null;
+    }
+
     return User(
         id: await sessionManager.get('id'),
         username: await sessionManager.get('username'),
@@ -68,7 +72,7 @@ class SaidSessionManager {
     await sessionManager.remove("phoneNumber");
     await sessionManager.remove("sex");
     await sessionManager.remove("age");
-    await sessionManager.set("isLoggedIn", false);
+    await sessionManager.remove("isLoggedIn");
   }
 
   static Future<void> clearJwt() async {

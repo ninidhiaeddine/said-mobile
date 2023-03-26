@@ -29,11 +29,11 @@ class _AccountFragmentState extends State<AccountFragment> {
   late List<String> sexOptions;
 
   Future<void> _saveChangesAsync() async {
-    User oldUser = await SaidSessionManager.getUser();
+    User? oldUser = await SaidSessionManager.getUser();
     var updatedUser = User(
-        id: oldUser.id,
-        username: oldUser.username,
-        email: oldUser.email,
+        id: oldUser!.id,
+        username: oldUser!.username,
+        email: oldUser!.email,
         firstName: controllers[0].text.isNotEmpty ? controllers[0].text : null,
         lastName: controllers[1].text.isNotEmpty ? controllers[1].text : null,
         age: controllers[2].text.isNotEmpty
@@ -53,7 +53,7 @@ class _AccountFragmentState extends State<AccountFragment> {
         return;
       }
 
-      // callback to reload user in user screen:
+      // callback to refresh user in user screen:
       widget.onRefreshUser(updatedUser);
 
       // show snackbar:
