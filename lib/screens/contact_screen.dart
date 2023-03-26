@@ -24,7 +24,7 @@ class ContactScreen extends StatefulWidget {
 
 class _ContactScreenState extends State<ContactScreen> {
   late String _messageValue = "";
-  late TextEditingController _controller;
+  final TextEditingController _controller = TextEditingController();
 
   Future<void> _sendMessage(BuildContext context) async {
     // prepare message:
