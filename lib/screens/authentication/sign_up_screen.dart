@@ -91,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SaidTextField(
                 placeholder: AppLocalizations.of(context).username,
                 textInputType: TextInputType.text,
-                callback: (newValue, controller) => {
+                onChanged: (newValue) => {
                   setState(() {
                     _usernameValue = newValue;
                   })
@@ -102,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 placeholder: AppLocalizations.of(context).email,
                 textInputType: TextInputType.emailAddress,
                 suffixIcon: const Icon(Icons.email_rounded),
-                callback: (newValue, controller) => {
+                onChanged: (newValue) => {
                   setState(() {
                     _emailValue = newValue;
                   })

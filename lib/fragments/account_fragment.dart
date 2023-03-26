@@ -58,9 +58,7 @@ class _AccountFragmentState extends State<AccountFragment> {
 
       // show snackbar:
       final snackBar = SnackBar(
-        content: Text(AppLocalizations
-            .of(context)
-            .changesSavedSuccess),
+        content: Text(AppLocalizations.of(context).changesSavedSuccess),
         backgroundColor: Colors.green,
         behavior: SnackBarBehavior.floating,
       );
@@ -76,9 +74,7 @@ class _AccountFragmentState extends State<AccountFragment> {
       // show snackbar:
       final snackBar = SnackBar(
         content:
-        Text('${AppLocalizations
-            .of(context)
-            .changesSavedError}: $errMsg'),
+            Text('${AppLocalizations.of(context).changesSavedError}: $errMsg'),
         backgroundColor: Colors.red,
         behavior: SnackBarBehavior.floating,
       );
@@ -86,121 +82,103 @@ class _AccountFragmentState extends State<AccountFragment> {
     }
   }
 
+  void populateTextFields() {
+    controllers[0].text = widget.authenticatedUser.firstName != null
+        ? widget.authenticatedUser.firstName!
+        : "";
+    controllers[1].text = widget.authenticatedUser.lastName != null
+        ? widget.authenticatedUser.lastName!
+        : "";
+    controllers[2].text = widget.authenticatedUser.age != null
+        ? widget.authenticatedUser.age!.toString()
+        : "";
+  }
+
   @override
   void initState() {
     super.initState();
+    populateTextFields();
   }
 
   @override
   Widget build(BuildContext context) {
     sexOptions = [
-      AppLocalizations
-          .of(context)
-          .male,
-      AppLocalizations
-          .of(context)
-          .female
+      AppLocalizations.of(context).male,
+      AppLocalizations.of(context).female
     ];
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-                children: [
-                Builder(builder: (context) {
-        if (widget.authenticatedUser.firstName != null) {
-        var fullName =
-        '${widget.authenticatedUser.firstName} ${widget.authenticatedUser.lastName}';
-        return SaidUserBar(
-        userFullName: fullName,
-        );
-        } else {
-        return SaidUserBar(
-        userFullName: widget.authenticatedUser.username,
-        );
-        }
-        }),
-        const SizedBox(
-          height: 32,
+        body: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Column(
+          children: [
+            Builder(builder: (context) {
+              if (widget.authenticatedUser.firstName != null) {
+                var fullName =
+                    '${widget.authenticatedUser.firstName} ${widget.authenticatedUser.lastName}';
+                return SaidUserBar(
+                  userFullName: fullName,
+                );
+              } else {
+                return SaidUserBar(
+                  userFullName: widget.authenticatedUser.username,
+                );
+              }
+            }),
+            const SizedBox(
+              height: 32,
+            ),
+            Text(
+              AppLocalizations.of(context).accountSettings,
+              style: subHeader(),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            SaidTextField(
+              placeholder: AppLocalizations.of(context).firstName,
+              textInputType: TextInputType.name,
+              controller: controllers[0],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+            ),
+            SaidTextField(
+              placeholder: AppLocalizations.of(context).lastName,
+              textInputType: TextInputType.name,
+              controller: controllers[1],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+            ),
+            SaidTextField(
+              placeholder: AppLocalizations.of(context).age,
+              textInputType: TextInputType.name,
+              controller: controllers[2],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+            ),
+            SaidDropdown(
+              placeholder: AppLocalizations.of(context).sex,
+              options: sexOptions,
+              value: widget.authenticatedUser.sex,
+              callback: (newValue) {
+                setState(() {
+                  _sexValue = newValue!;
+                });
+              },
+            ),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+            ),
+            SaidPrimaryButton(
+                text: AppLocalizations.of(context).save,
+                context: context,
+                onPressed: _saveChangesAsync),
+          ],
         ),
-        Text(
-          AppLocalizations
-              .of(context)
-              .accountSettings,
-          style: subHeader(),
-        ),
-        const SizedBox(
-          height: 32,
-        ),
-        SaidTextField(
-          placeholder: AppLocalizations
-              .of(context)
-              .firstName,
-          text: widget.authenticatedUser.firstName,
-          textInputType: TextInputType.name,
-          callback: (newValue, controller) {
-            setState(() {
-              controllers[0] = controller;
-            });
-          },
-        ),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-        ),
-        SaidTextField(
-          placeholder: AppLocalizations
-              .of(context)
-              .lastName,
-          text: widget.authenticatedUser.lastName,
-          textInputType: TextInputType.name,
-          callback: (newValue, controller) {
-            setState(() {
-              controllers[1] = controller;
-            });
-          },
-        ),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-        ),
-        SaidTextField(
-          placeholder: AppLocalizations
-              .of(context)
-              .age,
-          text: widget.authenticatedUser.age?.toString(),
-          textInputType: TextInputType.name,
-          callback: (newValue, controller) {
-            setState(() {
-              controllers[2] = controller;
-            });
-          },
-        ),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-        ),
-        SaidDropdown(
-          placeholder: AppLocalizations
-              .of(context)
-              .sex,
-          value: widget.authenticatedUser.sex,
-          options: sexOptions,
-          callback: (newValue) {
-            setState(() {
-              _sexValue = newValue!;
-            });
-          },
-        ),
-        const Padding(
-          padding: EdgeInsets.all(16.0),
-        ),
-        SaidPrimaryButton(
-            text: AppLocalizations
-                .of(context)
-                .save,
-            context: context,
-            onPressed: _saveChangesAsync),
-        ],
       ),
-    ),)
-    );
+    ));
   }
 }

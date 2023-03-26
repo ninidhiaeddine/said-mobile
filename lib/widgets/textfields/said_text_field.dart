@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
 
-class SaidTextField extends StatefulWidget {
+class SaidTextField extends StatelessWidget {
   const SaidTextField(
-      {super.key, this.callback, this.text, this.prefixIcon, this.suffixIcon, this.placeholder = "", this.linesCount = 1, this.textInputType = TextInputType.text, this.blackVariant = false});
+      {super.key,
+      this.onChanged,
+      this.text,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.placeholder = "",
+      this.linesCount = 1,
+      this.controller,
+      this.textInputType = TextInputType.text,
+      this.blackVariant = false});
 
-  final Function(String, TextEditingController)? callback;
+  final Function(String)? onChanged;
   final String placeholder;
   final bool blackVariant;
   final int linesCount;
@@ -13,41 +22,27 @@ class SaidTextField extends StatefulWidget {
   final String? text;
   final Icon? prefixIcon;
   final Icon? suffixIcon;
-
-  @override
-  State<StatefulWidget> createState() => _SaidTextFieldState();
-}
-
-class _SaidTextFieldState extends State<SaidTextField> {
-  final TextEditingController _controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.text != null) {
-      _controller.text = widget.text!;
-    }
-  }
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: _controller,
-      keyboardType: widget.textInputType,
-      style: widget.blackVariant ? const TextStyle(color: Colors.white) : null,
-      maxLines: widget.linesCount,
+      controller: controller,
+      keyboardType: textInputType,
+      style: blackVariant ? const TextStyle(color: Colors.white) : null,
+      maxLines: linesCount,
       decoration: InputDecoration(
-        prefixIcon: widget.prefixIcon,
-        suffixIcon: widget.suffixIcon,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
         fillColor:
-            widget.blackVariant ? Colors.black : ColorConstants.textFieldColor,
+            blackVariant ? Colors.black : ColorConstants.textFieldColor,
         filled: true,
-        hintText: widget.placeholder,
+        hintText: placeholder,
         hintStyle:
-            widget.blackVariant ? const TextStyle(color: Colors.grey) : null,
+            blackVariant ? const TextStyle(color: Colors.grey) : null,
       ),
       onChanged: (newValue) {
-        widget.callback!(newValue, _controller);
+        onChanged!(newValue);
       },
     );
   }

@@ -57,13 +57,6 @@ class _UserScreenState extends State<UserScreen>
     // wait on loading the user:
     User? user = await _loadUserAsync();
 
-    print(user);
-    if (user == null)
-      {
-        fragments = [];
-        return;
-      }
-
     // prepare views:
     fragments = [
       const ClubFragment(),
@@ -146,8 +139,7 @@ class _UserScreenState extends State<UserScreen>
   @override
   void onRefreshUser(User updatedUser) {
     _saveUserToSessionAsync(updatedUser);
-    setState(() {
-      _authenticatedUser = updatedUser;
-    });
+    // reinitialize the screen:
+    init();
   }
 }

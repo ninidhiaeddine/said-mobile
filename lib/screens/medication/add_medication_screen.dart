@@ -191,7 +191,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidTextField(
                       placeholder: AppLocalizations.of(context).medName,
-                      callback: (newValue, controller) {
+                      onChanged: (newValue) {
                         setState(() {
                           _medicationName = newValue;
                         });
@@ -201,7 +201,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                     SaidTextField(
                       placeholder: AppLocalizations.of(context).amount,
                       textInputType: TextInputType.number,
-                      callback: (newValue, controller) {
+                      onChanged: (newValue) {
                         setState(() {
                           _amount = double.parse(newValue);
                         });

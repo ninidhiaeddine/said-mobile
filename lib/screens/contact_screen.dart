@@ -97,10 +97,10 @@ class _ContactScreenState extends State<ContactScreen> {
                         placeholder: AppLocalizations.of(context).message,
                         linesCount: 10,
                         blackVariant: true,
-                        callback: (newValue, controller) => {
+                        controller: _controller,
+                        onChanged: (newValue) => {
                           setState(() {
                             _messageValue = newValue;
-                            _controller = controller;
                           })
                         },
                       ),

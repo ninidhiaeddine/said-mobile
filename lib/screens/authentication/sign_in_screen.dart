@@ -99,7 +99,7 @@ class _SignInScreenState extends State<SignInScreen> {
               SaidTextField(
                   placeholder: AppLocalizations.of(context).email,
                   suffixIcon: const Icon(Icons.email),
-                  callback: (newValue, controller) => {
+                  onChanged: (newValue) => {
                         setState(() {
                           _emailValue = newValue;
                         })
