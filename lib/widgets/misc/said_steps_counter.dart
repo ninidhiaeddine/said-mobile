@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:pedometer/pedometer.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/services/models/post.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/services/post_service.dart';
+import 'package:said/utils/steps_counter.dart';
 import 'package:said/widgets/buttons/said_primary_button.dart';
 
 class SaidStepsCounter extends StatefulWidget {
@@ -21,45 +21,26 @@ class SaidStepsCounter extends StatefulWidget {
 }
 
 class _SaidStepsCounterState extends State<SaidStepsCounter> {
-  late Stream<StepCount> _stepCountStream;
-  late int _stepsDone;
+  late final StepsCounter stepsCounter;
+  int _stepsDone = 0;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    stepsCounter = StepsCounter(onStepCount);
+  }
 
+  void onStepCount(int stepsDone) {
     setState(() {
-      _stepsDone = 0;
+      _stepsDone = stepsDone;
     });
-  }
-
-  void onStepCount(StepCount event) {
-    /// Handle step count changed
-    int steps = event.steps;
-
-    setState(() {
-      _stepsDone = steps;
-    });
-  }
-
-  void onStepCountError(error) {
-    /// Handle the error
-  }
-
-  void initPlatformState() {
-    /// Init stream
-    _stepCountStream = Pedometer.stepCountStream;
-
-    /// Listen to stream and handle errors
-    _stepCountStream.listen(onStepCount).onError(onStepCountError);
   }
 
   double _computeProgressValue() {
     return _stepsDone / widget.stepsGoal;
   }
 
-  Future<void> _shareMilestone(BuildContext context) async {
+  Future<void> _shareMilestoneAsync(BuildContext context) async {
     // prepare post:
     var postContent = 'Here is my steps milestone!\n$_stepsDone';
     var post = Post(
@@ -167,7 +148,7 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
                   context: context,
                   icon: const Icon(Icons.star_purple500),
                   enabled: widget.stepsGoal <= _stepsDone,
-                  onPressed: () => _shareMilestone(context)),
+                  onPressed: () => _shareMilestoneAsync(context)),
             )
           ],
         ));
