@@ -6,7 +6,6 @@ import 'package:said/screens/user_screen.dart';
 import 'package:said/services/dtos/register.dart';
 import 'package:said/services/register_service.dart';
 import 'package:said/theme/text_styles.dart';
-import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/misc/said_conditional_widget.dart';

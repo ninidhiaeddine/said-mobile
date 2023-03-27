@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:said/screens/user_screen.dart';
-import 'package:said/theme/text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/widgets/buttons/said_primary_button.dart';
 

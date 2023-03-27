@@ -32,8 +32,8 @@ class _AccountFragmentState extends State<AccountFragment> {
     User? oldUser = await SaidSessionManager.getUser();
     var updatedUser = User(
         id: oldUser!.id,
-        username: oldUser!.username,
-        email: oldUser!.email,
+        username: oldUser.username,
+        email: oldUser.email,
         firstName: controllers[0].text.isNotEmpty ? controllers[0].text : null,
         lastName: controllers[1].text.isNotEmpty ? controllers[1].text : null,
         age: controllers[2].text.isNotEmpty

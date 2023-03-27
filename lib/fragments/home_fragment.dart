@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/screens/medication/setup_med_screen.dart';
-import 'package:said/fragments/screening/screening_step1_fragment.dart';
 import 'package:said/screens/screening/screening_screen.dart';
 import 'package:said/services/medication_reminder_service.dart';
 import 'package:said/services/models/medication_reminder.dart';

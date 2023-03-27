@@ -7,7 +7,6 @@ import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/buttons/said_outlined_button.dart';
-import 'package:said/widgets/misc/said_user_bar.dart';
 
 class InfoFragment extends StatefulWidget {
   const InfoFragment({Key? key, required this.authenticatedUser})
