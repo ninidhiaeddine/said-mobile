@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:said/config/app_constants.dart';
-import 'package:said/utils/navigator.dart';
 
 class SaidPrimaryButton extends StatelessWidget {
   const SaidPrimaryButton(
@@ -29,7 +28,7 @@ class SaidPrimaryButton extends StatelessWidget {
               onPressed: () => {
                     linkTo == null
                         ? onPressed!.call()
-                        : navigateToRoute(context, linkTo!)
+                        : Navigator.push(context, MaterialPageRoute(builder: (context) => linkTo!))
                   },
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -61,7 +60,7 @@ class SaidPrimaryButton extends StatelessWidget {
                 onPressed: () {
                   linkTo == null
                       ? onPressed!.call()
-                      : navigateToRoute(context, linkTo!);
+                      : Navigator.push(context, MaterialPageRoute(builder: (context) => linkTo!));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

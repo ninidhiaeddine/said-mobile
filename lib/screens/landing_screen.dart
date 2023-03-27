@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/screens/authentication/sign_in_screen.dart';
 import 'package:said/screens/user_screen.dart';
-import 'package:said/utils/navigator.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/buttons/said_primary_button.dart';
 

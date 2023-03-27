@@ -24,7 +24,6 @@ class _UserScreenState extends State<UserScreen>
   int _selectedIndex = 2;
   late Future<void> initAsync;
 
-  late User _authenticatedUser;
   late List<Icon> icons = const [
     Icon(Icons.groups_rounded),
     Icon(Icons.info_rounded),
@@ -43,13 +42,6 @@ class _UserScreenState extends State<UserScreen>
 
   Future<User?> _loadUserAsync() async {
     var user = await SaidSessionManager.getUser();
-
-    if (user != null) {
-      setState(() {
-        _authenticatedUser = user;
-      });
-    }
-
     return user;
   }
 
@@ -61,10 +53,10 @@ class _UserScreenState extends State<UserScreen>
     fragments = [
       const ClubFragment(),
       InfoFragment(authenticatedUser: user!),
-      HomeFragment(authenticatedUser: user!),
+      HomeFragment(authenticatedUser: user),
       const AnnouncementsFragment(),
       AccountFragment(
-        authenticatedUser: user!,
+        authenticatedUser: user,
         onRefreshUser: onRefreshUser,
       )
     ];

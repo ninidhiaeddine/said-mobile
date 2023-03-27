@@ -129,7 +129,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     var reminders = _generateMedicationReminders(
         medication, startDate, endDate, timeOfTaking, daysSelections);
 
-    print("reminders.length = " + reminders.length.toString());
+    print("reminders.length = ${reminders.length}");
 
     for (var reminder in reminders) {
       // make api call:

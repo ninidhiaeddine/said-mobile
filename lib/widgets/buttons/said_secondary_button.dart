@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:said/config/app_constants.dart';
-import 'package:said/utils/navigator.dart';
 
 class SaidSecondaryButton extends StatelessWidget {
   const SaidSecondaryButton(
@@ -29,7 +28,7 @@ class SaidSecondaryButton extends StatelessWidget {
                 onPressed: () => {
                       linkTo == null
                           ? onPressed!.call()
-                          : navigateToRoute(context, linkTo!)
+                          : Navigator.push(context, MaterialPageRoute(builder: (context) => linkTo!))
                     },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -65,7 +64,7 @@ class SaidSecondaryButton extends StatelessWidget {
                 onPressed: () {
                   linkTo == null
                       ? onPressed!.call()
-                      : navigateToRoute(context, linkTo!);
+                      : Navigator.push(context, MaterialPageRoute(builder: (context) => linkTo!));
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
