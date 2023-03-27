@@ -29,7 +29,7 @@ class _ContactScreenState extends State<ContactScreen> {
   Future<void> _sendMessage(BuildContext context) async {
     // prepare message:
     var message = Message(
-        user: widget.authenticatedUser!,
+        user: widget.authenticatedUser,
         message: _messageValue,
         dateSent: DateTime.now());
 
@@ -109,7 +109,7 @@ class _ContactScreenState extends State<ContactScreen> {
                         text: AppLocalizations.of(context).send,
                         context: context,
                         icon: const Icon(Icons.send),
-                        enabled: widget.authenticatedUser != null,
+                        enabled: _controller.text.length > 10,
                         onPressed: () => _sendMessage(context),
                       ),
                       const SizedBox(
