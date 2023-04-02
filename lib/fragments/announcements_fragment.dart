@@ -44,20 +44,20 @@ class _AnnouncementsFragmentState extends State<AnnouncementsFragment> {
               child: FutureBuilder(
                   future: _announcements,
                   builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Text(AppLocalizations.of(context).loading);
+                    } else if (snapshot.connectionState ==
+                            ConnectionState.done &&
+                        snapshot.hasData &&
+                        snapshot.data!.isNotEmpty) {
                       return ListView(
                         children: snapshot.data!
                             .map((e) => SaidAnnouncement(
-                            content: e.content, createdAt: e.createdAt))
+                                content: e.content, createdAt: e.createdAt))
                             .toList(),
                       );
-                    } else if (snapshot.connectionState == ConnectionState.waiting){
-                      return Text(
-                          AppLocalizations.of(context).loading);
                     } else {
-                      print("No Announcements");
-                      return Text(
-                          AppLocalizations.of(context).noAnnouncements);
+                      return Text(AppLocalizations.of(context).noAnnouncements);
                     }
                   }),
             )

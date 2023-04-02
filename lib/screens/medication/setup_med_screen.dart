@@ -65,6 +65,7 @@ class _SetupMedScreenState extends State<SetupMedScreen>
                               snapshot.hasData &&
                               snapshot.data!.isNotEmpty) {
                             return ListView(
+                              physics: const BouncingScrollPhysics(),
                               children: snapshot.data!
                                   .map((e) => Padding(
                                         padding:

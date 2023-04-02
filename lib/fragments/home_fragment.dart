@@ -116,7 +116,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 future: _medicationReminders,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.hasData) {
+                      snapshot.hasData && snapshot.data!.isNotEmpty) {
                     return Column(
                       children: snapshot.data!
                           .map((e) => Dismissible(
