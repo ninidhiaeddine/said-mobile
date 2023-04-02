@@ -17,7 +17,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/widgets/dates/said_time_picker.dart';
 
 class AddMedicationScreen extends StatefulWidget {
-  const AddMedicationScreen({Key? key, required this.authenticatedUser, required this.onRefreshScreen})
+  const AddMedicationScreen(
+      {Key? key,
+      required this.authenticatedUser,
+      required this.onRefreshScreen})
       : super(key: key);
 
   final User authenticatedUser;
@@ -59,19 +62,24 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     var response = await MedicationService.addMedication(medication);
 
     if (response.statusCode == 200) {
+      // get medication id:
+      int medicationId = jsonDecode(response.body)['data']['id'];
+
+      // update medication id:
+      medication.id = medicationId;
+
       // add medication reminders:
-      // await _addMedicationReminders(medication, _dateRange.start,
-      //     _dateRange.end, _timeOfTaking, _selections);
+      await _addMedicationReminders(medication, _dateRange.start,
+          _dateRange.end, _timeOfTaking, _selections);
+
+      // refresh medications screen:
+      widget.onRefreshScreen(widget.authenticatedUser);
 
       // once done with adding reminders, go to the previous page:
       if (!mounted) {
         return;
       }
 
-      // refresh medications screen:
-      widget.onRefreshScreen(widget.authenticatedUser);
-
-      // go back to previous screen:
       Navigator.pop(context);
     } else {
       var body = jsonDecode(response.body);
@@ -104,10 +112,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     var iter = DateTime(startDate.year, startDate.month, startDate.day,
         timeOfTaking.hour, timeOfTaking.minute);
     while (iter.isBefore(endDate)) {
-      for (int i = 0; i < 7; i++) {
-        if (iter.weekday == ((i + 1) % 7) && daysSelections[(i + 1) % 7]) {
-          lstTargetDays.add(iter);
-        }
+      if (daysSelections[iter.weekday - 1]) {
+        lstTargetDays.add(iter);
       }
 
       // increment day:
@@ -134,7 +140,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     var reminders = _generateMedicationReminders(
         medication, startDate, endDate, timeOfTaking, daysSelections);
 
-    print("reminders.length = ${reminders.length}");
+    print(reminders.length);
 
     for (var reminder in reminders) {
       // make api call:

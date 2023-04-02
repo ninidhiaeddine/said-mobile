@@ -22,10 +22,16 @@ class Message {
     );
   }
 
-  Map toJson() => {
-    'id': id,
-    'user': user,
-    'message': message,
-    'dateSent': dateSent.toIso8601String(),
-  };
+  Map toJson() => id != null
+      ? {
+          'id': id,
+          'user': user,
+          'message': message,
+          'dateSent': dateSent.toIso8601String(),
+        }
+      : {
+          'user': user,
+          'message': message,
+          'dateSent': dateSent.toIso8601String(),
+        };
 }

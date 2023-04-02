@@ -32,14 +32,24 @@ class User {
     );
   }
 
-  Map toJson() => {
-    'id': id,
-    'username': username,
-    'email': email,
-    'firstName': firstName,
-    'lastName': lastName,
-    'phoneNumber': phoneNumber,
-    'age': age,
-    'sex': sex
-  };
+  Map toJson() => id != null
+      ? {
+          'id': id,
+          'username': username,
+          'email': email,
+          'firstName': firstName,
+          'lastName': lastName,
+          'phoneNumber': phoneNumber,
+          'age': age,
+          'sex': sex
+        }
+      : {
+          'username': username,
+          'email': email,
+          'firstName': firstName,
+          'lastName': lastName,
+          'phoneNumber': phoneNumber,
+          'age': age,
+          'sex': sex
+        };
 }

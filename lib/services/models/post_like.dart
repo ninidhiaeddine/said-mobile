@@ -4,10 +4,7 @@ import 'package:said/services/models/user.dart';
 class PostLike {
   final int? id;
 
-  PostLike(
-      {this.id,
-        required this.user,
-        required this.post});
+  PostLike({this.id, required this.user, required this.post});
 
   final Post post;
   final User user;
@@ -20,9 +17,14 @@ class PostLike {
     );
   }
 
-  Map toJson() => {
-    'id': id,
-    'user': user,
-    'post': post,
-  };
+  Map toJson() => id != null
+      ? {
+          'id': id,
+          'user': user,
+          'post': post,
+        }
+      : {
+          'user': user,
+          'post': post,
+        };
 }

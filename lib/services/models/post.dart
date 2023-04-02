@@ -6,10 +6,10 @@ class Post {
 
   Post(
       {this.id,
-        required this.user,
-        required this.postContent,
-        this.createdAt,
-        this.postLikes});
+      required this.user,
+      required this.postContent,
+      this.createdAt,
+      this.postLikes});
 
   final User user;
   final String postContent;
@@ -24,15 +24,23 @@ class Post {
       user: User.fromJson(json['user']),
       createdAt: DateTime.parse(json['createdAt']),
       postContent: json['postContent'],
-      postLikes: List.generate(postLikes.length, (i) => PostLike.fromJson(postLikes[i])),
+      postLikes: List.generate(
+          postLikes.length, (i) => PostLike.fromJson(postLikes[i])),
     );
   }
 
-  Map toJson() => {
-    'id': id,
-    'user': user,
-    'createdAt': createdAt!.toIso8601String(),
-    'postContent': postContent,
-    'postLikes': postLikes,
-  };
+  Map toJson() => id != null
+      ? {
+          'id': id,
+          'user': user,
+          'createdAt': createdAt!.toIso8601String(),
+          'postContent': postContent,
+          'postLikes': postLikes,
+        }
+      : {
+          'user': user,
+          'createdAt': createdAt!.toIso8601String(),
+          'postContent': postContent,
+          'postLikes': postLikes,
+        };
 }

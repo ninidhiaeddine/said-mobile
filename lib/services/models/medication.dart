@@ -1,7 +1,7 @@
 import 'package:said/services/models/user.dart';
 
 class Medication {
-  const Medication(
+  Medication(
       {this.id,
       required this.user,
       required this.name,
@@ -11,7 +11,7 @@ class Medication {
       required this.startDate,
       required this.endDate});
 
-  final int? id;
+  int? id;
   final User user;
   final String name;
   final double amount;
@@ -32,22 +32,24 @@ class Medication {
         endDate: DateTime.parse(json['endDate']));
   }
 
-  Map toJson() => id != null ? {
-    'id': id,
-    'user': user,
-    'name': name,
-    'amount': amount,
-    'type': type,
-    'method': method,
-    'startDate': startDate.toIso8601String(),
-    'endDate': endDate.toIso8601String(),
-  } : {
-    'user': user,
-    'name': name,
-    'amount': amount,
-    'type': type,
-    'method': method,
-    'startDate': startDate.toIso8601String(),
-    'endDate': endDate.toIso8601String(),
-  };
+  Map toJson() => id != null
+      ? {
+          'id': id,
+          'user': user,
+          'name': name,
+          'amount': amount,
+          'type': type,
+          'method': method,
+          'startDate': startDate.toIso8601String(),
+          'endDate': endDate.toIso8601String(),
+        }
+      : {
+          'user': user,
+          'name': name,
+          'amount': amount,
+          'type': type,
+          'method': method,
+          'startDate': startDate.toIso8601String(),
+          'endDate': endDate.toIso8601String(),
+        };
 }

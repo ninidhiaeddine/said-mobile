@@ -4,10 +4,7 @@ class StepCounter {
   final int? id;
 
   StepCounter(
-      {this.id,
-        required this.user,
-        required this.steps,
-        required this.date});
+      {this.id, required this.user, required this.steps, required this.date});
 
   final User user;
   final int steps;
@@ -22,10 +19,7 @@ class StepCounter {
     );
   }
 
-  Map toJson() => {
-    'id': id,
-    'user': user,
-    'steps': steps,
-    'date': date.toIso8601String()
-  };
+  Map toJson() => id != null
+      ? {'id': id, 'user': user, 'steps': steps, 'date': date.toIso8601String()}
+      : {'user': user, 'steps': steps, 'date': date.toIso8601String()};
 }

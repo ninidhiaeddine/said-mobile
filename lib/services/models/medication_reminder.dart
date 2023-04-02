@@ -26,11 +26,18 @@ class MedicationReminder {
     );
   }
 
-  Map toJson() => {
-    'id': id,
-    'medication': medication,
-    'user': user,
-    'alreadyTaken': alreadyTaken,
-    'dateTime': dateTime.toIso8601String(),
-  };
+  Map toJson() => id != null
+      ? {
+          'id': id,
+          'medication': medication,
+          'user': user,
+          'alreadyTaken': alreadyTaken,
+          'dateTime': dateTime.toIso8601String(),
+        }
+      : {
+          'medication': medication,
+          'user': user,
+          'alreadyTaken': alreadyTaken,
+          'dateTime': dateTime.toIso8601String(),
+        };
 }
