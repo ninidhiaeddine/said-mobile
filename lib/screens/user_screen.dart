@@ -5,7 +5,7 @@ import 'package:said/fragments/club_fragment.dart';
 import 'package:said/fragments/home_fragment.dart';
 import 'package:said/fragments/info_fragment.dart';
 import 'package:said/fragments/announcements_fragment.dart';
-import 'package:said/screens/refresh_user_interface.dart';
+import 'package:said/screens/refresh_screen_interface.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/utils/said_session_manager.dart';
 import 'package:said/widgets/nav/said_bottom_nav_bar.dart';
@@ -20,7 +20,7 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen>
-    implements RefreshUserInterface {
+    implements RefreshScreenInterface {
   int _selectedIndex = 2;
   late Future<void> initAsync;
 
@@ -57,7 +57,7 @@ class _UserScreenState extends State<UserScreen>
       const AnnouncementsFragment(),
       AccountFragment(
         authenticatedUser: user,
-        onRefreshUser: onRefreshUser,
+        onRefreshUser: onRefreshScreen,
       )
     ];
   }
@@ -129,7 +129,7 @@ class _UserScreenState extends State<UserScreen>
   }
 
   @override
-  void onRefreshUser(User updatedUser) {
+  void onRefreshScreen(User updatedUser) {
     _saveUserToSessionAsync(updatedUser);
     // reinitialize the screen:
     init();

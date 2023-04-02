@@ -17,10 +17,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/widgets/dates/said_time_picker.dart';
 
 class AddMedicationScreen extends StatefulWidget {
-  const AddMedicationScreen({Key? key, required this.authenticatedUser})
+  const AddMedicationScreen({Key? key, required this.authenticatedUser, required this.onRefreshScreen})
       : super(key: key);
 
   final User authenticatedUser;
+  final Function(User) onRefreshScreen;
 
   @override
   State<AddMedicationScreen> createState() => _AddMedicationScreenState();
@@ -59,14 +60,18 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 
     if (response.statusCode == 200) {
       // add medication reminders:
-      await _addMedicationReminders(medication, _dateRange.start,
-          _dateRange.end, _timeOfTaking, _selections);
+      // await _addMedicationReminders(medication, _dateRange.start,
+      //     _dateRange.end, _timeOfTaking, _selections);
 
       // once done with adding reminders, go to the previous page:
       if (!mounted) {
         return;
       }
 
+      // refresh medications screen:
+      widget.onRefreshScreen(widget.authenticatedUser);
+
+      // go back to previous screen:
       Navigator.pop(context);
     } else {
       var body = jsonDecode(response.body);

@@ -33,7 +33,6 @@ class Medication {
   }
 
   Map toJson() => {
-    'id': id,
     'user': user,
     'name': name,
     'amount': amount,

@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:said/services/models/user.dart';
 
 class EditMedicationScreen extends StatefulWidget {
-  const EditMedicationScreen({Key? key, required this.authenticatedUser}) : super(key: key);
+  const EditMedicationScreen(
+      {Key? key,
+      required this.authenticatedUser,
+      required this.onRefreshScreen})
+      : super(key: key);
 
   final User authenticatedUser;
+  final Function(User) onRefreshScreen;
 
   @override
   State<EditMedicationScreen> createState() => _EditMedicationScreenState();

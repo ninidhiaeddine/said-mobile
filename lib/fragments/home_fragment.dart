@@ -11,8 +11,8 @@ import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/misc/said_conditional_widget.dart';
 import 'package:said/widgets/misc/said_screening_warning.dart';
 import 'package:said/widgets/misc/said_steps_counter.dart';
-import 'package:said/widgets/misc/said_upcoming_med.dart';
-import 'package:said/widgets/misc/said_upcoming_med_text.dart';
+import 'package:said/widgets/medication/said_upcoming_med.dart';
+import 'package:said/widgets/medication/said_upcoming_med_text.dart';
 import 'package:said/widgets/misc/said_user_bar.dart';
 
 class HomeFragment extends StatefulWidget {

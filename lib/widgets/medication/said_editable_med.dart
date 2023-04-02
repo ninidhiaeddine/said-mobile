@@ -12,11 +12,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SaidEditableMed extends StatefulWidget {
   const SaidEditableMed(
       {super.key,
-      required this.authenticatedStudent,
-      required this.medication});
+      required this.authenticatedUser,
+      required this.medication,
+      required this.onRefreshUser});
 
-  final User authenticatedStudent;
+  final User authenticatedUser;
   final Medication medication;
+  final Function(User) onRefreshUser;
 
   @override
   State<SaidEditableMed> createState() => _SaidEditableMedState();
@@ -38,7 +40,7 @@ class _SaidEditableMedState extends State<SaidEditableMed> {
       // show snackbar:
       final snackBar = SnackBar(
         content:
-        Text('${AppLocalizations.of(context).changesSavedError}: $errMsg'),
+            Text('${AppLocalizations.of(context).changesSavedError}: $errMsg'),
         backgroundColor: Colors.red,
         behavior: SnackBarBehavior.floating,
       );
@@ -48,10 +50,11 @@ class _SaidEditableMedState extends State<SaidEditableMed> {
         return;
       }
 
+      widget.onRefreshUser(widget.authenticatedUser);
+
       // show snackbar:
       final snackBar = SnackBar(
-        content:
-        Text(AppLocalizations.of(context).changesSavedSuccess),
+        content: Text(AppLocalizations.of(context).changesSavedSuccess),
         backgroundColor: Colors.green,
         behavior: SnackBarBehavior.floating,
       );
@@ -106,12 +109,14 @@ class _SaidEditableMedState extends State<SaidEditableMed> {
               const Spacer(),
               Row(
                 children: [
-                  // SaidFab(
-                  //     dimensions: 40,
-                  //     backgroundColor: ColorConstants.secondaryColor,
-                  //     icon: const Icon(Icons.edit),
-                  //     linkTo: EditMedicationPage(
-                  //         authenticatedUser: widget.authenticatedStudent)),
+                  SaidFab(
+                      dimensions: 40,
+                      backgroundColor: ColorConstants.secondaryColor,
+                      icon: const Icon(Icons.edit),
+                      linkTo: EditMedicationScreen(
+                        authenticatedUser: widget.authenticatedUser,
+                        onRefreshScreen: widget.onRefreshUser,
+                      )),
                   const Padding(padding: EdgeInsets.all(4)),
                   SaidFab(
                       dimensions: 40,
