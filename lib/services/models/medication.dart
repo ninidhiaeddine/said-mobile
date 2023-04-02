@@ -32,7 +32,16 @@ class Medication {
         endDate: DateTime.parse(json['endDate']));
   }
 
-  Map toJson() => {
+  Map toJson() => id != null ? {
+    'id': id,
+    'user': user,
+    'name': name,
+    'amount': amount,
+    'type': type,
+    'method': method,
+    'startDate': startDate.toIso8601String(),
+    'endDate': endDate.toIso8601String(),
+  } : {
     'user': user,
     'name': name,
     'amount': amount,

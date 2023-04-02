@@ -44,9 +44,7 @@ class _SetupMedScreenState extends State<SetupMedScreen>
           backgroundColor: Colors.transparent,
           elevation: 0,
           title:
-          Text(AppLocalizations
-              .of(context)
-              .setUpMeds, style: subHeader()),
+              Text(AppLocalizations.of(context).setUpMeds, style: subHeader()),
           centerTitle: true,
           leading: const SaidIconBackButton()),
       body: SafeArea(
@@ -61,35 +59,33 @@ class _SetupMedScreenState extends State<SetupMedScreen>
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return Text(AppLocalizations
-                                .of(context)
-                                .loading);
+                            return Text(AppLocalizations.of(context).loading);
                           } else if (snapshot.connectionState ==
-                              ConnectionState.done &&
-                              snapshot.hasData && snapshot.data!.isNotEmpty) {
+                                  ConnectionState.done &&
+                              snapshot.hasData &&
+                              snapshot.data!.isNotEmpty) {
                             return ListView(
                               children: snapshot.data!
-                                  .map((e) =>
-                                  SaidEditableMed(
-                                    medication: e,
-                                    authenticatedUser:
-                                    widget.authenticatedUser,
-                                    onRefreshUser: onRefreshScreen,
-                                  ))
+                                  .map((e) => Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 16),
+                                        child: SaidEditableMed(
+                                          medication: e,
+                                          authenticatedUser:
+                                              widget.authenticatedUser,
+                                          onRefreshUser: onRefreshScreen,
+                                        ),
+                                      ))
                                   .toList(),
                             );
                           } else {
                             return Text(
-                                AppLocalizations
-                                    .of(context)
-                                    .noMedications);
+                                AppLocalizations.of(context).noMedications);
                           }
                         })),
                 const Padding(padding: EdgeInsets.all(8)),
                 SaidPrimaryButton(
-                  text: AppLocalizations
-                      .of(context)
-                      .addMedication,
+                  text: AppLocalizations.of(context).addMedication,
                   context: context,
                   icon: const Icon(Icons.add_circle_outline),
                   linkTo: AddMedicationScreen(

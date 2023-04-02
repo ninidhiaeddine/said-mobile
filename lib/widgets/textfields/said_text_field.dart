@@ -5,7 +5,6 @@ class SaidTextField extends StatelessWidget {
   const SaidTextField(
       {super.key,
       this.onChanged,
-      this.text,
       this.prefixIcon,
       this.suffixIcon,
       this.placeholder = "",
@@ -19,7 +18,6 @@ class SaidTextField extends StatelessWidget {
   final bool blackVariant;
   final int linesCount;
   final TextInputType textInputType;
-  final String? text;
   final Icon? prefixIcon;
   final Icon? suffixIcon;
   final TextEditingController? controller;
