@@ -42,7 +42,7 @@ class _SaidStepsCounterState extends State<SaidStepsCounter> {
 
   Future<void> _shareMilestoneAsync(BuildContext context) async {
     // prepare post:
-    var postContent = 'Here is my steps milestone!\n$_stepsDone';
+    var postContent = 'Here is my steps milestone 🏆!\n$_stepsDone';
     var post = Post(
         user: widget.authenticatedUser,
         createdAt: DateTime.now(),

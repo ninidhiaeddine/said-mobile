@@ -31,19 +31,24 @@ class _ClubFragmentState extends State<ClubFragment> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                Text(AppLocalizations.of(context).clubPosts, style: subHeader()),
+                Text(AppLocalizations.of(context).clubPosts,
+                    style: subHeader()),
                 const Padding(padding: EdgeInsets.all(8)),
                 FutureBuilder(
                     future: _posts,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done &&
-                          snapshot.hasData && snapshot.data!.isNotEmpty) {
+                          snapshot.hasData &&
+                          snapshot.data!.isNotEmpty) {
                         return Column(
                           children: snapshot.data!
-                              .map((e) => SaidUserPost(
-                              fullName:
-                              '${e.user.firstName} ${e.user.lastName}',
-                              postContent: e.postContent))
+                              .map((e) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 24),
+                                    child: SaidUserPost(
+                                        fullName:
+                                            '${e.user.firstName} ${e.user.lastName}',
+                                        postContent: e.postContent),
+                                  ))
                               .toList(),
                         );
                       } else if (snapshot.connectionState ==

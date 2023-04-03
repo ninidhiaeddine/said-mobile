@@ -18,6 +18,8 @@ class SaidUserPost extends StatefulWidget {
 }
 
 class _SaidUserPostState extends State<SaidUserPost> {
+  bool _isLiked = false;
+
   String _extractNameInitials(String userFullName) {
     String nameInitials = "";
 
@@ -63,36 +65,34 @@ class _SaidUserPostState extends State<SaidUserPost> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Stack(
+              alignment: Alignment.center,
               children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      height: 150,
-                      width: 360,
-                      decoration: const BoxDecoration(
-                        color: ColorConstants.secondaryColor,
-                      ),
-                    ),
-                    Text(
-                      widget.postContent,
-                      style: const TextStyle(color: Colors.white),
-                    )
-                  ],
+                Container(
+                  height: 150,
+                  decoration: const BoxDecoration(
+                    color: ColorConstants.secondaryColor,
+                  ),
+                ),
+                Text(
+                  widget.postContent,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                  textAlign: TextAlign.center,
                 )
               ],
             ),
-            Row(
-              children: [
-                IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.favorite_border)),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.mode_comment_outlined))
-              ],
-            ),
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isLiked = !_isLiked;
+                  });
+                },
+                icon: _isLiked
+                    ? const Icon(Icons.favorite_rounded)
+                    : const Icon(Icons.favorite_border)),
           ],
         ));
   }
