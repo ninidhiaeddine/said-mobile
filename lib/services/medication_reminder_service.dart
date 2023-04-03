@@ -77,7 +77,7 @@ class MedicationReminderService {
     // flatten data:
     var flattenedResponse = flattenApiResponse(responseBody);
 
-    // map data to list of announcements:
+    // map data to list of medication reminders:
     var lst =
         flattenedResponse.map((e) => MedicationReminder.fromJson(e)).toList();
     return lst;

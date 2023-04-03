@@ -36,12 +36,11 @@ class _ClubFragmentState extends State<ClubFragment> {
                 FutureBuilder(
                     future: _posts,
                     builder: (context, snapshot) {
-                      print(snapshot.error);
                       if (snapshot.connectionState == ConnectionState.done &&
                           snapshot.hasData && snapshot.data!.isNotEmpty) {
                         return Column(
                           children: snapshot.data!
-                              .map((e) => UserPost(
+                              .map((e) => SaidUserPost(
                               fullName:
                               '${e.user.firstName} ${e.user.lastName}',
                               postContent: e.postContent))

@@ -3,7 +3,12 @@ import 'dart:convert';
 import 'package:flat/flat.dart';
 
 Map<String, dynamic> _dataToMap(data) {
-  var flatMap = flatten(data, maxDepth: 2);
+  // preventing empty array to cause infinite loop here!
+  if (data.toString() == "[]") {
+    return {};
+  }
+
+  var flatMap = flatten(data as Map<String, dynamic>, maxDepth: 2);
   Map<String, dynamic> newMap = {};
 
   flatMap.forEach((key, value) {
@@ -16,6 +21,7 @@ Map<String, dynamic> _dataToMap(data) {
 
     // is value clean?
     if (value.toString().contains("data")) {
+      print("Doing a recursive call on $value of type ${value.runtimeType}");
       value = _dataToMap(value['data']);
     }
 

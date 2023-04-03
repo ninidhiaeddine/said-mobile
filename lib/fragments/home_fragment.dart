@@ -112,7 +112,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 }),
             SaidStepsCounter(
               authenticatedUser: widget.authenticatedUser,
-              stepsGoal: 8000,
+              stepsGoal: 0,
             ),
             const SizedBox(
               height: 32,

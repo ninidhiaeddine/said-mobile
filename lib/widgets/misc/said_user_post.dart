@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:said/config/color_constants.dart';
 import 'package:said/widgets/misc/said_avatar.dart';
 
-class UserPost extends StatefulWidget {
-  const UserPost(
+class SaidUserPost extends StatefulWidget {
+  const SaidUserPost(
       {super.key,
       this.profilePic,
       required this.fullName,
@@ -14,10 +14,10 @@ class UserPost extends StatefulWidget {
   final String postContent;
 
   @override
-  State<UserPost> createState() => _UserPostState();
+  State<SaidUserPost> createState() => _SaidUserPostState();
 }
 
-class _UserPostState extends State<UserPost> {
+class _SaidUserPostState extends State<SaidUserPost> {
   String _extractNameInitials(String userFullName) {
     String nameInitials = "";
 
