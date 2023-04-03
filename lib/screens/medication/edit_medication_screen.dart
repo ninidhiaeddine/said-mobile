@@ -7,7 +7,9 @@ import 'package:said/services/medication_service.dart';
 import 'package:said/services/models/medication.dart';
 import 'package:said/services/models/medication_reminder.dart';
 import 'package:said/services/models/user.dart';
+import 'package:said/services/utils/medication_reminder_utils.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/utils/medication_reminders_generator.dart';
 import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/buttons/said_icon_back_button.dart';
 import 'package:said/widgets/dates/said_date_range_picker.dart';
@@ -17,10 +19,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:said/widgets/dates/said_time_picker.dart';
 
 class EditMedicationScreen extends StatefulWidget {
-  const EditMedicationScreen({Key? key,
-    required this.authenticatedUser,
-    required this.onRefreshScreen,
-    required this.medication})
+  const EditMedicationScreen(
+      {Key? key,
+      required this.authenticatedUser,
+      required this.onRefreshScreen,
+      required this.medication})
       : super(key: key);
 
   final User authenticatedUser;
@@ -36,6 +39,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
   final List<bool> _selections = List.generate(7, (index) => false);
   final TextEditingController medNameController = TextEditingController();
   final TextEditingController medAmountController = TextEditingController();
+  bool _loading = false;
 
   List<String> typeOptions = ["Pill", "Injection", "Drop", "Solution", "Other"];
   List<String> methodOptions = [
@@ -62,13 +66,20 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
         startDate: _dateRange.start,
         endDate: _dateRange.end);
 
+    setState(() {
+      _loading = true;
+    });
+
     // make api call:
     var response = await MedicationService.updateMedication(medication);
 
     if (response.statusCode == 200) {
+      // delete existing medication reminders:
+      await deleteAssociatedMedicationReminders(medication);
+
       // add medication reminders:
-      // await _addMedicationReminders(medication, _dateRange.start,
-      //     _dateRange.end, _timeOfTaking, _selections);
+      await _addMedicationReminders(medication, _dateRange.start,
+          _dateRange.end, _timeOfTaking, _selections);
 
       // once done with adding reminders, go to the previous page:
       if (!mounted) {
@@ -91,55 +102,25 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
       // show snackbar:
       final snackBar = SnackBar(
         content:
-        Text('${AppLocalizations
-            .of(context)
-            .changesSavedError}: $errMsg'),
+            Text('${AppLocalizations.of(context).changesSavedError}: $errMsg'),
         backgroundColor: Colors.red,
         behavior: SnackBarBehavior.floating,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+
+    setState(() {
+      _loading = false;
+    });
   }
 
-  List<MedicationReminder> _generateMedicationReminders(Medication medication,
-      DateTime startDate,
-      DateTime endDate,
-      TimeOfDay timeOfTaking,
-      List<bool> daysSelections) {
-    var lstTargetDays = [];
-
-    // initialize iterator:
-    var iter = DateTime(startDate.year, startDate.month, startDate.day,
-        timeOfTaking.hour, timeOfTaking.minute);
-    while (iter.isBefore(endDate)) {
-      for (int i = 0; i < 7; i++) {
-        if (iter.weekday == ((i + 1) % 7) && daysSelections[(i + 1) % 7]) {
-          lstTargetDays.add(iter);
-        }
-      }
-
-      // increment day:
-      iter = iter.add(const Duration(days: 1));
-    }
-
-    var reminders = List.generate(
-        lstTargetDays.length,
-            (i) =>
-            MedicationReminder(
-                medication: medication,
-                user: widget.authenticatedUser,
-                alreadyTaken: false,
-                dateTime: lstTargetDays[i]));
-
-    return reminders;
-  }
-
-  Future<void> _addMedicationReminders(Medication medication,
+  Future<void> _addMedicationReminders(
+      Medication medication,
       DateTime startDate,
       DateTime endDate,
       TimeOfDay timeOfTaking,
       List<bool> daysSelections) async {
-    var reminders = _generateMedicationReminders(
+    var reminders = generateMedicationReminders(
         medication, startDate, endDate, timeOfTaking, daysSelections);
 
     print("reminders.length = ${reminders.length}");
@@ -147,7 +128,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
     for (var reminder in reminders) {
       // make api call:
       var response =
-      await MedicationReminderService.addMedicationReminder(reminder);
+          await MedicationReminderService.addMedicationReminder(reminder);
 
       if (response.statusCode != 200) {
         // show snackbar:
@@ -160,9 +141,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
 
         final snackBar = SnackBar(
           content: Text(
-              '${AppLocalizations
-                  .of(context)
-                  .changesSavedError}: $errMsg'),
+              '${AppLocalizations.of(context).changesSavedError}: $errMsg'),
           backgroundColor: Colors.red,
           behavior: SnackBarBehavior.floating,
         );
@@ -200,9 +179,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Text(AppLocalizations
-              .of(context)
-              .editMedication,
+          title: Text(AppLocalizations.of(context).editMedication,
               style: subHeader()),
           centerTitle: true,
           leading: const SaidIconBackButton(),
@@ -218,7 +195,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                             border: Border.all(
                                 color: ColorConstants.secondaryColor),
                             borderRadius:
-                            const BorderRadius.all(Radius.circular(16))),
+                                const BorderRadius.all(Radius.circular(16))),
                         child: const Padding(
                             padding: EdgeInsets.all(4.0),
                             child: Icon(
@@ -228,9 +205,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                             ))),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidTextField(
-                      placeholder: AppLocalizations
-                          .of(context)
-                          .medName,
+                      placeholder: AppLocalizations.of(context).medName,
                       controller: medNameController,
                       onChanged: (newValue) {
                         setState(() {
@@ -240,9 +215,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidTextField(
-                      placeholder: AppLocalizations
-                          .of(context)
-                          .amount,
+                      placeholder: AppLocalizations.of(context).amount,
                       textInputType: TextInputType.number,
                       controller: medAmountController,
                       onChanged: (newValue) {
@@ -253,9 +226,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidDropdown(
-                        placeholder: AppLocalizations
-                            .of(context)
-                            .type,
+                        placeholder: AppLocalizations.of(context).type,
                         options: typeOptions,
                         value: widget.medication.type,
                         callback: (newValue) {
@@ -265,9 +236,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                         }),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidDropdown(
-                      placeholder: AppLocalizations
-                          .of(context)
-                          .method,
+                      placeholder: AppLocalizations.of(context).method,
                       options: methodOptions,
                       value: widget.medication.method,
                       callback: (newValue) {
@@ -278,9 +247,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                     ),
                     const Padding(padding: EdgeInsets.all(16)),
                     SaidTimePicker(
-                      placeholder: AppLocalizations
-                          .of(context)
-                          .time,
+                      placeholder: AppLocalizations.of(context).time,
                       callback: (newValue) {
                         setState(() {
                           _timeOfTaking = newValue;
@@ -289,9 +256,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidDateRangePicker(
-                      placeholder: AppLocalizations
-                          .of(context)
-                          .dateRange,
+                      placeholder: AppLocalizations.of(context).dateRange,
                       callback: (newValue) {
                         setState(() {
                           _dateRange = newValue;
@@ -301,9 +266,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                     const Padding(padding: EdgeInsets.all(8)),
                     Row(
                       children: [
-                        Text(AppLocalizations
-                            .of(context)
-                            .notifications),
+                        Text(AppLocalizations.of(context).notifications),
                         const Spacer(),
                         Switch(
                             value: _notifsAreOn,
@@ -318,48 +281,34 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                       height: 75,
                       child: Expanded(
                           child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: ToggleButtons(
-                              direction: Axis.horizontal,
-                              isSelected: _selections,
-                              onPressed: !_notifsAreOn
-                                  ? null
-                                  : (index) {
-                                setState(() {
-                                  _selections[index] = !_selections[index];
-                                });
-                              },
-                              children: [
-                                Text(AppLocalizations
-                                    .of(context)
-                                    .monday),
-                                Text(AppLocalizations
-                                    .of(context)
-                                    .tuesday),
-                                Text(AppLocalizations
-                                    .of(context)
-                                    .wednesday),
-                                Text(AppLocalizations
-                                    .of(context)
-                                    .thursday),
-                                Text(AppLocalizations
-                                    .of(context)
-                                    .friday),
-                                Text(AppLocalizations
-                                    .of(context)
-                                    .saturday),
-                                Text(AppLocalizations
-                                    .of(context)
-                                    .sunday),
-                              ],
-                            ),
-                          )),
+                        scrollDirection: Axis.horizontal,
+                        child: ToggleButtons(
+                          direction: Axis.horizontal,
+                          isSelected: _selections,
+                          onPressed: !_notifsAreOn
+                              ? null
+                              : (index) {
+                                  setState(() {
+                                    _selections[index] = !_selections[index];
+                                  });
+                                },
+                          children: [
+                            Text(AppLocalizations.of(context).monday),
+                            Text(AppLocalizations.of(context).tuesday),
+                            Text(AppLocalizations.of(context).wednesday),
+                            Text(AppLocalizations.of(context).thursday),
+                            Text(AppLocalizations.of(context).friday),
+                            Text(AppLocalizations.of(context).saturday),
+                            Text(AppLocalizations.of(context).sunday),
+                          ],
+                        ),
+                      )),
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidPrimaryButton(
-                        text: AppLocalizations
-                            .of(context)
-                            .save,
+                        text: _loading
+                            ? AppLocalizations.of(context).loading
+                            : AppLocalizations.of(context).save,
                         context: context,
                         onPressed: () => _editMedication(context))
                   ],

@@ -8,6 +8,7 @@ import 'package:said/services/models/medication.dart';
 import 'package:said/services/models/medication_reminder.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
+import 'package:said/utils/medication_reminders_generator.dart';
 import 'package:said/widgets/buttons/said_primary_button.dart';
 import 'package:said/widgets/buttons/said_icon_back_button.dart';
 import 'package:said/widgets/dates/said_date_range_picker.dart';
@@ -33,6 +34,7 @@ class AddMedicationScreen extends StatefulWidget {
 class _AddMedicationScreenState extends State<AddMedicationScreen> {
   bool _notifsAreOn = false;
   final List<bool> _selections = List.generate(7, (index) => false);
+  bool _loading = false;
 
   List<String> typeOptions = ["Pill", "Injection", "Drop", "Solution", "Other"];
   List<String> methodOptions = [
@@ -49,6 +51,10 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
   late DateTimeRange _dateRange;
 
   Future<void> _addMedication(BuildContext context) async {
+    setState(() {
+      _loading = true;
+    });
+
     var medication = Medication(
         user: widget.authenticatedUser,
         name: _medicationName,
@@ -98,37 +104,10 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-  }
 
-  List<MedicationReminder> _generateMedicationReminders(
-      Medication medication,
-      DateTime startDate,
-      DateTime endDate,
-      TimeOfDay timeOfTaking,
-      List<bool> daysSelections) {
-    var lstTargetDays = [];
-
-    // initialize iterator:
-    var iter = DateTime(startDate.year, startDate.month, startDate.day,
-        timeOfTaking.hour, timeOfTaking.minute);
-    while (iter.isBefore(endDate)) {
-      if (daysSelections[iter.weekday - 1]) {
-        lstTargetDays.add(iter);
-      }
-
-      // increment day:
-      iter = iter.add(const Duration(days: 1));
-    }
-
-    var reminders = List.generate(
-        lstTargetDays.length,
-        (i) => MedicationReminder(
-            medication: medication,
-            user: widget.authenticatedUser,
-            alreadyTaken: false,
-            dateTime: lstTargetDays[i]));
-
-    return reminders;
+    setState(() {
+      _loading = false;
+    });
   }
 
   Future<void> _addMedicationReminders(
@@ -137,7 +116,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       DateTime endDate,
       TimeOfDay timeOfTaking,
       List<bool> daysSelections) async {
-    var reminders = _generateMedicationReminders(
+    var reminders = generateMedicationReminders(
         medication, startDate, endDate, timeOfTaking, daysSelections);
 
     print(reminders.length);
@@ -298,7 +277,9 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                     ),
                     const Padding(padding: EdgeInsets.all(8)),
                     SaidPrimaryButton(
-                        text: AppLocalizations.of(context).save,
+                        text: _loading
+                            ? AppLocalizations.of(context).loading
+                            : AppLocalizations.of(context).save,
                         context: context,
                         onPressed: () => _addMedication(context))
                   ],

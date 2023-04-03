@@ -74,7 +74,7 @@ class _SetupMedScreenState extends State<SetupMedScreen>
                                           medication: e,
                                           authenticatedUser:
                                               widget.authenticatedUser,
-                                          onRefreshUser: onRefreshScreen,
+                                          onRefreshScreen: onRefreshScreen,
                                         ),
                                       ))
                                   .toList(),

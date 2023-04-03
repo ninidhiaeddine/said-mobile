@@ -11,7 +11,7 @@ class MedicationReminderService {
       int medicationId) async {
     final response = await http.get(
         Uri.parse(
-            '${ApiConstants.baseUrl}${ApiConstants.medicationRemindersEndpoint}?medication=$medicationId'),
+            '${ApiConstants.baseUrl}${ApiConstants.medicationRemindersEndpoint}?filters[medication][id][\$eq]=$medicationId&populate[medication][populate][0]=user'),
         headers: <String, String>{
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         });

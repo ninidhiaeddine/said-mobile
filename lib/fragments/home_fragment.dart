@@ -122,8 +122,8 @@ class _HomeFragmentState extends State<HomeFragment> {
                           .map((e) => Dismissible(
                               key: ValueKey<int>(e.hashCode),
                               child: SaidUpcomingMed(
-                                  medName: e.medication.name,
-                                  method: e.medication.method,
+                                  medName: e.medication!.name,
+                                  method: e.medication!.method,
                                   timeOfTaking: e.dateTime)))
                           .toList(),
                     );
