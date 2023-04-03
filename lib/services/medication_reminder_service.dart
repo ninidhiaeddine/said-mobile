@@ -7,11 +7,11 @@ import 'package:said/services/models/medication_reminder.dart';
 import 'package:said/utils/flatten_api_response.dart';
 
 class MedicationReminderService {
-  static Future<List<MedicationReminder>> getAllMedicationReminders(
+  static Future<List<MedicationReminder>> getMedicationRemindersByMedication(
       int medicationId) async {
     final response = await http.get(
         Uri.parse(
-            '${ApiConstants.baseUrl}${ApiConstants.medicationRemindersEndpoint}?filters[medication][id][\$eq]=$medicationId&populate[medication][populate][0]=user'),
+            '${ApiConstants.baseUrl}${ApiConstants.medicationRemindersEndpoint}?filters[medication][id][\$eq]=$medicationId&populate[medication][populate][0]=user&sort[0]=id'),
         headers: <String, String>{
           'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
         });
@@ -26,6 +26,27 @@ class MedicationReminderService {
       throw Exception('Failed to load Medication Reminders');
     }
   }
+
+  static Future<List<MedicationReminder>> getMedicationRemindersByUser(
+      int userId) async {
+    final response = await http.get(
+        Uri.parse(
+            '${ApiConstants.baseUrl}${ApiConstants.medicationRemindersEndpoint}?filters[medication][user][id][\$eq]=$userId&populate[medication][populate][0]=user&sort[0]=id'),
+        headers: <String, String>{
+          'Authorization': 'Bearer ${dotenv.env['API_KEY']}'
+        });
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return parseMedicationReminders(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load Medication Reminders');
+    }
+  }
+
 
   static Future<http.Response> addMedicationReminder(
       MedicationReminder medicationReminder) {

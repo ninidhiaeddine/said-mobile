@@ -28,12 +28,32 @@ class _HomeFragmentState extends State<HomeFragment> {
   late Future<dynamic> _mustSeeDoctor;
   late Future<List<MedicationReminder>> _medicationReminders;
 
+  bool _isSameDay(DateTime day1, DateTime day2) {
+    return day1.weekday == day2.weekday &&
+        day1.year == day2.year &&
+        day1.month == day2.month;
+  }
+
+  Future<List<MedicationReminder>> _initMedicationReminders() async {
+    // get all medication reminders related to this user:
+    var allMedicationReminders =
+        await MedicationReminderService.getMedicationRemindersByUser(
+            widget.authenticatedUser.id!);
+
+    // only keep those of today:
+    var today = DateTime.now();
+
+    // filtering process:
+    return allMedicationReminders
+        .where((reminder) => _isSameDay(today, reminder.dateTime))
+        .toList();
+  }
+
   @override
   void initState() {
     super.initState();
     _mustSeeDoctor = SaidSessionManager.getSessionValue("mustSeeDoctor");
-    _medicationReminders =
-        MedicationReminderService.getAllMedicationReminders(0);
+    _medicationReminders = _initMedicationReminders();
   }
 
   @override
@@ -41,7 +61,7 @@ class _HomeFragmentState extends State<HomeFragment> {
     return Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: Column(
@@ -60,7 +80,20 @@ class _HomeFragmentState extends State<HomeFragment> {
               }
             }),
             const Padding(padding: EdgeInsets.all(8.0)),
-            const SaidUpcomingMedicationText(),
+            FutureBuilder(
+                future: _medicationReminders,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.hasData &&
+                      snapshot.data!.isNotEmpty) {
+                    return SaidUpcomingMedicationText(
+                        medsCount: snapshot.data!.length);
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return Text(AppLocalizations.of(context).loading);
+                  }
+                  return const SaidUpcomingMedicationText();
+                }),
             const Padding(padding: EdgeInsets.all(8.0)),
             FutureBuilder(
                 future: _mustSeeDoctor,
@@ -88,7 +121,9 @@ class _HomeFragmentState extends State<HomeFragment> {
                 alignment: Alignment.centerLeft,
                 child: Text(AppLocalizations.of(context).actions,
                     style: subHeader())),
-            const Padding(padding: EdgeInsets.all(4.0)),
+            const SizedBox(
+              height: 16,
+            ),
             SaidPrimaryButton(
               text: AppLocalizations.of(context).setUpMeds,
               context: context,
@@ -105,26 +140,32 @@ class _HomeFragmentState extends State<HomeFragment> {
                 icon: const Icon(Icons.arrow_right_alt),
                 linkTo: const ScreeningScreen()),
             const SizedBox(
-              height: 16,
+              height: 32,
             ),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(AppLocalizations.of(context).upcomingMedReminders,
                     style: subHeader())),
-            const Padding(padding: EdgeInsets.all(4.0)),
+            const SizedBox(
+              height: 16,
+            ),
             FutureBuilder(
                 future: _medicationReminders,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.hasData && snapshot.data!.isNotEmpty) {
+                      snapshot.hasData &&
+                      snapshot.data!.isNotEmpty) {
                     return Column(
                       children: snapshot.data!
                           .map((e) => Dismissible(
                               key: ValueKey<int>(e.hashCode),
-                              child: SaidUpcomingMed(
-                                  medName: e.medication!.name,
-                                  method: e.medication!.method,
-                                  timeOfTaking: e.dateTime)))
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                child: SaidUpcomingMed(
+                                    medName: e.medication!.name,
+                                    method: e.medication!.method,
+                                    timeOfTaking: e.dateTime),
+                              )))
                           .toList(),
                     );
                   } else if (snapshot.connectionState ==

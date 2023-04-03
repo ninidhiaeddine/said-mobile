@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SaidUpcomingMed extends StatelessWidget {
   const SaidUpcomingMed(
@@ -7,6 +8,11 @@ class SaidUpcomingMed extends StatelessWidget {
   final String medName;
   final String method;
   final DateTime timeOfTaking;
+
+  String formatDateTime(DateTime dateTime) {
+    String time = DateFormat('jm').format(dateTime);
+    return "At $time";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,7 @@ class SaidUpcomingMed extends StatelessWidget {
               ),
               const Spacer(),
               Column(
-                children: [Text(timeOfTaking.toString())],
+                children: [Text(formatDateTime(timeOfTaking))],
               )
             ],
           )),

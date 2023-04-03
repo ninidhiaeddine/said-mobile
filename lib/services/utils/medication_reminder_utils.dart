@@ -5,7 +5,8 @@ import 'package:said/services/models/medication_reminder.dart';
 Future<bool> deleteAssociatedMedicationReminders(Medication medication) async {
   // get all associated medication reminders:
   List<MedicationReminder> reminders =
-      await MedicationReminderService.getAllMedicationReminders(medication.id!);
+      await MedicationReminderService.getMedicationRemindersByMedication(
+          medication.id!);
 
   // delete each one of them:
   for (var reminder in reminders) {
