@@ -17,7 +17,6 @@ class Post {
   final List<PostLike>? postLikes;
 
   factory Post.fromJson(Map<String, dynamic> json) {
-    print(json);
     var postLikes = json['postLikes'];
 
     return Post(

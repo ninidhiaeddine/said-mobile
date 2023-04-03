@@ -21,7 +21,6 @@ Map<String, dynamic> _dataToMap(data) {
 
     // is value clean?
     if (value.toString().contains("data")) {
-      print("Doing a recursive call on $value of type ${value.runtimeType}");
       value = _dataToMap(value['data']);
     }
 

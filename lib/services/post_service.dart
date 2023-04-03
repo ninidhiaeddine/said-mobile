@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-import 'package:flat/flat.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:said/config/api_constants.dart';
 import 'package:said/services/models/post.dart';
-import 'package:said/services/models/user.dart';
 import 'package:said/utils/flatten_api_response.dart';
 
 class PostService {

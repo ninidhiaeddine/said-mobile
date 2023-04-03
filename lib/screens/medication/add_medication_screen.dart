@@ -5,7 +5,6 @@ import 'package:said/config/color_constants.dart';
 import 'package:said/services/medication_reminder_service.dart';
 import 'package:said/services/medication_service.dart';
 import 'package:said/services/models/medication.dart';
-import 'package:said/services/models/medication_reminder.dart';
 import 'package:said/services/models/user.dart';
 import 'package:said/theme/text_styles.dart';
 import 'package:said/utils/medication_reminders_generator.dart';
@@ -118,8 +117,6 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       List<bool> daysSelections) async {
     var reminders = generateMedicationReminders(
         medication, startDate, endDate, timeOfTaking, daysSelections);
-
-    print(reminders.length);
 
     for (var reminder in reminders) {
       // make api call:
