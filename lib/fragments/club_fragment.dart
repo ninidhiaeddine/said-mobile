@@ -38,7 +38,7 @@ class _ClubFragmentState extends State<ClubFragment> {
                     builder: (context, snapshot) {
                       print(snapshot.error);
                       if (snapshot.connectionState == ConnectionState.done &&
-                          snapshot.hasData) {
+                          snapshot.hasData && snapshot.data!.isNotEmpty) {
                         return Column(
                           children: snapshot.data!
                               .map((e) => UserPost(

@@ -162,8 +162,8 @@ class _HomeFragmentState extends State<HomeFragment> {
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 16),
                                 child: SaidUpcomingMed(
-                                    medName: e.medication!.name,
-                                    method: e.medication!.method,
+                                    medName: e.medication.name,
+                                    method: e.medication.method,
                                     timeOfTaking: e.dateTime),
                               )))
                           .toList(),
